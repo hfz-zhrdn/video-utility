@@ -1,0 +1,412 @@
+<!-- Backup of index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MIPI Configuration</title>
+    <link rel="icon" type="image/png" href="imgs/favicon.ico" />
+    <style>
+      /* Inlined styles.css */
+      /* filepath: c:\Users\hzaharud\OneDrive - Lattice Semiconductor Corp\Documents\task2 - Calculator Project\VSCode Project Folder\copy_of_newgit\styles.css */
+      /* 
+        Main color and sizing variables.
+        Change these for global color and sizing adjustments.
+      */
+      
+      html {
+        overflow-y: scroll;
+      }
+      
+      .main-banner {
+        position: relative;
+      }
+      
+      .banner-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1800px;
+        margin: 0 auto;
+        padding: 0.5rem 1.5rem 0.5rem 1rem;
+      }
+      
+      .banner-logo {
+        height: 30px;
+        margin-right: 2rem;
+      }
+      
+      .banner-nav {
+        display: flex;
+        gap: 2rem;
+        flex: 1;
+        justify-content: center;
+      }
+      
+      /* .banner-underline {
+        width: 100%;
+        height: 4px;
+        background: #ffd600;
+        margin-top: 0;
+      } */
+      
+      :root {
+        --bg: #fff;
+        --text: #111;
+        --label-color: #111;
+        --dropdown-text-color: #222;
+        --input-label-color: #ffb300;
+        --dropdown-label-color: #ffffff;
+        --instructions-text-color: #ffffff;
+        --description-text-color: #ffffff;
+        --output-text-color: #ffffff;
+        --input-bg: #fffbe7;
+        --input-border: #ffe066;
+        --input-focus: #ffd600;
+        --output-bg: #000000;
+        --output-border: #ffe066;
+        --output-label: #000000;
+        --output-value: #000000;
+        --accent: #ffd600;
+        --shadow: 0 4px 24px rgba(255, 221, 51, 0.08);
+        --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --error: #e53935;
+      }
+      
+      /* Input label color */
+      .field-group label {
+        color: var(--input-label-color);
+      }
+      
+      /* Dropdown label color (for labels next to selects) */
+      #mode-row label,
+      #device-row label,
+      #package-row label,
+      #speed-row label {
+        color: var(--dropdown-label-color);
+      }
+      
+      /* Dropdown text color */
+      select,
+      input[type="number"],
+      input[type="text"] {
+        color: var(--dropdown-text-color);
+      }
+      
+      /* Instructions and description box text color */
+      .instructions-block,
+      .description-box .desc-text {
+        color: white;
+      }
+      
+      .description-box {
+        color: white;
+      }
+      
+      /* Output text color */
+      .output-group span,
+      .output-value,
+      #bandwidth-output,
+      #b2p-bandwidth-output,
+      #bitsclock-output {
+        color: white;
+      }
+      
+      body {
+        background: url("imgs/lattice_bg_cropped.png") no-repeat center center fixed;
+        background-size: cover;
+        color: var(--text);
+        font-family: "Segoe UI", Arial, sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        display: block;
+        font-size: 0.85rem;
+        /* Change for global font size */
+      }
+      
+      /* Navigation Button*/
+      .main-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        background: var(--input-bg);
+        padding: 1.2rem 0 0.7rem 0;
+        border-radius: 0 0 0.7rem 0.7rem;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        margin-bottom: 1.2rem;
+      }
+      
+      .nav-link {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.08em;
+        padding: 0.3rem 1.2rem;
+        border-radius: 0.4rem;
+        transition: background var(--transition), color var(--transition),
+          box-shadow var(--transition);
+      }
+      
+      .nav-link:hover,
+      .nav-link.active {
+        background: var(--accent);
+        color: #111;
+        box-shadow: 0 2px 8px rgba(255, 221, 51, 0.1);
+      }
+      
+      .main-content-row {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 2.5rem;
+        /* Equal spacing between description, input, and table */
+        width: 100%;
+        justify-content: center;
+        position: relative;
+      }
+      
+      .description-box {
+        position: static;
+        max-width: 320px;
+        min-width: 220px;
+        margin-bottom: 0.7rem;
+        margin-left: 0;
+        font-weight: bold;
+        font-size: 1.1em;
+        flex: 0 1 320px;
+      }
+      
+      /* Table description box on the right */
+      .main-content-row .description-box:last-child {
+        min-width: 260px;
+        max-width: 350px;
+        flex: 0 1 350px;
+      }
+      
+      .table-border {
+        border-collapse: collapse;
+        width: 100%;
+        font-weight: normal;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .table-border td,
+      .table-border th {
+        border: 1px solid #888;
+        padding: 0.5rem;
+        text-align: center;
+      }
+      
+      /* Main container for all fields and outputs */
+      .container {
+        display: flex;
+        flex-direction: row;
+        /* Change to column for vertical layout */
+        gap: 1.2rem;
+        /* Space between columns */
+        background: var(--input-bg);
+        border-radius: 0.7rem;
+        box-shadow: var(--shadow);
+        padding: 1.2rem 1.2rem;
+        /* Container padding */
+        margin-top: 50rem;
+        /* Center horizontally */
+        transition: background var(--transition), box-shadow var(--transition);
+        align-items: center;
+        max-width: 600px;
+        /* Change for wider/narrower container */
+        width: 100%;
+      }
+      
+      .container.center-fields {
+        justify-content: center;
+        align-items: center;
+        transition: justify-content var(--transition), align-items var(--transition),
+          padding var(--transition);
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+      
+      /* Wrapper for input fields */
+      .input-fields-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-height: 250px;
+        position: relative;
+      }
+      
+      /* Section containing both columns */
+      .fields-section {
+        flex: 1 1 auto;
+        display: flex;
+        gap: 3.5rem;
+        /* Space between columns */
+      }
+      
+      /* Each column of fields */
+      .fields-col {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        flex: 1 1 0;
+        min-width: 0;
+      }
+      
+      .fields-col:first-child {
+        margin-top: 0rem;
+      }
+      
+      
+      .fields-col:last-child {
+        margin-top: 0rem;
+      
+      }
+      
+      .index-bg-container .fields-col:first-child {
+        margin-top: 0rem;
+        margin-right: -5rem;
+      }
+      
+      .index-bg-container .fields-col:last-child {
+        margin-top: 0rem;
+      }
+      
+      /* Button row under Number of Gear (desktop) */
+      .fields-col .button-row {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-start;
+        align-items: flex-end;
+        margin-top: 0.7rem;
+        padding-top: 0;
+      }
+      
+      /* Hide right column button-row on desktop */
+      .fields-col:last-child .button-row {
+        display: none;
+      }
+      
+      /* Output section styles */
+      .outputs-section {
+        margin: auto;
+        display: block;
+        max-width: 320px;
+        width: 100%;
+        padding: 1.5rem;
+        background-color: #fefbe8;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        min-width: 180px;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(30px) scale(0.98);
+        transition: opacity var(--transition), visibility var(--transition),
+          transform var(--transition);
+      }
+      
+      .outputs-section.visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+        animation: fadeInSlideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      @keyframes fadeInSlideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px) scale(0.98);
+        }
+      
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      
+      .outputs-section.hiding {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(30px) scale(0.98);
+        transition: opacity var(--transition), visibility var(--transition),
+          transform var(--transition);
+      }
+      
+      .container.center-fields {
+        background: linear-gradient(to bottom right, #000000, #363636 80%);
+      }
+      
+      .output-group span,
+      #bandwidth-output {
+        color: #fff !important;
+        /* or another color that contrasts your background */
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+      
+      .output-label {
+        font-weight: 600;
+        color: var(--output-label);
+        font-size: 0.92em;
+        margin-bottom: 0.1rem;
+        letter-spacing: 0.03em;
+        transition: color var(--transition);
+      }
+      
+      .output-value {
+        color: var(--output-value);
+        font-size: 0.92em;
+        word-break: break-all;
+        transition: color var(--transition);
+      }
+      
+      .video-timing-container .output-group span,
+      .video-timing-container .output-value {
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #000000 !important;
+        /* or use var(--output-value) for theme support */
+      }
+      
+      /* Field group (label + input) */
+      .field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+      }
+      
+      .field-group label,
+      .output-label {
+        color: var(--label-color);
+        font-weight: 600;
+        transition: color var(--transition);
+        font-size: 0.92em;
+      }
+      
+      .field-group input[type="text"],
+      .field-group input[type="number"],
+      .field-group select {
+        padding: 0.35rem 0.7rem;
+        /* Input padding */
+        border: 2px solid var(--input-border);
+        border-radius: 0.4rem;
+        background: var(--input-bg);
+        color: var(--text);
+        font-size: 0.92em;
+        transition: border-color var(--transition), box-shadow var(--transition),
+          background var(--transition), color var(--transition);
+        outline: none;
+        box-shadow: 0 2px 8px rgba(255, 221, 51, 0.04);
+        width: 160px;
+        /* Input width, change for wider/narrower fields */
+        max-width: 160px;
+        box-sizing: border-box;
+      }

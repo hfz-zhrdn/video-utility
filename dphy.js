@@ -223,3 +223,60 @@ if (bitRateInput) {
     else if (val > 2500) bitRateInput.value = 2500;
   });
 }
+
+// Add tooltip + modal preview for D-PHY timing diagram (mirrors video timing behavior)
+(function() {
+  const trigger = document.querySelector('.diagram-tooltip');
+  if(!trigger) return;
+  const original = trigger.querySelector('.diagram-tooltip-content');
+  if(!original) return;
+  // Ensure hidden in-place
+  original.style.display = 'none';
+
+  // Reuse / create modal elements if not present
+  let modal = document.getElementById('imgModal');
+  let modalImg = document.getElementById('imgModalContent');
+  let modalClose = document.getElementById('imgModalClose');
+  if(!modal || !modalImg || !modalClose) {
+    modal = document.createElement('div');
+    modal.id = 'imgModal';
+    modal.className = 'img-modal';
+    modal.innerHTML = '<span id="imgModalClose" class="img-modal-close" style="position:absolute;top:20px;right:40px;font-size:40px;color:#fff;cursor:pointer;z-index:11">&times;</span><img id="imgModalContent" class="img-modal-content" />';
+    document.body.appendChild(modal);
+    modalImg = document.getElementById('imgModalContent');
+    modalClose = document.getElementById('imgModalClose');
+  }
+
+  let floating = null;
+  function removeFloating(){ if(floating){ try{ document.body.removeChild(floating);}catch(e){} floating=null; } }
+  function positionFloating(){ if(!floating) return; const rect = trigger.getBoundingClientRect(); let left = rect.left + window.scrollX; let top = rect.bottom + window.scrollY + 6; const fw = floating.offsetWidth; const fh = floating.offsetHeight; if(left + fw > window.scrollX + window.innerWidth - 8){ left = Math.max(window.scrollX + window.innerWidth - fw - 8, 8);} if(top + fh > window.scrollY + window.innerHeight - 8){ top = rect.top + window.scrollY - fh - 8; } floating.style.left = left + 'px'; floating.style.top = top + 'px'; }
+  function createFloating(){ if(floating) return; floating = original.cloneNode(true); floating.style.display='block'; floating.style.position='absolute'; floating.style.zIndex='4000'; floating.style.minWidth=''; document.body.appendChild(floating); positionFloating(); const img = floating.querySelector('img'); if(img){ img.addEventListener('click', () => openModal(img.src, img.alt)); } }
+  function openModal(src, alt){ modalImg.alt = alt || ''; modal.classList.add('show'); modalImg.onload=null; modalImg.src = src; }
+  function closeModal(){ modal.classList.remove('show'); modalImg.src=''; }
+
+  trigger.addEventListener('mouseenter', createFloating);
+  trigger.addEventListener('focus', createFloating);
+  trigger.addEventListener('mouseleave', removeFloating);
+  trigger.addEventListener('blur', removeFloating);
+  window.addEventListener('scroll', positionFloating, { passive:true });
+  window.addEventListener('resize', positionFloating);
+  if(modalClose) modalClose.addEventListener('click', closeModal);
+  if(modal) modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+
+  // Allow clicking the tooltip trigger itself to open the zoomed modal directly
+  trigger.addEventListener('click', (e) => {
+    const img = original.querySelector('img');
+    if(img){
+      e.preventDefault();
+      openModal(img.src, img.alt);
+    }
+  });
+  // Keyboard accessibility (Enter/Space)
+  trigger.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      const img = original.querySelector('img');
+      if(img) openModal(img.src, img.alt);
+    }
+  });
+})();

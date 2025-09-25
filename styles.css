@@ -47,7 +47,12 @@ html {
   --color-surface-accent: #fefbe8; /* Highlight surface (outputs-section) */
 
   /* Borders */
-  --color-border-subtle: rgba(0,0,0,0.08); /* Light subtle border for separation */
+  --color-border-subtle: rgba(
+    0,
+    0,
+    0,
+    0.08
+  ); /* Light subtle border for separation */
   --color-border-output: #e8d780; /* Border for outputs-section */
   --container-border: 0; /* Set to 0 (no border) OR e.g. 1px solid #fff (white) OR 1px solid #e0e0e0 for subtle frame */
 
@@ -85,8 +90,12 @@ html {
   --dropdown-text-color: var(--color-text-primary);
   --input-label-color: var(--color-text-secondary); /* Legacy */
   --dropdown-label-color: var(--color-text-secondary); /* Legacy */
-  --instructions-text-color: var(--color-text-secondary); /* Unused; safe to remove when purged */
-  --output-text-color: var(--color-text-primary); /* Unused direct; outputs now inherit */
+  --instructions-text-color: var(
+    --color-text-secondary
+  ); /* Unused; safe to remove when purged */
+  --output-text-color: var(
+    --color-text-primary
+  ); /* Unused direct; outputs now inherit */
   --input-bg: var(--color-input-bg);
   --input-border: var(--color-input-border);
   --input-focus: var(--color-input-focus);
@@ -123,17 +132,23 @@ html {
 }
 
 /* Line rate range reminder color */
-#line-rate-reminder { color: var(--color-text-secondary) !important; }
+#line-rate-reminder {
+  color: var(--color-text-secondary) !important;
+}
 
 /* Dropdown / input text color */
 select,
 input[type="number"],
-input[type="text"] { color: var(--color-text-primary); }
+input[type="text"] {
+  color: var(--color-text-primary);
+}
 
 /* Instructions & description text */
 .instructions-block,
 .description-box .desc-text,
-.description-box { color: var(--color-text-secondary); }
+.description-box {
+  color: var(--color-text-secondary);
+}
 
 /* (Old block forcing white output text removed; outputs inherit later rules) */
 
@@ -172,7 +187,10 @@ body {
 }
 
 .nav-link:hover,
-.nav-link.active { background: var(--color-accent); color: var(--color-text-primary); }
+.nav-link.active {
+  background: var(--color-accent);
+  color: var(--color-text-primary);
+}
 
 .main-content-row {
   display: flex;
@@ -279,10 +297,8 @@ body {
   margin-top: 0rem;
 }
 
-
 .fields-col:last-child {
   margin-top: 0rem;
-
 }
 
 .index-bg-container .fields-col:first-child {
@@ -662,7 +678,6 @@ body.light .video-timing-container #bandwidth-output,
 body.light .video-timing-container #b2p-bandwidth-output,
 body.light .video-timing-container #bitsclock-output {
   color: #232426 !important;
-  
 }
 
 /*Input styling for Video Timing Calculator*/
@@ -1584,18 +1599,32 @@ body.light .output-container {
 
 /* Table stripes driven by variables */
 #dphy-output-table,
-#dphy-rx-output-table { background: #fff; border: 1px solid #ccc; border-collapse: collapse; }
+#dphy-rx-output-table {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+}
 #dphy-output-table thead tr,
-#dphy-rx-output-table thead tr { background: var(--color-table-header); }
+#dphy-rx-output-table thead tr {
+  background: var(--color-table-header);
+}
 #dphy-output-table tbody tr:nth-child(even),
-#dphy-rx-output-table tbody tr:nth-child(even) { background: var(--color-table-stripe); }
+#dphy-rx-output-table tbody tr:nth-child(even) {
+  background: var(--color-table-stripe);
+}
 
 /* Output text color (final override) */
 .output-group span,
-#bandwidth-output { color: var(--color-text-primary) !important; }
+#bandwidth-output {
+  color: var(--color-text-primary) !important;
+}
 
 /* D-PHY extra outputs text color */
-#dphy-extra-outputs, #dphy-extra-outputs strong, #dphy-extra-outputs span { color: var(--color-text-secondary) !important; }
+#dphy-extra-outputs,
+#dphy-extra-outputs strong,
+#dphy-extra-outputs span {
+  color: var(--color-text-secondary) !important;
+}
 
 /* === Drop shadow removal (containers & UI) === */
 .container,
@@ -1609,6 +1638,7 @@ body.light .output-container {
 .diagram-tooltip-content,
 .tooltip-content,
 .tooltip-text,
-.img-modal-content { box-shadow: none !important; }
+.img-modal-content {
+  box-shadow: none !important;
+}
 /* End drop shadow removal overrides */
-

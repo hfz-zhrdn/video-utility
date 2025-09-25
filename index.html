@@ -121,11 +121,7 @@
               href="https://www.latticesemi.com/Products/DesignSoftwareAndIP/IntellectualProperty/IPCore/IPCores04/BytetoPixelConverter/"
               target="_blank"
               rel="noopener"
-              style="
-                color: #ecd24b;
-                text-decoration: underline;
-                font-weight: bold;
-              "
+              style="color: #50affc; text-decoration: underline"
               >Lattice Byte to Pixel Converter User Guide</a
             >
             <br /><br />
@@ -133,11 +129,7 @@
               href="https://www.latticesemi.com/Products/DesignSoftwareAndIP/IntellectualProperty/IPCore/IPCores04/PixeltoByteConverter/"
               target="_blank"
               rel="noopener"
-              style="
-                color: #ecd24b;
-                text-decoration: underline;
-                font-weight: bold;
-              "
+              style="color: #50affc; text-decoration: underline"
               >Lattice Pixel to Byte Converter User Guide</a
             >
           </div>
@@ -395,6 +387,7 @@
                     gap: 1.2rem;
                     min-width: 220px;
                     flex: 1 1 220px;
+                    margin-top: -0.2rem;
                   "
                 >
                   <!-- 4. Data Type dropdown -->
@@ -409,9 +402,10 @@
                           position: relative;
                           display: inline-block;
                           margin-left: 0.5rem;
-                          color: #fcdf50;
+                          color: #ecd24b;
                           cursor: help;
                           font-weight: bold;
+                          font-size: 1.1em;
                         "
                       >
                         ⓘ
@@ -493,7 +487,7 @@
                         </div>
                       </span>
                     </label>
-                    <select id="input4">
+                    <select id="input4" style="height: 2rem">
                       <option value="RAW8" selected>RAW8</option>
                       <option value="RAW10">RAW10</option>
                       <option value="RAW12">RAW12</option>
@@ -602,7 +596,7 @@
                   href="https://www.latticesemi.com/Products/DesignSoftwareAndIP/IntellectualProperty/IPCore/IPCores04/BytetoPixelConverter/"
                   target="_blank"
                   rel="noopener"
-                  style="color: #fcdf50; text-decoration: underline"
+                  style="color: #50affc; text-decoration: underline"
                   >Lattice Byte to Pixel Converter User Guide</a
                 >
                 <br /><br />
@@ -610,7 +604,7 @@
                   href="https://www.latticesemi.com/Products/DesignSoftwareAndIP/IntellectualProperty/IPCore/IPCores04/PixeltoByteConverter/"
                   target="_blank"
                   rel="noopener"
-                  style="color: #fcdf50; text-decoration: underline"
+                  style="color: #50affc; text-decoration: underline"
                   >Lattice Pixel to Byte Converter User Guide</a
                 >
                 <br /><br />
@@ -649,7 +643,7 @@
             <!-- Input to P2B Calculator: add new fields or logic here -->
             <div
               class="bandwidth-card"
-              style="min-width: 320px; flex: 1 1 320px; max-width: 400px"
+              style="min-width: 320px; flex: 1 1 320px; max-width: 320px"
             >
               <div
                 style="
@@ -657,7 +651,6 @@
                   font-size: 1.1em;
                   text-align: center;
                   margin-bottom: 1rem;
-                  color: #fff;
                 "
               >
                 Input to Pixel-to-Byte
@@ -702,7 +695,7 @@
                   <button type="reset" class="action-btn">Clear</button>
                 </div>
                 <div class="bandwidth-output-group">
-                  <label style="color: #fff">Bandwidth (Mbps):</label>
+                  <label>Bandwidth (Mbps):</label>
                   <span id="bandwidth-output"></span>
                 </div>
               </form>
@@ -718,7 +711,6 @@
                   font-size: 1.1em;
                   text-align: center;
                   margin-bottom: 1rem;
-                  color: #fff;
                 "
               >
                 Output to Byte-to-Pixel
@@ -760,7 +752,7 @@
                   <button type="reset" class="action-btn">Clear</button>
                 </div>
                 <div class="bandwidth-output-group">
-                  <label style="color: #fff">Bandwidth (Mbps):</label>
+                  <label>Bandwidth (Mbps):</label>
                   <span id="b2p-bandwidth-output"></span>
                 </div>
               </form>

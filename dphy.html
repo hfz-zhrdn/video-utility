@@ -113,7 +113,28 @@
               border: 1px solid rgba(255, 255, 255, 0.1);
             "
           >
-            <h2>Soft D-PHY Timing Calculator</h2>
+            <h2 style="display:flex; align-items:center; gap:0.6rem;">
+              Soft D-PHY Timing Calculator
+              <span
+                class="diagram-tooltip"
+                tabindex="0"
+                aria-label="Open RX Timing Diagram"
+                style="display:inline-block; position:relative; color:#fcdf50; font-weight:bold; cursor:pointer;"
+              >
+                ⓘ
+                <div
+                  class="diagram-tooltip-content"
+                  style="display:none; position:absolute; left:0; z-index:1200; background:#fefbe8; color:#000; padding:0.6rem; border-radius:6px; border:1px solid rgba(0,0,0,0.08); width:320px;"
+                >
+                  <div style="font-weight:bold; margin-bottom:0.4rem;">RX Timing Diagram</div>
+                  <img
+                    src="imgs/rxtiming_lightmode.svg"
+                    alt="RX Timing Diagram preview"
+                    style="width:100%; height:auto; display:block; cursor:zoom-in; border-radius:4px;"
+                  />
+
+              </span>
+            </h2>
             <p style="font-weight: normal">
               Lattice Radiant automatically calculates protocol timing
               parameters based on user input. However, users can also customize
@@ -126,7 +147,7 @@
                 href="https://www.latticesemi.com/Products/DesignSoftwareAndIP/IntellectualProperty/IPCore/IPCores04/CSI2DSIDPHYTransmitter"
                 target="_blank"
                 rel="noopener"
-                style="color: #fcdf50; text-decoration: underline"
+                style="color: #50affc; text-decoration: underline"
                 >Lattice MIPI D-PHY TX Page</a
               >
               <br /><br />
@@ -134,27 +155,11 @@
                 href="https://www.latticesemi.com/Products/DesignSoftwareAndIP/IntellectualProperty/IPCore/IPCores04/CSI2DSIDPHYReceiver"
                 target="_blank"
                 rel="noopener"
-                style="color: #fcdf50; text-decoration: underline"
+                style="color: #50affc; text-decoration: underline"
                 >Lattice MIPI D-PHY RX Page</a
               >
               <br /><br />
-              <img
-                id="rxTimingDiagram"
-                src="imgs/rxtiming_lightmode.svg"
-                class="img-magnify"
-                alt="RX Timing Diagram"
-                style="width: 20rem; margin-bottom: 0.2rem"
-              />
-              <div
-                style="
-                  font-size: 0.8em;
-                  color: #888;
-                  margin-top: 0;
-                  width: 150px;
-                "
-              >
-                Click this image to enlarge
-              </div>
+              <div style="font-size:0.8em; color:#888; margin-top:0; width:180px;">Use the (ⓘ) icon for diagram preview</div>
             </div>
           </div>
           <!-- Instructions column -->
@@ -455,6 +460,46 @@
         document.getElementById("imgModal").onclick = function (e) {
           if (e.target === this) this.classList.remove("show");
         };
+        // Tooltip + modal behavior for RX Timing Diagram (mirrors video timing implementation)
+        (function() {
+          const trigger = document.querySelector('.diagram-tooltip');
+          if(!trigger) return;
+          const originalContent = trigger.querySelector('.diagram-tooltip-content');
+          if(!originalContent) return;
+          originalContent.style.display = 'none';
+
+          const modal = document.getElementById('imgModal');
+          let modalImg = document.getElementById('imgModalContent');
+          const modalClose = document.getElementById('imgModalClose');
+
+          if(!modal || !modalImg) {
+            // Create modal if missing
+            const m = document.createElement('div');
+            m.id = 'imgModal';
+            m.className = 'img-modal';
+            m.innerHTML = '<span id="imgModalClose" class="img-modal-close" style="position:absolute;top:20px;right:40px;font-size:40px;color:#fff;cursor:pointer;z-index:11">&times;</span><img id="imgModalContent" class="img-modal-content" />';
+            document.body.appendChild(m);
+            modal = m; modalImg = document.getElementById('imgModalContent');
+          }
+
+          let floating = null;
+          function removeFloating(){ if(floating){ try{ document.body.removeChild(floating); }catch(e){} floating=null; } }
+          function positionFloating(){ if(!floating) return; const rect = trigger.getBoundingClientRect(); let left = rect.left + window.scrollX; let top = rect.bottom + window.scrollY + 6; const fw = floating.offsetWidth; const fh = floating.offsetHeight; if(left+fw > window.scrollX + window.innerWidth - 8){ left = Math.max(window.scrollX + window.innerWidth - fw - 8,8);} if(top+fh > window.scrollY + window.innerHeight - 8){ top = rect.top + window.scrollY - fh - 8; } floating.style.left = left + 'px'; floating.style.top = top + 'px'; }
+          function createFloating(){ if(floating) return; floating = originalContent.cloneNode(true); floating.style.display='block'; floating.style.position='absolute'; floating.style.zIndex='4000'; document.body.appendChild(floating); positionFloating(); const img = floating.querySelector('img'); if(img){ img.addEventListener('click', () => openModal(img.src, img.alt)); }
+          }
+          function openModal(src, alt){ modalImg.alt = alt || ''; modal.classList.add('show'); modalImg.onload = null; modalImg.src = src; }
+          function closeModal(){ modal.classList.remove('show'); modalImg.src=''; }
+
+          trigger.addEventListener('mouseenter', () => { createFloating(); });
+          trigger.addEventListener('focus', () => { createFloating(); });
+          trigger.addEventListener('mouseleave', () => { removeFloating(); });
+          trigger.addEventListener('blur', () => { removeFloating(); });
+          window.addEventListener('scroll', positionFloating, { passive:true });
+          window.addEventListener('resize', positionFloating);
+
+          if(modalClose){ modalClose.addEventListener('click', closeModal); }
+          if(modal){ modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); }); }
+        })();
       </script>
     </div>
   </body>

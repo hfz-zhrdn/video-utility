@@ -104,9 +104,45 @@
               </span>
             </h2>
             <p style="font-weight: normal">
-              This calculator helps you calculate the required pixel clock and
-              bandwidth for the target video resolution.
+              This calculator derives fundamental video timing and bandwidth
+              metrics from either a selected industry timing (CTA/CEA or VESA)
+              or a custom set of porch/sync values that you provide. It
+              consolidates horizontal and vertical blanking, computes total
+              active + blanking pixels per line and per frame, and then
+              determines the pixel clock and aggregate link bandwidth required
+              for transmission.
             </p>
+            <p style="font-weight: normal; margin-top: 0.8rem">
+              Results reported:
+            </p>
+            <ul
+              style="
+                margin-top: 0.2rem;
+                padding-left: 1.1rem;
+                font-weight: normal;
+              "
+            >
+              <li>
+                <strong>Horizontal Total Pixel</strong> = Active + Total
+                Horizontal Blanking
+              </li>
+              <li>
+                <strong>Vertical Total Lines</strong> = Active + Total Vertical
+                Blanking
+              </li>
+              <li>
+                <strong>Total Pixel per Frame per Sec</strong> = H Total × V
+                Total × Refresh Rate
+              </li>
+              <li>
+                <strong>Pixel Clock (MHz)</strong> = (Total Pixel per Frame per
+                Sec) / 10^6
+              </li>
+              <li>
+                <strong>Total Link Bandwidth Used (Gbps)</strong> = Pixel Clock
+                × Effective Bits per Pixel ÷ 1000
+              </li>
+            </ul>
             <!-- preview is shown from the tooltip above -->
           </div>
           <!-- Instructions column -->
@@ -581,8 +617,9 @@
             modalImg.style.width = Math.round(natW * scale) + "px";
             modalImg.style.height = Math.round(natH * scale) + "px";
             modalImg.style.objectFit = "contain";
-            modalImg.style.transformOrigin = "center center";
-            modalImg.style.transform = "translate(-6%, -8%)";
+            modalImg.style.transform = "";
+            modalImg.style.transformOrigin = "";
+            modalImg.style.margin = "0";
           } catch (err) {
             modalImg.style.width = "";
             modalImg.style.height = "";
@@ -604,9 +641,6 @@
           modalImg.src = src;
           if (modalImg.complete) {
             fitImageToViewport();
-            try {
-              modalClose.focus();
-            } catch (e) {}
           }
         }
 
@@ -779,6 +813,11 @@
           },
           { passive: true }
         );
+
+        // Ensure image recenters on viewport resize while modal open
+        window.addEventListener("resize", () => {
+          if (modal.classList.contains("show")) fitImageToViewport();
+        });
       })();
     </script>
   </body>

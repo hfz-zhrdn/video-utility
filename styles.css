@@ -63,8 +63,8 @@ html {
   --color-input-text: #333333; /* Input text color */
 
   /* Accent / semantic */
-  --color-accent: #ffd600; /* Primary accent (buttons, hover fills) */
-  --color-accent-hover: #ffe066; /* Hover state for accent elements */
+  --color-accent: #209dd8 ; /* Primary accent (buttons, hover fills) */
+  --color-accent-hover: #3eabde ; /* Hover state for accent elements */
   --color-error: #e53935; /* Validation errors */
 
   /* Tables */
@@ -143,6 +143,23 @@ input[type="text"] {
   color: var(--color-text-primary);
 }
 
+
+/* Custom styling for dropdown options */
+select option {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+/* Custom styling for dropdown options on hover */
+select option:hover,
+select option:focus,
+select option:active,
+select option:checked {
+  background-color: #6c6c6c !important;
+  color: #ffffff !important;
+}
+
+
 /* Instructions & description text */
 .instructions-block,
 .description-box .desc-text,
@@ -163,44 +180,60 @@ body {
   font-size: 0.85rem;
 }
 
-/* Navigation Button*/
-.main-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  background: var(--color-surface-accent);
-  padding: 1.2rem 0 0.7rem 0;
-  border-radius: 0 0 0.7rem 0.7rem;
-  box-shadow: none;
-  margin-bottom: 1.2rem;
-}
+/* Navigation button styling */
 
-.nav-link {
-  color: var(--color-text-secondary);
+.top-nav .nav-link {
+  color: #fff;  /* White font by default */
   text-decoration: none;
   font-weight: 600;
   font-size: 1.08em;
   padding: 0.3rem 1.2rem;
   border-radius: 0.4rem;
-  transition: background var(--transition), color var(--transition);
+  transition: color 0.18s ease;
+  background: transparent !important;  /* No background */
+  border-bottom: none !important;      /* No border bottom */
 }
 
-.nav-link:hover,
-.nav-link.active {
-  background: var(--color-accent);
-  color: var(--color-text-primary);
+/* Grey text on hover, no background change */
+.top-nav .nav-link:hover,
+.top-nav .nav-link:focus {
+  color: #aaaaaa !important;           /* Grey font on hover */
+  background: transparent !important;  /* No background */
+  border-bottom: none !important;      /* No border */
 }
 
-.main-content-row {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 2.5rem;
-  /* Equal spacing between description, input, and table */
-  width: 100%;
-  justify-content: center;
+/* Active page indicator - yellow line under the specific nav button */
+.top-nav .nav-link.active {
   position: relative;
+  color: #fff !important;  /* Keep active link white */
+  background: transparent !important; /* No background */
+}
+
+/* Yellow line under the active button */
+.top-nav .nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;   
+  height: 3px;    
+  background-color: #ffd600; 
+  display: block;
+}
+
+/* Keep the bottom yellow line for the entire navigation bar */
+.top-nav::after,
+.main-nav::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: #ffd600; /* Yellow line */
+  z-index: 5;
+  border-radius: 0 0 6px 6px;
+  pointer-events: none;
 }
 
 .description-box {
@@ -509,6 +542,7 @@ select.highlight {
   padding-top: 0;
 }
 
+
 .action-btn {
   background: #ffdd33;
   color: #232426;
@@ -523,9 +557,19 @@ select.highlight {
   box-shadow: 0 2px 8px rgba(255, 221, 51, 0.08);
 }
 
-.action-btn:hover {
-  background: #ffe066;
-  color: #111;
+
+/* Button hover styles */
+button#calculateButton:hover,
+button#clearButton:hover,
+.action-btn:hover,
+#calc-p2b-btn:hover,
+#calculate-btn:hover,
+#clear-btn:hover,
+button[type="button"]:hover,
+input[type="button"]:hover,
+.button-row button:hover {
+  background-color: #3eabde !important; /* Lighter blue on hover */
+  color: #ffffff !important;            /* Keep text white */
   transform: translateY(-2px) scale(1.05);
 }
 
@@ -754,34 +798,24 @@ select:focus {
   outline: none;
 }
 
-button#calculateButton {
-  background-color: #ffdd33;
-  color: #232426;
-  border: none;
+button#calculateButton,
+button#clearButton,
+.action-btn,
+#calc-p2b-btn,
+#calculate-btn,
+#clear-btn,
+button[type="button"],
+input[type="button"],
+.button-row button {
+  background-color: #209dd8 !important; /* Blue background */
+  color: #ffffff !important;            /* White text */
+  border: none !important;
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 1rem;
-  display: block;
-  width: 100%;
-}
-
-button#clearButton {
-  background-color: #ffdd33;
-  color: #232426;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  margin-top: 1rem;
-  display: block;
-  width: 100%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 /* Field label and input styling */
@@ -975,11 +1009,17 @@ button#clearButton {
   background: #ffd600 !important;
 }
 
+
+.main-banner,
+.banner-content,
+.banner-nav,
+.banner-underline,
 .top-nav,
 .main-nav {
-  background: #232426 !important;
-  color: #fffde7 !important;
+  background: #333333!important; /* Grey background */
+  color: #fffde7 !important;      /* Light text color */
 }
+
 
 /* Resize the .top-nav */
 .top-nav {

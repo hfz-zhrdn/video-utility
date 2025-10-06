@@ -21,7 +21,7 @@
             />
           </a>
           <nav class="top-nav">
-            <a href="index.html" class="nav-link ">MIPI Configuration</a>
+            <a href="index.html" class="nav-link">MIPI Configuration</a>
             <a href="dphy.html" class="nav-link">Soft D-PHY Parameter</a>
             <a href="video_timing.html" class="nav-link">Video Timing</a>
           </nav>
@@ -334,6 +334,7 @@
                     gap: 1.2rem;
                     min-width: 220px;
                     flex: 1 1 220px;
+                    margin-top: 0px;
                   "
                 >
                   <!-- 1. Line Rate (Mbps) -->
@@ -562,6 +563,15 @@
                 <div class="output-group">
                   <div class="output-label">Byte Clock Frequency</div>
                   <div class="output-value" id="output4"></div>
+                </div>
+                <!-- Added export button below outputs -->
+                <div
+                  class="button-row"
+                  style="margin-top: 0.8rem; justify-content: flex-start"
+                >
+                  <button type="button" id="export-json-btn" class="action-btn">
+                    Download JSON
+                  </button>
                 </div>
               </div>
             </div>

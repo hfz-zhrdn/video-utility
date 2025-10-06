@@ -82,7 +82,6 @@ function clearDPHYTable() {
     outClkPostMin, outClkPostMax, outClkPostChoice,
     outClkTrailMin, outClkTrailMax, outClkTrailChoice,
     outClkExitMin, outClkExitMax, outClkExitChoice
-    // ...other outputs if needed...
   ].forEach(cell => cell && (cell.textContent = ''));
   if (dphyClockInput) dphyClockInput.value = '';
 }
@@ -95,28 +94,28 @@ function calcDPHY() {
   }
   // D-PHY Clock Frequency (MHz)
   const dphyClock = bitRate / 2;
-  if (dphyClockInput) dphyClockInput.textContent = dphyClock.toFixed(3);
+  if (dphyClockInput) dphyClockInput.textContent = dphyClock.toFixed(2);
 
   // DPHY CLOCK period (ns)
   const dphyClockPeriod = 1000 / dphyClock;
-  if (outClockPerMin) outClockPerMin.textContent = dphyClockPeriod.toFixed(3);
-  if (outClockPerMinTable) outClockPerMinTable.textContent = dphyClockPeriod.toFixed(3);
+  if (outClockPerMin) outClockPerMin.textContent = dphyClockPeriod.toFixed(2);
+  if (outClockPerMinTable) outClockPerMinTable.textContent = dphyClockPeriod.toFixed(2);
 
   // Byte Clock Frequency (MHz)
   const byteClockFreq = dphyClock / 8;
-  if (outByteFreqMin) outByteFreqMin.textContent = byteClockFreq.toFixed(3);
-  if (outByteFreqMinTable) outByteFreqMinTable.textContent = byteClockFreq.toFixed(3);
+  if (outByteFreqMin) outByteFreqMin.textContent = byteClockFreq.toFixed(2);
+  if (outByteFreqMinTable) outByteFreqMinTable.textContent = byteClockFreq.toFixed(2);
 
   // Byte Clock Period (ps)
   const byteClockPeriod_ns = 1000 / byteClockFreq; // Convert MHz to ns
   const byteClockPeriod_ps = 1000 * byteClockPeriod_ns; // Convert ns to ps
-  if (outByteClockPeriod) outByteClockPeriod.textContent = byteClockPeriod_ps.toFixed(3);
-  if (outByteClockPeriod) outByteClockPeriod.textContent = byteClockPeriod_ns.toFixed(3);
+  if (outByteClockPeriod) outByteClockPeriod.textContent = byteClockPeriod_ps.toFixed(2);
+  if (outByteClockPeriod) outByteClockPeriod.textContent = byteClockPeriod_ns.toFixed(2);
 
   // UI (ps)
   const uiPs = 1000000 / bitRate;
-  if (outUIps) outUIps.textContent = uiPs.toFixed(3);
-  if (outByteClockPeriod) outByteClockPeriod.textContent = byteClockPeriod_ps.toFixed(3);
+  if (outUIps) outUIps.textContent = uiPs.toFixed(2);
+  if (outByteClockPeriod) outByteClockPeriod.textContent = byteClockPeriod_ps.toFixed(2);
 
   // t_LPX (uses ns)
   const tLpxMin = Math.floor(50 / byteClockPeriod_ns);
@@ -280,3 +279,52 @@ if (bitRateInput) {
     }
   });
 })();
+
+document.getElementById('export-json-btn').addEventListener('click', function () {
+  // Helper to safely read text by element id
+  const getText = (id) => {
+    const el = document.getElementById(id);
+    return el ? el.textContent : '';
+  };
+  // Helper for input values
+  const getValue = (id) => {
+    const el = document.getElementById(id);
+    return el ? el.value : '';
+  };
+
+  const results = {
+    bit_rate: getValue('bit-rate'),
+    ui_ps: getText('out-ui-ps'),
+    dphy_clock_frequency: getText('dphy-clock'),
+    byte_clock_period: getText('out-byte-clock-period'),
+    dphy_clock_period: getText('out-clock-per-min'),
+    byte_clock_frequency: getText('out-byte-freq-min'),
+    timing_outputs: {
+      t_LPX: { min: getText('out-lpx-min'), max: getText('out-lpx-max'), default: getText('out-lpx-choice') },
+      t_HS_PREPARE: { min: getText('out-hs-prepare-min'), max: getText('out-hs-prepare-max'), default: getText('out-hs-prepare-choice') },
+      TX_TCLK_HSZERO: { min: getText('out-tclk-hszero-min'), max: getText('out-tclk-hszero-max'), default: getText('out-tclk-hszero-choice') },
+      t_HS_TRAIL: { min: getText('out-hs-trail-min'), max: getText('out-hs-trail-max'), default: getText('out-hs-trail-choice') },
+      t_HS_EXIT: { min: getText('out-hs-exit-min'), max: getText('out-hs-exit-max'), default: getText('out-hs-exit-choice') },
+      t_CLK_Prepare: { min: getText('out-clk-prepare-min'), max: getText('out-clk-prepare-max'), default: getText('out-clk-prepare-choice') },
+      t_CLK_ZERO: { min: getText('out-clk-zero-min'), max: getText('out-clk-zero-max'), default: getText('out-clk-zero-choice') },
+      t_CLK_PRE: { min: getText('out-clk-pre-min'), max: getText('out-clk-pre-max'), default: getText('out-clk-pre-choice') },
+      t_CLK_POST: { min: getText('out-clk-post-min'), max: getText('out-clk-post-max'), default: getText('out-clk-post-choice') },
+      t_CLK_TRAIL: { min: getText('out-clk-trail-min'), max: getText('out-clk-trail-max'), default: getText('out-clk-trail-choice') },
+      t_CLK_EXIT: { min: getText('out-clk-exit-min'), max: getText('out-clk-exit-max'), default: getText('out-clk-exit-choice') }
+    },
+    rx_timing_outputs: {
+      Data_Settle: { min: getText('out-data-settle-min'), max: getText('out-data-settle-max'), default: getText('out-data-settle-choice') }
+    }
+  };
+
+  const json = JSON.stringify(results, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'dphy_results.json';
+  a.click();
+
+  URL.revokeObjectURL(url);
+});

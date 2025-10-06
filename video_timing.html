@@ -232,11 +232,7 @@
                               </ul>
                             </div>
                           </label>
-                          <select
-                            id="presetResolution"
-                            name="presetResolution"
-                            style="width: 14.1rem"
-                          >
+                          <select id="presetResolution" name="presetResolution">
                             <option value="Custom">Custom</option>
                             <option value="CTA_1280_720_60">
                               CTA/CEA 1280x720 @60Hz
@@ -293,12 +289,6 @@
                             type="text"
                             id="TotalhBlank"
                             name="TotalhBlank"
-                            readonly
-                            style="
-                              background: #7c7c7c;
-                              color: #585858;
-                              cursor: not-allowed;
-                            "
                           />
                         </div>
                         <!-- Vertical Blanking Components -->
@@ -340,12 +330,6 @@
                             type="text"
                             id="TotalvBlank"
                             name="TotalvBlank"
-                            readonly
-                            style="
-                              background: #7c7c7c;
-                              color: #585858;
-                              cursor: not-allowed;
-                            "
                           />
                         </div>
                       </div>
@@ -383,12 +367,7 @@
                         </div>
                         <div class="form-group">
                           <label for="colorFormat">Color Format</label>
-                          <select
-                            id="colorFormat"
-                            name="colorFormat"
-                            required
-                            style="width: 14.2rem"
-                          >
+                          <select id="colorFormat" name="colorFormat" required>
                             <option value="RGB666">RGB, 4:4:4, 6 BPC</option>
                             <option value="RGB888">RGB, 4:4:4, 8 BPC</option>
                             <option value="RGB101010">
@@ -437,11 +416,6 @@
                             <option value="YCbCr420_16">
                               YCbCr, 4:2:0, 16 BPC
                             </option>
-                            <option value="RAW8">RAW8</option>
-                            <option value="RAW10">RAW10</option>
-                            <option value="RAW12">RAW12</option>
-                            <option value="RAW14">RAW14</option>
-                            <option value="RAW16">RAW16</option>
                           </select>
                         </div>
                         <div class="form-group">
@@ -463,7 +437,6 @@
                           <select
                             id="pixelPerClock"
                             name="pixelPerClock"
-                            style="width: 14.2rem"
                             required
                           >
                             <option value="1">1</option>
@@ -478,15 +451,16 @@
                       class="button-row"
                       style="margin-top: 1.5rem; justify-content: center"
                     >
+                      <button type="button" id="clearButton" class="action-btn">
+                        Clear
+                      </button>
+
                       <button
                         type="button"
                         id="calculateButton"
                         class="action-btn"
                       >
                         Calculate
-                      </button>
-                      <button type="button" id="clearButton" class="action-btn">
-                        Clear
                       </button>
                     </div>
                   </form>

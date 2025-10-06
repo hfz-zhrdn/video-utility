@@ -25,25 +25,54 @@ const bitsPerPixelMap = {
   "RAW16": 16
 };
 
+const colorFormatToBpp = {
+  RGB666: 18,
+  RGB888: 24,
+  RGB101010: 30,
+  RGB121212: 36,
+  RGB161616: 48,
+  YCbCr444_8: 24,
+  YCbCr444_10: 30,
+  YCbCr444_12: 36,
+  YCbCr444_16: 48,
+  YCbCr422_8: 16,
+  YCbCr422_10: 20,
+  YCbCr422_12: 24,
+  YCbCr422_16: 32,
+  YCbCr420_8: 12,
+  YCbCr420_10: 15,
+  YCbCr420_12: 18,
+  YCbCr420_16: 24
+};
+
 const colorFormatSelect = document.getElementById('colorFormat');
 const bitsPerPixelInput = document.getElementById('bitsPerPixel');
+const presetResolutionSelect = document.getElementById('presetResolution');
 
-// Updated function for Bits per Pixel, including RAW formats
 function updateBitsPerPixel() {
-  const colorFormat = colorFormatSelect.value;
-  if (bitsPerPixelMap[colorFormat] !== undefined) {
-    bitsPerPixelInput.value = bitsPerPixelMap[colorFormat];
+  const selectedFormat = colorFormatSelect.value;
+  const bpp = colorFormatToBpp[selectedFormat] || '';
+
+  if (presetResolutionSelect.value === 'Custom') {
+    bitsPerPixelInput.readOnly = false;
+    bitsPerPixelInput.style.background = '';
+    bitsPerPixelInput.style.color = '';
+    bitsPerPixelInput.style.cursor = '';
+    bitsPerPixelInput.value = bpp; // Ensure value is updated for Custom preset
   } else {
-    bitsPerPixelInput.value = ''; // Clear the field if the format is not found
+    bitsPerPixelInput.value = bpp;
+    bitsPerPixelInput.readOnly = true;
+    bitsPerPixelInput.style.background = '#f5f5f5';
+    bitsPerPixelInput.style.color = '#888';
+    bitsPerPixelInput.style.cursor = 'not-allowed';
   }
 }
 
-// Add event listener for color format change
 colorFormatSelect.addEventListener('change', updateBitsPerPixel);
+presetResolutionSelect.addEventListener('change', updateBitsPerPixel);
 
-// Call once on page load to initialize
+// Initialize on page load
 updateBitsPerPixel();
-
 
 //Limitation range for Link Rate per Lane 
 //Not used in the current version, but kept for future reference
@@ -269,29 +298,41 @@ const presetResolutions = {
   }
 };
 
-const presetSelect = document.getElementById('presetResolution');
 const presetFieldIds = [
   'hSync', 'hBackPorch', 'hFrontPorch', 'hPixels',
-  'vSync', 'vBackPorch', 'vFrontPorch', 'vLines', 'refreshRate'
+  'vSync', 'vBackPorch', 'vFrontPorch', 'vLines', 'refreshRate',
+  'TotalhBlank', 'TotalvBlank', 'bitsPerPixel' // Added fields
 ];
+
+const presetSelect = document.getElementById('presetResolution');
 if (presetSelect) {
   presetSelect.addEventListener('change', function () {
     const val = this.value;
+
     if (presetResolutions[val]) {
       const preset = presetResolutions[val];
       presetFieldIds.forEach(id => {
         const el = document.getElementById(id);
         if (el) {
-          el.value = preset[id];
+          el.value = preset[id] || '';
           el.readOnly = true;
           el.style.background = '#f5f5f5';
           el.style.color = '#888';
           el.style.cursor = 'not-allowed';
         }
       });
+      // Set default color format and BPP for presets
+      if (colorFormatSelect) {
+        colorFormatSelect.value = 'RGB666';
+      }
+      if (typeof updateBitsPerPixel === 'function') {
+        updateBitsPerPixel(); // will set BPP to 18 and keep it read-only for presets
+      } else if (bitsPerPixelInput) {
+        bitsPerPixelInput.value = 18; // fallback
+        bitsPerPixelInput.readOnly = true;
+      }
       calculateOutputs();
     } else {
-      // If 'Custom' or blank is selected, make fields editable
       presetFieldIds.forEach(id => {
         const el = document.getElementById(id);
         if (el) {

@@ -505,4 +505,40 @@ document.addEventListener("DOMContentLoaded", function () {
       if (e.target === imgModal) imgModal.style.display = 'none';
     };
   }
+
+  // Export to JSON functionality
+  const exportJsonBtn = document.getElementById('export-json-btn');
+  if (exportJsonBtn) {
+    exportJsonBtn.addEventListener('click', () => {
+      // Collect inputs
+      const data = {
+        inputs: {
+          lineRateMbps: inputFields[0]?.value || '',
+          numberOfLanes: inputFields[1]?.value || '',
+          numberOfGear: inputFields[2]?.value || '',
+          dataType: inputFields[3]?.value || '',
+          pixelPerClock: inputFields[4]?.value || '',
+        },
+        outputs: {
+          bitsPerClock: document.getElementById('output1')?.textContent || '',
+          dphyClockMHz: document.getElementById('output2')?.textContent || '',
+          pixelClockMHz: document.getElementById('output3')?.textContent || '',
+          byteClockFrequency: document.getElementById('output4')?.textContent || '',
+        }
+      };
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      const ts = new Date().toISOString().replace(/[:.]/g, '-');
+      a.download = `mipi-config-${ts}.json`;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 0);
+    });
+  }
 });

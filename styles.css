@@ -1751,7 +1751,7 @@ body.light .output-container {
 /* Footer disclaimer styling */
 .site-footer {
   background: #4a4a4a;
-  color: #686868;
+  color: #ffffff;
   font-size: 0.85rem;
   line-height: 1.4;
   margin-top: 3rem;
@@ -1759,7 +1759,7 @@ body.light .output-container {
 }
 .site-footer h2,
 .site-footer h3 {
-  color: #686868;
+  color: #ffd600;
   font-size: 1rem;
   margin-top: 0;
 }

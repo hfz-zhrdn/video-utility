@@ -13,7 +13,7 @@
     <header class="main-banner">
       <div class="banner-content">
         <!-- Logo and navigation side by side -->
-        <div style="display: flex; align-items: center; gap: 2rem">
+        <div style="display: flex; align-items: center">
           <a href="https://www.latticesemi.com/" target="_blank" rel="noopener">
             <img
               src="imgs/Lattice Logo Yellow_White.png"
@@ -23,7 +23,8 @@
           </a>
           <!--To add new pages & highlight which page user is on-->
           <nav class="top-nav">
-            <a href="index.html" class="nav-link">MIPI Configuration</a>
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="config.html" class="nav-link">MIPI Configuration</a>
             <a href="dphy.html" class="nav-link">Soft D-PHY Parameter</a>
             <a href="video_timing.html" class="nav-link">Video Timing</a>
           </nav>
@@ -180,6 +181,44 @@
         </div>
         <!-- Main content row as flexbox -->
         <div class="main-content-padded">
+          <!-- Centered Import JSON button for Video Timing page -->
+          <div
+            style="
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              margin-top: 0.6rem;
+              margin-bottom: 0.9rem;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.4rem;
+              "
+            >
+              <button
+                id="vt-import-json-btn"
+                type="button"
+                class="action-btn"
+                style="width: 160px"
+              >
+                Import JSON
+              </button>
+              <input
+                id="vt-import-json-input"
+                type="file"
+                accept="application/json"
+                style="display: none"
+              />
+              <span
+                id="vt-import-status"
+                style="color: #50affc; font-size: 0.85em; min-height: 1.1em"
+              ></span>
+            </div>
+          </div>
           <div
             style="
               display: flex;
@@ -497,6 +536,20 @@
                     <span class="output-value" id="outLinkBandwidthUsed"
                       >-</span
                     >
+                  </div>
+                  <!-- Export button now inside output container -->
+                  <div
+                    class="button-row"
+                    style="margin-top: 0.8rem; justify-content: center"
+                  >
+                    <button
+                      id="vt-export-json-btn"
+                      type="button"
+                      class="action-btn"
+                      style="min-width: 160px"
+                    >
+                      Export JSON
+                    </button>
                   </div>
                 </div>
               </div>

@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MIPI Configuration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" href="imgs/favicon.ico" />
   </head>
@@ -12,7 +12,7 @@
     <header class="main-banner">
       <div class="banner-content">
         <!--Logo and navigation-->
-        <div style="display: flex; align-items: center; gap: 2rem">
+        <div style="display: flex; align-items: center">
           <a href="https://www.latticesemi.com/" target="_blank" rel="noopener">
             <img
               src="imgs/Lattice Logo Yellow_White.png"
@@ -21,961 +21,255 @@
             />
           </a>
           <nav class="top-nav">
-            <a href="index.html" class="nav-link">MIPI Configuration</a>
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="config.html" class="nav-link">MIPI Configuration</a>
             <a href="dphy.html" class="nav-link">Soft D-PHY Parameter</a>
             <a href="video_timing.html" class="nav-link">Video Timing</a>
           </nav>
         </div>
       </div>
     </header>
-    <!-- Main content container to separate from background -->
-    <div class="index-bg-container" style="padding-bottom: 5rem">
-      <!-- Top description row as flexbox, matching video_timing.html -->
-      <div
-        class="index-description-row"
-        style="
-          display: flex;
-          flex-direction: row;
-          gap: 2rem;
-          width: 100%;
-          justify-content: center;
-          margin-bottom: 1.2rem;
-        "
-      >
-        <!-- Description column -->
-        <div
-          class="description-box"
-          style="
-            max-width: 380px;
-            min-width: 260px;
-            margin-top: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-          "
+
+    <!-- Welcome Text and Description -->
+    <main>
+      <section class="welcome-section">
+        <h1>Welcome to the Video Timing Calculator</h1>
+        <p>
+          This tool is designed to help you calculate and configure various
+          parameters for video timing and MIPI configurations. Explore the
+          following pages to get started:
+        </p>
+        <p>
+          <strong>Purpose:</strong> Provide quick, accurate calculations for
+          video timing (active area, blanking intervals, pixel clock) and MIPI
+          D-PHY parameters based on display presets or custom inputs.
+        </p>
+        <p>
+          <strong>Target audience:</strong> FPGA/SoC designers, display
+          interface engineers, firmware developers, applications engineers, and
+          validation/test teams working with MIPI DSI/CSI and general video
+          pipelines.
+        </p>
+        <p>
+          <strong>Typical use cases:</strong> sizing blanking for timing
+          closure, estimating lane rates and bandwidth, validating
+          sensor/display configurations, and sharing configurations across
+          teams.
+        </p>
+        <p>
+          <strong>Who should use this:</strong> Teams building camera/display
+          interfaces, prototyping embedded vision systems, or validating
+          board-level video paths on Lattice devices.
+        </p>
+        <p><strong>What it covers:</strong></p>
+        <ul>
+          <li>
+            Video timing fundamentals: total/active pixels, horizontal/vertical
+            blanking, frame rate, pixel clock.
+          </li>
+          <li>
+            MIPI D-PHY sizing: lane count, lane rate, payload efficiency,
+            byte/bit clocks.
+          </li>
+          <li>
+            Color formats and bit depths: RGB and YCbCr options with derived
+            bits-per-pixel.
+          </li>
+        </ul>
+        <p><strong>How to use:</strong></p>
+        <ol>
+          <li>
+            Open <a href="video_timing.html">Video Timing</a> and select a
+            preset resolution or enter custom values.
+          </li>
+          <li>
+            Adjust horizontal/vertical blanking as needed; derived fields update
+            automatically.
+          </li>
+          <li>
+            Review outputs (pixel clock, totals) and proceed to
+            <a href="dphy.html">Soft D-PHY</a> to size lane rate and lanes.
+          </li>
+          <li>
+            Use <a href="config.html">MIPI Configuration</a> to finalize format
+            and interface details.
+          </li>
+          <li>
+            Optionally export inputs/outputs as JSON for documentation and
+            reviews.
+          </li>
+        </ol>
+        <p><strong>Assumptions & limitations:</strong></p>
+        <ul>
+          <li>
+            Calculations assume synchronous pixel domain and typical D-PHY
+            efficiency; verify exact requirements with panel/sensor datasheets.
+          </li>
+          <li>
+            Results provide engineering estimates; hardware validation is
+            recommended.
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a href="config.html">MIPI Configuration</a>: Configure MIPI-related
+            parameters.
+          </li>
+          <li>
+            <a href="dphy.html">Soft D-PHY Parameter</a>: Adjust and calculate
+            D-PHY parameters.
+          </li>
+          <li>
+            <a href="video_timing.html">Video Timing</a>: Calculate video timing
+            parameters.
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="disclaimer-text collapsed" id="full-disclaimer">
+        <h2>Disclaimer</h2>
+        <p>LATTICE SEMICONDUCTOR CORPORATION License Agreement</p>
+        <p>
+          This is a legal agreement between you, the end user, and Lattice
+          Semiconductor Corporation. By proceeding with the use of the Software
+          you acknowledge you have read this Agreement, you understand it, and
+          you agree to be bound by the terms and conditions of this Agreement.
+          Lattice Semiconductor Corporation ("Lattice") and the individual or
+          entity acquiring the Software ("Licensee") agree as follows:
+        </p>
+        <p>
+          1. DEFINITIONS <br />
+          "Software" means the computer program(s) in machine-readable form
+          furnished to Licensee by Lattice, in whatever media and by whatever
+          method, which are enabled for use pursuant to Lattice's software
+          protection mechanism. Software includes any related update or upgrade
+          programs that may be added from time to time.
+        </p>
+        <p>
+          2. SOFTWARE LICENSE <br />
+          a. Lattice hereby grants to Licensee a non-exclusive, nontransferable
+          license to use the Software for Licensee's internal purposes only on
+          any computer possessed or accessed by Licensee on which the Software
+          is designed to operate, such use to be in accordance with and subject
+          to the terms and conditions of this Agreement.
+          <br />b. Licensee shall not distribute, copy, transfer, lend,
+          incorporate, or modify the Software. <br />c. If Licensee fails to
+          comply with the provisions of this Agreement, this license is
+          automatically terminated. <br />d. Except for the rights expressly
+          granted herein to Licensee, the title and all intellectual property
+          rights in and to the Software and any copy of the Software which may
+          be made by Licensee hereunder remain the sole and exclusive property
+          of Lattice and/or Lattice's licensors.
+        </p>
+        <p>
+          3. WARRANTY DISCLAIMER
+          <br />SOFTWARE PROVIDED BY LATTICE IS PROVIDED "AS IS" WITHOUT
+          WARRANTY OF ANY KIND. LATTICE MAKES NO WARRANTIES ON THE SOFTWARE,
+          WHETHER EXPRESSED, IMPLIED, STATUTORY, OR IN ANY OTHER PROVISION OF
+          THIS AGREEMENT OR COMMUNICATION WITH LICENSEE, AND LATTICE
+          SPECIFICALLY DISCLAIMS ANY IMPLIED WARRANTY OF MERCHANTABILITY OR
+          FITNESS FOR A PARTICULAR PURPOSE. LATTICE DOES NOT WARRANT THAT THE
+          FUNCTIONS CONTAINED IN THE SOFTWARE WILL MEET LICENSEE'S REQUIREMENTS,
+          OR THAT LICENSEE'S OPERATION OF THE SOFTWARE WILL BE UNINTERRUPTED OR
+          ERROR FREE, OR THAT DEFECTS IN THE SOFTWARE WILL BE CORRECTED.
+          LICENSEE ASSUMES RESPONSIBILITY FOR SELECTION OF THE SOFTWARE TO
+          ACHIEVE ITS INTENDED RESULTS, AND FOR THE PROPER INSTALLATION, USE,
+          AND RESULTS OBTAINED FROM THE SOFTWARE. LICENSEE ASSUMES THE ENTIRE
+          RISK OF THE SOFTWARE PROVING DEFECTIVE OR FAILING TO PERFORM PROPERLY
+          AND IN SUCH EVENT, LICENSEE SHALL ASSUME THE ENTIRE COST AND RISK OF
+          ANY REPAIR, SERVICE, CORRECTION, OR ANY OTHER LIABILITIES OR DAMAGES
+          CAUSED BY OR ASSOCIATED WITH THE SOFTWARE. LATTICE'S SOLE LIABILITY,
+          AND LICENSEE'S SOLE REMEDY, IS SET FORTH ABOVE. LATTICE DOES NOT
+          WARRANT THAT USE OF THE SOFTWARE DOES NOT INFRINGE ON THIRD PARTIES'
+          INTELLECTUAL PROPERTY RIGHTS.
+        </p>
+        <p>
+          5. LIMITATION OF LIABILITY <br />a. Licensee agrees that Lattice's
+          entire liability to Licensee and Licensee's sole remedy hereunder for
+          any cause whatsoever, regardless of the form of the action, shall be
+          limited to the price paid to Lattice for the Software. <br />b. IN NO
+          EVENT WILL LATTICE OR ANY OF ITS SUPPLIERS BE LIABLE TO LICENSEE OR
+          ANY OTHER PERSON FOR ANY DAMAGES, INCLUDING ANY DIRECT, INDIRECT,
+          INCIDENTAL, CONSEQUENTIAL, OR SPECIAL DAMAGES, INCLUDING EXPENSES,
+          LOST PROFITS, LOST SAVINGS, OR OTHER DAMAGES OF ANY SORT ARISING OUT
+          OF THE USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF LATTICE HAS
+          BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. SOME JURISDICTIONS DO
+          NOT ALLOW THE LIMITATION OR EXCLUSION OF INCIDENTAL OR CONSEQUENTIAL
+          DAMAGES, SO THE ABOVE LIMITATIONS OR EXCLUSIONS MAY NOT APPLY TO YOU.
+        </p>
+
+        <p>
+          6. INFORMATION REGARDING PERSONAL DATA <br />If you accessed this
+          Software from our website, we have collected information about you,
+          including your name and contact information, from the information you
+          provided when you registered to use the website.
+        </p>
+        <p>
+          7. GENERAL
+          <br />THIS AGREEMENT WILL BE GOVERNED BY THE LAWS OF THE STATE OF
+          OREGON, WITHOUT REFERENCE TO ANY CONFLICT OF LAWS PRINCIPLES. NOTHING
+          IN THIS AGREEMENT WILL BE INTERPRETED OR CONSTRUED SO AS TO LIMIT OR
+          EXCLUDE THE RIGHTS OR OBLIGATIONS OF LICENSEE OR LATTICE WHICH IT IS
+          UNLAWFUL TO LIMIT OR EXCLUDE UNDER APPLICABLE LAWS, INCLUDING THE LAWS
+          OF ANY MEMBER STATE OF THE EUROPEAN UNION WHICH IMPLEMENTS RELEVANT
+          EUROPEAN COMMUNITIES COUNCIL DIRECTIVES. Except as specifically
+          provided in this Agreement, Licensee may not sublicense, assign, or
+          transfer this license or the Software. Any attempted assignment,
+          transfer or sublicense by Licensee in violation of this provision
+          shall be void. Subject to the foregoing, this Agreement shall be
+          binding upon and inure to the benefit of the successors and permitted
+          assigns of the parties. The prevailing party in any legal action or
+          arbitration arising out of this Agreement shall be entitled to
+          reimbursement for reasonable attorneys fees and expenses, in addition
+          to any other rights and remedies such party may have. Agreement is the
+          entire agreement between the parties with respect to use of the
+          Software and supersedes any other communications or prior agreements,
+          oral or written, regarding the Software. If any provision of this
+          Agreement is held invalid, the remainder of the Agreement shall
+          continue in full force and effect. Please direct all inquiries, in
+          writing, to: <br />Lattice Semiconductor Corporation, <br />5555 N.E.
+          Moore Court, <br />Hillsboro, Oregon 97124.
+        </p>
+        <p>
+          Copyright (c) 2025 Lattice Semiconductor Corporation. All rights
+          reserved.
+        </p>
+        <button
+          id="disclaimer-toggle"
+          aria-expanded="false"
+          aria-controls="full-disclaimer"
         >
-          <h2 style="display: flex; align-items: center; gap: 0.6rem">
-            User Configuration
-            <span
-              class="diagram-tooltip"
-              tabindex="0"
-              aria-label="Open MIPI diagram"
-              style="
-                display: inline-block;
-                position: relative;
-                color: #ecd24b;
-                font-weight: bold;
-                cursor: pointer;
-              "
-            >
-              ⓘ
-              <div
-                class="diagram-tooltip-content"
-                style="
-                  display: none;
-                  position: absolute;
-                  left: 0;
-                  z-index: 30;
-                  background: #fefbe8;
-                  color: #000;
-                  padding: 0.6rem;
-                  border-radius: 6px;
-                  border: 1px solid rgba(0, 0, 0, 0.08);
-                  width: 320px;
-                "
-              >
-                <div style="font-weight: bold; margin-bottom: 0.4rem">
-                  MIPI Block Diagram
-                </div>
-                <img
-                  src="imgs/mipi-block-diagram.png"
-                  alt="MIPI Block Diagram"
-                  style="
-                    width: 100%;
-                    height: auto;
-                    display: block;
-                    cursor: zoom-in;
-                    border-radius: 4px;
-                  "
-                />
-                <div
-                  style="
-                    text-align: right;
-                    margin-top: 6px;
-                    font-size: 0.5em;
-                    color: #666;
-                  "
-                >
-                  Click the tooltip icon to open and zoom
-                </div>
-              </div>
-            </span>
-          </h2>
-          <p style="font-weight: normal">
-            This page allows you to calculate the MIPI bandwidth and clock
-            frequencies for the Lattice devices based on the input parameters.
-          </p>
-          <div style="margin-top: 1rem; font-weight: normal">
-            <a
-              href="https://www.latticesemi.com/Products/DesignSoftwareAndIP/IntellectualProperty/IPCore/IPCores04/BytetoPixelConverter/"
-              target="_blank"
-              rel="noopener"
-              style="color: #50affc; text-decoration: underline"
-              >Lattice Byte to Pixel Converter User Guide</a
-            >
-            <br /><br />
-            <a
-              href="https://www.latticesemi.com/Products/DesignSoftwareAndIP/IntellectualProperty/IPCore/IPCores04/PixeltoByteConverter/"
-              target="_blank"
-              rel="noopener"
-              style="color: #50affc; text-decoration: underline"
-              >Lattice Pixel to Byte Converter User Guide</a
-            >
-          </div>
-        </div>
-        <!-- Instructions column -->
-        <div
-          class="description-box"
-          style="
-            max-width: 380px;
-            min-width: 260px;
-            margin-top: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-          "
-        >
-          <h2>Instructions</h2>
-          <ol style="font-weight: normal">
-            <li>Select your device from the Device dropdown above.</li>
-            <li>Enter the respective parameters in the input fields.</li>
-            <li>
-              Pressing "Calculate" will display the values for Bits per Clock,
-              D_PHY Clock, Pixel Clock Frequency and Byte Clock Frequency.
-            </li>
-          </ol>
-        </div>
+          Expand All
+        </button>
       </div>
-      <!-- Device/package/speed dropdowns container (now includes mode selector) -->
-      <div
-        id="dropdowns-container"
-        style="
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          margin-top: 1.2rem;
-          margin-bottom: 1.2rem;
-        "
-      >
-        <div
-          style="
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.5rem;
-            min-width: 340px;
-            margin-right: 9rem;
-          "
-        >
-          <div
-            id="mode-row"
-            style="display: flex; align-items: center; gap: 0.7rem; width: 100%"
-          >
-            <label
-              for="mode-select"
-              style="font-weight: bold; font-size: 1em; min-width: 90px"
-              >Mode:</label
-            >
-            <select
-              id="mode-select"
-              style="
-                font-size: 1em;
-                padding: 0.3rem 1.2rem;
-                border-radius: 0.4rem;
-                width: 260px;
-              "
-            >
-              <option value="user-config" selected>User Configuration</option>
-              <option value="pxb">Pixel-Byte Frequency Calculator</option>
-            </select>
-          </div>
-          <div
-            id="device-row"
-            style="display: flex; align-items: center; gap: 0.7rem; width: 100%"
-          >
-            <label
-              for="device-select"
-              style="font-weight: bold; font-size: 1em; min-width: 90px"
-              >Device:</label
-            >
-            <select
-              id="device-select"
-              name="device"
-              style="
-                font-size: 1em;
-                padding: 0.3rem 1.2rem;
-                border-radius: 0.4rem;
-                width: 260px;
-              "
-            >
-              <option value="CrossLink-NX" selected>CrossLink-NX</option>
-              <option value="Avant">Avant</option>
-              <option value="CertusPro-NX_MachXO5">
-                CertusPro-NX / MachXO5
-              </option>
-              <option value="Certus-NX">Certus-NX</option>
-              <!-- Add other devices as needed -->
-            </select>
-          </div>
-          <div
-            id="package-row"
-            style="display: flex; align-items: center; gap: 0.7rem; width: 100%"
-          >
-            <label
-              for="package-select"
-              style="font-weight: bold; font-size: 1em; min-width: 90px"
-              >Package:</label
-            >
-            <select
-              id="package-select"
-              style="
-                font-size: 1em;
-                padding: 0.3rem 1.2rem;
-                border-radius: 0.4rem;
-                width: 260px;
-              "
-            >
-              <option value="WLCSP84">WLCSP84</option>
-              <option value="FCCSP104">FCCSP104</option>
-              <option value="QFN72">QFN72 / WLCSP72</option>
-              <!-- csfBGA121, caBGA256, csBGA400 -->
-              <option value="otherLIFCL">
-                csfBGA121 / caBGA256/400 / csBGA289
-              </option>
-            </select>
-          </div>
-          <div
-            id="speed-row"
-            style="display: flex; align-items: center; gap: 0.7rem; width: 100%"
-          >
-            <label
-              for="speed-select"
-              style="font-weight: bold; font-size: 1em; min-width: 90px"
-              >Speed:</label
-            >
-            <select
-              id="speed-select"
-              style="
-                font-size: 1em;
-                padding: 0.3rem 1.2rem;
-                border-radius: 0.4rem;
-                width: 260px;
-              "
-            >
-              <option value="speed_7">7</option>
-              <option value="speed_8">8</option>
-              <option value="speed_9">9</option>
-            </select>
-          </div>
-          <!-- Reminder message for line rate range -->
-          <div
-            id="line-rate-reminder"
-            style="
-              width: 30rem;
-              text-align: center;
-              margin-bottom: 0.1rem;
-              font-size: 1em;
-              color: #fcdf50;
-              font-weight: bold;
-            "
-          >
-            Note: Valid range for Line Rate (Mbps) is currently
-            <span id="line-rate-range"></span> and will update automatically
-            based on your selected Device, Package and Speed Grade.
-          </div>
-        </div>
-      </div>
-
-      <!-- =====================
-        MAIN USER CONFIGURATION SECTION
-        ===================== -->
-      <div id="user-config-section">
-        <div class="main-content-row">
-          <!-- Center: Input/output container -->
-          <div
-            class="container center-fields"
-            style="
-              background: linear-gradient(
-                to bottom right,
-                #000000,
-                #363636 70%
-              );
-            "
-          >
-            <div class="input-fields-wrapper">
-              <div
-                class="fields-section"
-                style="
-                  display: flex;
-                  flex-direction: row;
-                  gap: 3rem;
-                  flex-wrap: wrap;
-                  align-self: center;
-                "
-              >
-                <!-- Left input column -->
-                <div
-                  class="fields-col"
-                  style="
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1.2rem;
-                    min-width: 220px;
-                    flex: 1 1 220px;
-                    margin-top: 0px;
-                  "
-                >
-                  <!-- 1. Line Rate (Mbps) -->
-                  <div class="field-group">
-                    <label for="input1">Line Rate (Mbps)</label>
-                    <input
-                      type="number"
-                      id="input1"
-                      min="160"
-                      max="861"
-                      step="1"
-                      autocomplete="off"
-                      placeholder="160-861"
-                      value="160"
-                    />
-                    <div class="error-message" id="error1"></div>
-                  </div>
-                  <!-- 2. Number of Lanes -->
-                  <div class="field-group">
-                    <label for="input2">Number of Lanes</label>
-                    <select id="input2" autocomplete="off">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="4">4</option>
-                    </select>
-                    <div class="error-message" id="error2"></div>
-                  </div>
-                  <!-- 3. Number of Gear (fixed at 8 or selectable) -->
-                  <div class="field-group" id="gear-group">
-                    <label for="input3">Number of Gear</label>
-                    <select id="input3">
-                      <option value="8">8</option>
-                      <option value="16">16</option>
-                    </select>
-                    <input
-                      type="number"
-                      id="input3-fixed"
-                      value="8"
-                      readonly
-                      style="display: none"
-                    />
-                    <div class="error-message" id="error3"></div>
-                  </div>
-                </div>
-                <!-- Right input column -->
-                <div
-                  class="fields-col"
-                  style="
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1.2rem;
-                    min-width: 220px;
-                    flex: 1 1 220px;
-                    margin-top: -0.2rem;
-                  "
-                >
-                  <!-- 4. Data Type dropdown -->
-                  <div class="field-group">
-                    <label for="input4"
-                      >Data Type
-                      <span
-                        class="tooltip"
-                        tabindex="0"
-                        aria-label="Supported Data Types"
-                        style="
-                          position: relative;
-                          display: inline-block;
-                          margin-left: 0.5rem;
-                          color: #ecd24b;
-                          cursor: help;
-                          font-weight: bold;
-                          font-size: 1.1em;
-                        "
-                      >
-                        ⓘ
-                        <div
-                          class="tooltip-content"
-                          role="tooltip"
-                          style="
-                            visibility: hidden;
-                            position: absolute;
-                            left: 0;
-                            top: 1.6rem;
-                            z-index: 20;
-                            background: #fefbe8;
-                            color: #000;
-                            padding: 0.6rem;
-                            border-radius: 6px;
-                            border: 1px solid rgba(0, 0, 0, 0.08);
-                            width: 320px;
-                          "
-                        >
-                          <div style="font-weight: bold; margin-bottom: 0.4rem">
-                            Supported Data Type Table
-                          </div>
-                          <table
-                            class="table-border"
-                            style="
-                              width: 100%;
-                              border-collapse: collapse;
-                              font-size: 0.9em;
-                            "
-                          >
-                            <tbody>
-                              <tr style="font-weight: bold">
-                                <td style="padding: 4px">CSI-2 Data Type</td>
-                                <td style="padding: 4px">Pixel Width</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 4px">RAW8</td>
-                                <td style="padding: 4px">8</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 4px">RAW10</td>
-                                <td style="padding: 4px">10</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 4px">RAW12</td>
-                                <td style="padding: 4px">12</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 4px">RAW14</td>
-                                <td style="padding: 4px">14</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 4px">RAW16</td>
-                                <td style="padding: 4px">16</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 4px">YUV_420_8</td>
-                                <td style="padding: 4px">8</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 4px">YUV_420_10</td>
-                                <td style="padding: 4px">10</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 4px">YUV_422_8</td>
-                                <td style="padding: 4px">8</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 4px">YUV_422_10</td>
-                                <td style="padding: 4px">10</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 4px">RGB888</td>
-                                <td style="padding: 4px">24</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </span>
-                    </label>
-                    <select id="input4" style="height: 2rem">
-                      <option value="RAW8" selected>RAW8</option>
-                      <option value="RAW10">RAW10</option>
-                      <option value="RAW12">RAW12</option>
-                      <option value="RAW14">RAW14</option>
-                      <option value="RAW16">RAW16</option>
-                      <option value="YUV_420_8">YUV_420_8</option>
-                      <option value="YUV_420_10">YUV_420_10</option>
-                      <option value="YUV_422_8">YUV_422_8</option>
-                      <option value="YUV_422_10">YUV_422_10</option>
-                      <option value="RGB888">RGB888</option>
-                    </select>
-                    <div class="error-message" id="error4"></div>
-                  </div>
-                  <!-- 5. Pixel per Clock -->
-                  <div class="field-group">
-                    <label for="input5">Pixel per Clock</label>
-                    <select id="input5" autocomplete="off">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="4">4</option>
-                      <option value="6">6</option>
-                      <option value="8">8</option>
-                      <option value="10">10</option>
-                    </select>
-                    <div class="error-message" id="error5"></div>
-                  </div>
-                </div>
-              </div>
-              <!-- Buttons row below both input columns -->
-              <div
-                class="button-row"
-                style="
-                  display: flex;
-                  flex-direction: row;
-                  gap: 0rem;
-                  margin-top: 1.2rem;
-                  justify-content: flex-start;
-                "
-              >
-                <button
-                  id="clear-btn"
-                  class="action-btn"
-                  style="margin-left: 6.5rem; width: 7rem"
-                >
-                  Clear
-                </button>
-                <button id="calculate-btn" class="action-btn">Calculate</button>
-              </div>
-              <!-- Output section (hidden by default, stays below buttons) -->
-              <div
-                class="outputs-section"
-                id="outputs-section"
-                style="
-                  display: none;
-                  background-color: #fefbe8;
-                  margin-top: 1.2rem;
-                  font-size: 16px;
-                "
-              >
-                <div class="output-group">
-                  <div class="output-label">Number of Bits/Clock</div>
-                  <div class="output-value" id="output1"></div>
-                </div>
-                <div class="output-group">
-                  <div class="output-label">D_PHY Clock (MHz)</div>
-                  <div class="output-value" id="output2"></div>
-                </div>
-                <div class="output-group">
-                  <div class="output-label">Pixel Clock Frequency (MHz)</div>
-                  <div class="output-value" id="output3"></div>
-                </div>
-                <div class="output-group">
-                  <div class="output-label">Byte Clock Frequency</div>
-                  <div class="output-value" id="output4"></div>
-                </div>
-                <!-- Added export button below outputs -->
-                <div
-                  class="button-row"
-                  style="margin-top: 0.8rem; justify-content: flex-start"
-                >
-                  <button type="button" id="export-json-btn" class="action-btn">
-                    Download JSON
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Supported Data Type table moved into tooltip next to the Data Type label -->
-        </div>
-      </div>
-      <!-- =====================
-        PIXEL-BYTE FREQUENCY CALCULATOR SECTION
-        To add new calculators or fields, edit the forms below.
-        ===================== -->
-      <div id="pxb-section" style="display: none">
-        <main>
-          <div style="display: flex; width: 100%; justify-content: center">
-            <!-- Description and instructions: update as needed -->
-            <div
-              class="description-box"
-              style="
-                top: 735px;
-                left: 500px;
-                width: 350px;
-                text-justify: distribute-all-lines;
-                margin-top: 1rem;
-              "
-            >
-              <div class="desc-title">Pixel-Byte Frequency Calculator</div>
-              <div class="desc-text" style="font-weight: normal">
-                This page allows you to calculate the MIPI bandwidth for
-                selected Lattice devices based on the input parameters.<br />
-                <br />
-                <a
-                  href="https://www.latticesemi.com/Products/DesignSoftwareAndIP/IntellectualProperty/IPCore/IPCores04/BytetoPixelConverter/"
-                  target="_blank"
-                  rel="noopener"
-                  style="color: #50affc; text-decoration: underline"
-                  >Lattice Byte to Pixel Converter User Guide</a
-                >
-                <br /><br />
-                <a
-                  href="https://www.latticesemi.com/Products/DesignSoftwareAndIP/IntellectualProperty/IPCore/IPCores04/PixeltoByteConverter/"
-                  target="_blank"
-                  rel="noopener"
-                  style="color: #50affc; text-decoration: underline"
-                  >Lattice Pixel to Byte Converter User Guide</a
-                >
-                <br /><br />
-              </div>
-            </div>
-            <div
-              class="description-box"
-              style="
-                text-justify: distribute-all-lines;
-                margin-left: 3rem;
-                margin-top: 1rem;
-              "
-            >
-              <div class="desc-title">Usage Instructions</div>
-              <div class="desc-text" style="font-weight: normal">
-                1. Enter parameters value into their respective fields.<br />
-                2. Click the "Calculate" button to compute the respective
-                bandwidth.<br />
-                3. The results will be displayed below the input fields.<br />
-                4. Use the "Clear" button to reset the form fields.
-              </div>
-            </div>
-          </div>
-
-          <div
-            style="
-              display: flex;
-              gap: 0rem;
-              justify-content: center;
-              flex-wrap: wrap;
-              margin-top: 0.1rem;
-              position: relative;
-              padding: 0 10rem;
-            "
-          >
-            <!-- Input to P2B Calculator: add new fields or logic here -->
-            <div
-              class="bandwidth-card"
-              style="min-width: 320px; flex: 1 1 320px; max-width: 320px"
-            >
-              <div
-                style="
-                  font-weight: bold;
-                  font-size: 1.1em;
-                  text-align: center;
-                  margin-bottom: 1rem;
-                "
-              >
-                Input to Pixel-to-Byte
-              </div>
-              <form id="bandwidth-form" autocomplete="off">
-                <div class="bandwidth-fields">
-                  <div class="field-group">
-                    <label for="pixel-clock">Pixel Clock (MHz):</label>
-                    <input
-                      type="number"
-                      id="pixel-clock"
-                      min="0"
-                      step="any"
-                      placeholder="Insert number here"
-                    />
-                  </div>
-                  <div class="field-group">
-                    <label for="ppc">Pixel Per Clock (PPC):</label>
-                    <input
-                      type="number"
-                      id="ppc"
-                      min="1"
-                      step="1"
-                      placeholder="Insert number here"
-                    />
-                  </div>
-                  <div class="field-group">
-                    <label for="bpc">Bits Per Clock (BPC):</label>
-                    <input
-                      type="number"
-                      id="bpc"
-                      min="1"
-                      step="1"
-                      placeholder="Insert number here"
-                    />
-                  </div>
-                </div>
-                <div class="bandwidth-buttons">
-                  <button type="button" id="calc-p2b-btn" class="action-btn">
-                    Calculate
-                  </button>
-                  <button type="reset" class="action-btn">Clear</button>
-                </div>
-                <div class="bandwidth-output-group">
-                  <label>Bandwidth (Mbps):</label>
-                  <span id="bandwidth-output"></span>
-                </div>
-              </form>
-            </div>
-            <!-- Output to B2P Calculator: add new fields or logic here -->
-            <div
-              class="bandwidth-card"
-              style="min-width: 320px; flex: 1 1 320px; max-width: 400px"
-            >
-              <div
-                style="
-                  font-weight: bold;
-                  font-size: 1.1em;
-                  text-align: center;
-                  margin-bottom: 1rem;
-                "
-              >
-                Output to Byte-to-Pixel
-              </div>
-              <form id="b2p-form" autocomplete="off">
-                <div class="bandwidth-fields">
-                  <div class="field-group">
-                    <label for="byte-clock">Byte Clock (MHz):</label>
-                    <input
-                      type="number"
-                      id="byte-clock"
-                      min="0"
-                      step="any"
-                      placeholder="Insert number here"
-                    />
-                  </div>
-                  <div class="field-group">
-                    <label for="num-lanes">Number of Lanes:</label>
-                    <input
-                      type="number"
-                      id="num-lanes"
-                      min="1"
-                      step="1"
-                      placeholder="Insert number here"
-                    />
-                  </div>
-                  <div class="field-group">
-                    <label for="gear">Gear:</label>
-                    <select id="gear">
-                      <option value="8">8</option>
-                      <option value="16">16</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="bandwidth-buttons">
-                  <button type="button" id="calc-b2p-btn" class="action-btn">
-                    Calculate
-                  </button>
-                  <button type="reset" class="action-btn">Clear</button>
-                </div>
-                <div class="bandwidth-output-group">
-                  <label>Bandwidth (Mbps):</label>
-                  <span id="b2p-bandwidth-output"></span>
-                </div>
-              </form>
-            </div>
-          </div>
-        </main>
-      </div>
-    </div>
-    <!-- =====================
-      SCRIPTS AND EVENT HANDLERS
-      Add new event listeners or calculation logic in the script below.
-      ===================== -->
-    <script src="app.js"></script>
-    <div
-      id="imgModal"
-      class="img-modal"
-      style="
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.7);
-        z-index: 50;
-        align-items: center;
-        justify-content: center;
-      "
-    >
-      <span
-        class="img-modal-close"
-        id="imgModalClose"
-        style="
-          position: absolute;
-          top: 20px;
-          z-index: 51;
-          right: 30px;
-          color: #fff;
-          font-size: 2rem;
-          cursor: pointer;
-        "
-        >&times;</span
-      >
-      <img
-        class="img-modal-content"
-        id="imgModalContent"
-        style="max-width: 90%; max-height: 90%; border-radius: 8px"
-      />
-    </div>
-    <script>
-      // Diagram tooltip interactions and modal open/close
-      (function () {
-        const modal = document.getElementById("imgModal");
-        const modalImg = document.getElementById("imgModalContent");
-        const modalClose = document.getElementById("imgModalClose");
-
-        // Fit image to viewport and center it inside the modal
-        function fitImageToViewport() {
-          try {
-            const padding = 40; // extra padding to keep gaps from edges
-            const maxW = Math.max(window.innerWidth * 0.9 - padding, 100);
-            const maxH = Math.max(window.innerHeight * 0.9 - padding, 100);
-            const natW = modalImg.naturalWidth || modalImg.width || maxW;
-            const natH = modalImg.naturalHeight || modalImg.height || maxH;
-            const scale = Math.min(maxW / natW, maxH / natH, 1);
-            modalImg.style.width = Math.round(natW * scale) + "px";
-            modalImg.style.height = Math.round(natH * scale) + "px";
-            modalImg.style.objectFit = "contain";
-            // move the image a bit up and to the left for better visual placement
-            // negative X -> left, negative Y -> up (percent relative to image size)
-            modalImg.style.transformOrigin = "center center";
-            modalImg.style.transform = "translate(-6%, -60%)";
-          } catch (err) {
-            // fallback: let CSS max-width/max-height handle sizing
-            modalImg.style.width = "";
-            modalImg.style.height = "";
-            modalImg.style.transform = "";
-          }
-        }
-
-        // Open modal with given image src — waits for image load then fits it
-        function openModal(src, alt) {
-          // reset any inline sizing so natural sizes will be available
-          modalImg.style.width = "";
-          modalImg.style.height = "";
-          modalImg.style.objectFit = "contain";
-          modalImg.alt = alt || "";
-
-          // show the overlay first so viewport measurements are accurate
-          modal.style.display = "flex";
-
-          // Ensure we refit after image loads
-          modalImg.onload = function () {
-            fitImageToViewport();
-            // focus close button for accessibility
-            try {
-              modalClose.focus();
-            } catch (e) {}
-          };
-
-          // Set src last to trigger load
-          modalImg.src = src;
-
-          // If the image is cached and already complete, call fit immediately
-          if (modalImg.complete) {
-            fitImageToViewport();
-            try {
-              modalClose.focus();
-            } catch (e) {}
-          }
-        }
-
-        function closeModal() {
-          modal.style.display = "none";
-          // clear src to release memory and reset sizing
-          modalImg.src = "";
-          modalImg.onload = null;
-          modalImg.style.width = "";
-          modalImg.style.height = "";
-          modalImg.style.transform = "";
-        }
-
-        // Re-fit image on window resize while modal is open
-        window.addEventListener("resize", function () {
-          if (
-            modal &&
-            modal.style.display === "flex" &&
-            modalImg &&
-            modalImg.src
-          ) {
-            fitImageToViewport();
-          }
-        });
-
-        // Wire up diagram tooltip(s)
-        document.querySelectorAll(".diagram-tooltip").forEach(function (span) {
-          const content = span.querySelector(".diagram-tooltip-content");
-          if (!content) return;
-          // show tooltip content on hover/focus
-          span.addEventListener("mouseenter", function () {
-            content.style.display = "block";
-            content.style.position = "absolute";
-          });
-          span.addEventListener("mouseleave", function () {
-            content.style.display = "none";
-          });
-          span.addEventListener("focus", function () {
-            content.style.display = "block";
-          });
-          span.addEventListener("blur", function () {
-            content.style.display = "none";
-          });
-
-          // click opens modal with the image inside the tooltip
-          span.addEventListener("click", function (e) {
-            const img = content.querySelector("img");
-            if (img && img.src) openModal(img.src, img.alt);
-            e.stopPropagation();
-          });
-        });
-
-        // Close modal handlers
-        modalClose.addEventListener("click", closeModal);
-        modal.addEventListener("click", function (e) {
-          if (e.target === modal) closeModal();
-        });
-        document.addEventListener("keydown", function (e) {
-          if (e.key === "Escape") closeModal();
-        });
-      })();
-    </script>
-    <!-- Script to handle default page zooming -->
-    <script>
-      // Set the default zoom factor
-      document.addEventListener("DOMContentLoaded", function () {
-        if (window.webFrame) {
-          window.webFrame.setZoomFactor(1.0);
-        } else {
-          // Standard browser: use CSS zoom
-          document.body.style.zoom = "100%";
-        }
-      });
-    </script>
-    <!-- Add small JS to toggle tooltip visibility on focus/click for keyboard accessibility -->
+    </footer>
     <script>
       (function () {
-        document.querySelectorAll(".tooltip").forEach(function (t) {
-          var content = t.querySelector(".tooltip-content");
-          if (!content) return;
-          t.addEventListener("mouseenter", function () {
-            content.style.visibility = "visible";
+        const box = document.getElementById("full-disclaimer");
+        const btn = document.getElementById("disclaimer-toggle");
+        function placeButton(collapsed) {
+          if (!btn || !box) return;
+          if (collapsed) {
+            const firstP = box.querySelector("p");
+            if (firstP && firstP.nextSibling !== btn) {
+              firstP.after(btn);
+            }
+          } else {
+            box.appendChild(btn);
+          }
+        }
+        if (btn && box) {
+          // initial placement (collapsed by default)
+          placeButton(true);
+          btn.addEventListener("click", function () {
+            const collapsed = box.classList.toggle("collapsed");
+            btn.textContent = collapsed ? "Expand All" : "Collapse";
+            btn.setAttribute("aria-expanded", (!collapsed).toString());
+            placeButton(collapsed);
           });
-          t.addEventListener("mouseleave", function () {
-            content.style.visibility = "hidden";
-          });
-          t.addEventListener("focus", function () {
-            content.style.visibility = "visible";
-          });
-          t.addEventListener("blur", function () {
-            content.style.visibility = "hidden";
-          });
-          t.addEventListener("click", function (e) {
-            // toggle on click
-            content.style.visibility =
-              content.style.visibility === "visible" ? "hidden" : "visible";
-            e.stopPropagation();
-          });
-        });
-        // hide tooltips when clicking elsewhere
-        document.addEventListener("click", function () {
-          document
-            .querySelectorAll(".tooltip .tooltip-content")
-            .forEach(function (c) {
-              c.style.visibility = "hidden";
-            });
-        });
+        }
       })();
     </script>
   </body>

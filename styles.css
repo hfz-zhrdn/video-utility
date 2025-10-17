@@ -1093,7 +1093,7 @@ body.light #b2p-bandwidth-output {
   color: #000 !important;
 }
 
-/* Light mode: output container background for index.html */
+/* Light mode: output container background for config.html */
 body.light #bandwidth-output,
 body.light .output-container {
   background: #fffde7 !important;
@@ -1432,7 +1432,7 @@ body.light .output-container {
   align-items: stretch;
 }
 
-/* New styles for index.html description and instructions layout */
+/* New styles for config.html description and instructions layout */
 .index-bg-container {
   display: flex;
   flex-direction: column;
@@ -1722,4 +1722,88 @@ body.light .output-container {
 /* Ensure hover effect remains consistent */
 .video-timing-bg-container .action-btn:hover {
   transform: translateY(-2px) scale(1.05);
+}
+
+/* Centering and styling for index.html welcome and disclaimer sections */
+.welcome-section,
+.disclaimer-section {
+  text-align: left;
+  font-family: var(--font-family-base);
+  font-size: 1.2em;
+  margin: 20px auto;
+  max-width: 800px;
+  text-justify: distribute;
+}
+
+.welcome-section h1,
+.disclaimer-section h2 {
+  text-align: center !important;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.welcome-section p,
+.disclaimer-section p {
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+/* Footer disclaimer styling */
+.site-footer {
+  background: #4a4a4a;
+  color: #686868;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-top: 3rem;
+  padding: 2rem 1.5rem;
+}
+.site-footer h2,
+.site-footer h3 {
+  color: #686868;
+  font-size: 1rem;
+  margin-top: 0;
+}
+.site-footer p {
+  margin: 0 0 0.8rem 0;
+}
+.site-footer .disclaimer-text {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  text-align: left;
+  white-space: normal;
+}
+.site-footer a {
+  color: #ffd84d;
+  text-decoration: underline;
+}
+.site-footer a:hover {
+  color: #ffe899;
+}
+.site-footer .disclaimer-text.collapsed p:not(:first-of-type) {
+  display: none;
+}
+.site-footer .disclaimer-toggle-wrapper {
+  text-align: center;
+  margin: 0.8rem 0 1.2rem;
+}
+#disclaimer-toggle {
+  background: #666;
+  color: #fff;
+  border: 1px solid #888;
+  padding: 0.5rem 1.1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+#disclaimer-toggle:hover {
+  background: #777;
+}
+
+.disabled-select {
+  opacity: 0.45;
+  pointer-events: none;
+  background: #ccc !important;
+  color: #666 !important;
 }

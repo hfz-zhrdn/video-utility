@@ -278,30 +278,61 @@ document.addEventListener("DOMContentLoaded", function () {
         width: indexDescRow.style.width || '100%',
       };
     }
-    
+    // Track last mode for auto-reset behavior
+    let lastMode = modeSelect.value || 'user-config';
     modeSelect.addEventListener("change", function () {
-      if (modeSelect.value === "user-config") {
+      const newMode = modeSelect.value;
+      const switchingToUserConfigFromPxb = (lastMode === 'pxb' && newMode === 'user-config');
+
+      if (newMode === "user-config") {
         userConfigSection.style.display = "";
         pxbSection.style.display = "none";
-        
         if (indexDescRow) {
-          // Restore all the original styles
-          indexDescRow.style.display = originalStyles.display;
-          indexDescRow.style.flexDirection = originalStyles.flexDirection;
-          indexDescRow.style.flexWrap = originalStyles.flexWrap;
-          indexDescRow.style.justifyContent = originalStyles.justifyContent;
-          indexDescRow.style.gap = originalStyles.gap;
-          indexDescRow.style.width = originalStyles.width;
-          
-          // Force horizontal layout with no wrapping
-          indexDescRow.style.flexDirection = 'row';
-          indexDescRow.style.flexWrap = 'nowrap';
+          // Restore original styles
+            indexDescRow.style.display = originalStyles.display;
+            indexDescRow.style.flexDirection = originalStyles.flexDirection;
+            indexDescRow.style.flexWrap = originalStyles.flexWrap;
+            indexDescRow.style.justifyContent = originalStyles.justifyContent;
+            indexDescRow.style.gap = originalStyles.gap;
+            indexDescRow.style.width = originalStyles.width;
+            // Force horizontal layout with no wrapping
+            indexDescRow.style.flexDirection = 'row';
+            indexDescRow.style.flexWrap = 'nowrap';
         }
-        
         if (deviceRow) deviceRow.style.display = '';
         if (packageRow) packageRow.style.display = '';
         if (speedRow) speedRow.style.display = '';
-        if (lineRateReminder) lineRateReminder.style.display = '';
+
+        // If coming back from pxb mode, auto-reset dependent selections & inputs
+        if (switchingToUserConfigFromPxb) {
+          // Clear device/package/speed selects to placeholders
+          const devSel = document.getElementById('device-select');
+          const pkgSel = document.getElementById('package-select');
+            const spdSel = document.getElementById('speed-select');
+          if (devSel) devSel.value = '';
+          if (pkgSel) { pkgSel.value = ''; pkgSel.disabled = true; pkgSel.classList.add('disabled-select'); }
+          if (spdSel) { spdSel.value = ''; spdSel.disabled = true; spdSel.classList.add('disabled-select'); }
+          // Clear line rate and restore default range
+          if (lineRateInput) {
+            lineRateInput.value = '';
+            lineRateInput.min = 160; lineRateInput.max = 861; lineRateInput.placeholder = '160-861';
+          }
+          const lrRange = document.getElementById('line-rate-range');
+          if (lrRange) lrRange.textContent = '160-861';
+          // Hide outputs & clear values
+          if (outputsSection) {
+            outputsSection.style.display = 'none';
+            outputsSection.classList.remove('visible');
+            outputsSection.classList.add('hiding');
+            const outIds = ['output1','output2','output3','output4'];
+            outIds.forEach(id => { const el = document.getElementById(id); if (el) el.textContent = ''; });
+          }
+          // Ensure reminder hidden until selections re-made
+          const lrReminder = document.getElementById('line-rate-reminder');
+          if (lrReminder) lrReminder.style.display = 'none';
+          // Scroll to top of configuration area to prompt re-selection
+          if (dropdownsContainer) dropdownsContainer.scrollIntoView({behavior:'smooth', block:'start'});
+        }
       } else {
         userConfigSection.style.display = "none";
         pxbSection.style.display = "";
@@ -311,8 +342,14 @@ document.addEventListener("DOMContentLoaded", function () {
         if (speedRow) speedRow.style.display = 'none';
         if (lineRateReminder) lineRateReminder.style.display = 'none';
       }
+      // Re-apply initial visibility rules for dropdown dependency & sections
+      if (typeof updateVisibilityForDefaults === 'function') {
+        updateVisibilityForDefaults();
+      }
+      lastMode = newMode; // update tracker
     });
   }
+
   // Make mobile buttons work like desktop ones
   const calcBtn = document.getElementById("calculate-btn");
   const clearBtn = document.getElementById("clear-btn");
@@ -385,6 +422,103 @@ document.addEventListener("DOMContentLoaded", function () {
   const packageSelect = document.getElementById("package-select");
   const speedSelect = document.getElementById("speed-select");
   const lineRateInput = document.getElementById("input1");
+  const userConfigWrapper = document.getElementById("user-config-section");
+  const descRow = document.querySelector('.index-description-row');
+
+  // Device capability map: whether a device exposes package & speed selectors
+  const deviceCapabilities = {
+    'CrossLink-NX': { hasPackage: true, hasSpeed: true },
+    'Avant': { hasPackage: false, hasSpeed: false }, // no package, no speed selection
+    'Certus-NX': { hasPackage: false, hasSpeed: true },
+    'CertusPro-NX_MachXO5': { hasPackage: false, hasSpeed: true }
+  };
+
+  function updateVisibilityForDefaults(){
+    // Force hide when in Pixel-Byte Frequency Calculator mode
+    const modeSel = document.getElementById('mode-select');
+    if(modeSel && modeSel.value === 'pxb') {
+      if(userConfigWrapper) userConfigWrapper.style.display = 'none';
+      const lr = document.getElementById('line-rate-reminder');
+      if(lr) lr.style.display = 'none';
+      return; // do not proceed with normal visibility logic
+    }
+
+    const deviceVal = deviceSelect ? deviceSelect.value : '';
+    const deviceChosen = !!deviceVal;
+    const caps = deviceCapabilities[deviceVal] || { hasPackage: true, hasSpeed: true };
+
+    // Determine logical chosen state for package & speed based on capabilities
+    let packageChosen = !caps.hasPackage; // if no package for this device treat as chosen
+    let speedChosen = !caps.hasSpeed;     // if no speed for this device treat as chosen
+
+    // HANDLE PACKAGE SELECT
+    if (!deviceChosen) {
+      // Reset & disable dependents when no device selected
+      if (packageSelect) {
+        packageSelect.disabled = true;
+        packageSelect.classList.add('disabled-select');
+        packageSelect.value = '';
+      }
+      if (speedSelect) {
+        speedSelect.disabled = true;
+        speedSelect.classList.add('disabled-select');
+        speedSelect.value = '';
+      }
+    } else {
+      // Device chosen
+      if (caps.hasPackage) {
+        if (packageSelect) {
+          packageSelect.disabled = false;
+          packageSelect.classList.remove('disabled-select');
+          // Evaluate current selection
+          if (packageSelect.value !== '') packageChosen = true; else packageChosen = false;
+        }
+      } else {
+        // No package needed -> ensure select (if present) is disabled & cleared
+        if (packageSelect) {
+          packageSelect.disabled = true;
+          packageSelect.classList.add('disabled-select');
+          packageSelect.value = '';
+        }
+        packageChosen = true;
+      }
+
+      // HANDLE SPEED SELECT (depends on both device capabilities & package choice if package exists)
+      if (caps.hasSpeed) {
+        const canEnableSpeed = packageChosen; // only enable speed after package (if any) is chosen
+        if (speedSelect) {
+          if (canEnableSpeed) {
+            speedSelect.disabled = false;
+            speedSelect.classList.remove('disabled-select');
+          } else {
+            speedSelect.disabled = true;
+            speedSelect.classList.add('disabled-select');
+            speedSelect.value = '';
+          }
+          // Update speedChosen only if enabled & a value selected
+          speedChosen = speedSelect.disabled ? false : speedSelect.value !== '';
+        }
+      } else {
+        // No speed required
+        if (speedSelect) {
+          speedSelect.disabled = true;
+          speedSelect.classList.add('disabled-select');
+          speedSelect.value = '';
+        }
+        speedChosen = true;
+      }
+    }
+
+    const ready = deviceChosen && packageChosen && speedChosen;
+    if(userConfigWrapper) userConfigWrapper.style.display = ready ? '' : 'none';
+    const lineRateReminder = document.getElementById('line-rate-reminder');
+    if(lineRateReminder) lineRateReminder.style.display = ready ? '' : 'none';
+  }
+  if(deviceSelect){ deviceSelect.addEventListener('change', updateVisibilityForDefaults); }
+  if(packageSelect){ packageSelect.addEventListener('change', updateVisibilityForDefaults); }
+  if(speedSelect){ speedSelect.addEventListener('change', updateVisibilityForDefaults); }
+  updateVisibilityForDefaults();
+
   if (deviceSelect && packageSelect && speedSelect && lineRateInput) {
     deviceSelect.addEventListener("change", function () {
       if (deviceSelect.value === "CertusPro-NX_MachXO5") {
@@ -511,7 +645,15 @@ document.addEventListener("DOMContentLoaded", function () {
   if (exportJsonBtn) {
     exportJsonBtn.addEventListener('click', () => {
       // Collect inputs
+      const selectedDevice = document.getElementById('device-select')?.value || '';
+      const selectedPackage = document.getElementById('package-select')?.value || '';
+      const selectedSpeed = document.getElementById('speed-select')?.value || '';
       const data = {
+        selection: {
+          device: selectedDevice,
+          package: selectedPackage,
+          speed: selectedSpeed
+        },
         inputs: {
           lineRateMbps: inputFields[0]?.value || '',
           numberOfLanes: inputFields[1]?.value || '',
@@ -539,6 +681,75 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
       }, 0);
+    });
+  }
+
+  // Import JSON functionality (populate selections & inputs)
+  const importBtn = document.getElementById('import-json-btn');
+  const importInput = document.getElementById('import-json-input');
+  const importStatus = document.getElementById('import-status');
+  if(importBtn && importInput){
+    importBtn.addEventListener('click', ()=> importInput.click());
+    importInput.addEventListener('change', (e)=>{
+      const file = e.target.files && e.target.files[0];
+      if(!file){ return; }
+      const reader = new FileReader();
+      reader.onload = (evt)=>{
+        try {
+          const text = evt.target.result;
+          const data = JSON.parse(text);
+          // Expect structure { selection:{device,package,speed}, inputs:{...} }
+          const sel = data.selection || {}; const inp = data.inputs || {};
+          // Populate dropdowns only in user-config mode
+          const modeSel = document.getElementById('mode-select');
+          if(modeSel && modeSel.value !== 'user-config'){
+            modeSel.value = 'user-config';
+            modeSel.dispatchEvent(new Event('change'));
+          }
+          const devSel = document.getElementById('device-select');
+          const pkgSel = document.getElementById('package-select');
+          const spdSel = document.getElementById('speed-select');
+          if(devSel && sel.device !== undefined){ devSel.value = sel.device; }
+          if(pkgSel && sel.package !== undefined){ pkgSel.value = sel.package; }
+          if(spdSel && sel.speed !== undefined){ spdSel.value = sel.speed; }
+          // Trigger change events so dependency logic re-applies
+          if(devSel) devSel.dispatchEvent(new Event('change'));
+          if(pkgSel) pkgSel.dispatchEvent(new Event('change'));
+          if(spdSel) spdSel.dispatchEvent(new Event('change'));
+          // Populate input fields
+          const lineRate = document.getElementById('input1');
+          const lanes = document.getElementById('input2');
+          const gear = document.getElementById('input3');
+          const dtype = document.getElementById('input4');
+          const ppc = document.getElementById('input5');
+          if(lineRate && inp.lineRateMbps !== undefined){ lineRate.value = inp.lineRateMbps; }
+          if(lanes && inp.numberOfLanes !== undefined){ lanes.value = inp.numberOfLanes; }
+          if(gear && inp.numberOfGear !== undefined){ gear.value = inp.numberOfGear; }
+          if(dtype && inp.dataType !== undefined){ dtype.value = inp.dataType; }
+          if(ppc && inp.pixelPerClock !== undefined){ ppc.value = inp.pixelPerClock; }
+          // Enforce bounds after population
+          if(typeof enforceLineRateBounds === 'function'){ enforceLineRateBounds(); }
+          if(typeof updateVisibilityForDefaults === 'function'){ updateVisibilityForDefaults(); }
+          if(importStatus){
+            importStatus.textContent = 'Imported configuration applied.';
+            importStatus.style.color = '#50affc';
+          }
+          // Clear file input for potential re-import
+          importInput.value = '';
+        } catch(err){
+          if(importStatus){
+            importStatus.textContent = 'Failed to parse JSON file.';
+            importStatus.style.color = '#ff6666';
+          }
+        }
+      };
+      reader.onerror = ()=>{
+        if(importStatus){
+          importStatus.textContent = 'Error reading file.';
+          importStatus.style.color = '#ff6666';
+        }
+      };
+      reader.readAsText(file);
     });
   }
 });

@@ -217,15 +217,12 @@ if (calculateButton) {
       outputSection.style.display = 'block';
       outputSection.classList.add('visible');
     }
-    
-    // Expand container when output is shown
+    // Removed exportRow handling (button lives inside outputSection now)
     const container = document.querySelector('.video-timing-bg-container .container.center-fields');
     if (container) container.classList.add('expanded');
-    
     const bgContainer = document.querySelector('.video-timing-bg-container');
     if (bgContainer) bgContainer.classList.add('expanded');
-    
-    calculateOutputs(); // <-- Call calculateOutputs here
+    calculateOutputs();
   });
 }
 
@@ -345,3 +342,115 @@ if (presetSelect) {
     }
   });
 }
+
+// Import JSON functionality for Video Timing page
+(function(){
+  const importBtn = document.getElementById('vt-import-json-btn');
+  const importInput = document.getElementById('vt-import-json-input');
+  const importStatus = document.getElementById('vt-import-status');
+  if(!importBtn || !importInput) return;
+  importBtn.addEventListener('click', ()=> importInput.click());
+  importInput.addEventListener('change', (e)=>{
+    const file = e.target.files && e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt)=>{
+      try {
+        const text = evt.target.result;
+        const parsed = JSON.parse(text);
+        // New expected structure: { videoTiming: { presetResolution, inputs:{...}, outputs:{...}, meta:{...} } }
+        // Backward compatibility: allow root-level fields
+        const vt = parsed.videoTiming || parsed;
+        const preset = vt.presetResolution || vt.presetResolutionSelect || 'Custom';
+        const presetSelectEl = document.getElementById('presetResolution');
+        if(presetSelectEl){
+          presetSelectEl.value = preset;
+          presetSelectEl.dispatchEvent(new Event('change'));
+        }
+        const inp = vt.inputs || vt.inputs === undefined ? vt.inputs : vt; // prefer vt.inputs if exists
+        if(inp){
+          const map = {
+            hSync:'hSync', hBackPorch:'hBackPorch', hFrontPorch:'hFrontPorch', hPixels:'hPixels',
+            vSync:'vSync', vBackPorch:'vBackPorch', vFrontPorch:'vFrontPorch', vLines:'vLines', refreshRate:'refreshRate',
+            colorFormat:'colorFormat', pixelPerClock:'pixelPerClock'
+          };
+          Object.keys(map).forEach(k=>{
+            const el = document.getElementById(map[k]);
+            if(el && inp[k] !== undefined){ el.value = inp[k]; }
+          });
+        }
+        // Update bitsPerPixel if colorFormat changed
+        if(typeof updateBitsPerPixel === 'function') updateBitsPerPixel();
+        calculateOutputs();
+        // If outputs present, populate them directly (does not recalc integrity, assumes file trusted)
+        const outs = vt.outputs || parsed.outputs;
+        if(outs){
+          const outMap = {
+            outHTotal:'outHTotal', outVTotal:'outVTotal', outTotalPixelPerSec:'outTotalPixelPerSec', outPixelClock:'outPixelClock', outLinkBandwidthUsed:'outLinkBandwidthUsed'
+          };
+          Object.keys(outMap).forEach(k=>{
+            const el = document.getElementById(outMap[k]);
+            if(el && outs[k] !== undefined) el.textContent = outs[k];
+          });
+          // Ensure output section shown if we have outputs
+          const outputSection = document.getElementById('outputSection');
+          if(outputSection){ outputSection.style.display='block'; outputSection.classList.add('visible'); }
+        }
+        if(importStatus){ importStatus.textContent = 'Imported timing applied.'; importStatus.style.color = '#50affc'; }
+        importInput.value='';
+      } catch(err){
+        if(importStatus){ importStatus.textContent = 'Failed to parse JSON.'; importStatus.style.color = '#ff6666'; }
+      }
+    };
+    reader.onerror = ()=>{ if(importStatus){ importStatus.textContent = 'File read error.'; importStatus.style.color = '#ff6666'; } };
+    reader.readAsText(file);
+  });
+})();
+
+// Export JSON functionality for Video Timing page
+(function(){
+  const exportBtn = document.getElementById('vt-export-json-btn');
+  if(!exportBtn) return;
+  exportBtn.addEventListener('click', ()=>{
+    // Ensure latest calculations
+    calculateOutputs();
+    const data = {
+      videoTiming: {
+        presetResolution: document.getElementById('presetResolution')?.value || '',
+        inputs: {
+          hSync: document.getElementById('hSync')?.value || '',
+          hBackPorch: document.getElementById('hBackPorch')?.value || '',
+          hFrontPorch: document.getElementById('hFrontPorch')?.value || '',
+          TotalhBlank: document.getElementById('TotalhBlank')?.value || '',
+          vSync: document.getElementById('vSync')?.value || '',
+            vBackPorch: document.getElementById('vBackPorch')?.value || '',
+          vFrontPorch: document.getElementById('vFrontPorch')?.value || '',
+          TotalvBlank: document.getElementById('TotalvBlank')?.value || '',
+          hPixels: document.getElementById('hPixels')?.value || '',
+          vLines: document.getElementById('vLines')?.value || '',
+          refreshRate: document.getElementById('refreshRate')?.value || '',
+          colorFormat: document.getElementById('colorFormat')?.value || '',
+          bitsPerPixel: document.getElementById('bitsPerPixel')?.value || '',
+          pixelPerClock: document.getElementById('pixelPerClock')?.value || ''
+        },
+        outputs: {
+          outHTotal: document.getElementById('outHTotal')?.textContent || '',
+          outVTotal: document.getElementById('outVTotal')?.textContent || '',
+          outTotalPixelPerSec: document.getElementById('outTotalPixelPerSec')?.textContent || '',
+          outPixelClock: document.getElementById('outPixelClock')?.textContent || '',
+          outLinkBandwidthUsed: document.getElementById('outLinkBandwidthUsed')?.textContent || ''
+        },
+        meta: { exportedAt: new Date().toISOString() }
+      }
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const ts = new Date().toISOString().replace(/[:.]/g,'-');
+    a.download = `video-timing-${ts}.json`;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); },0);
+  });
+})();

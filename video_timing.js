@@ -301,6 +301,21 @@ const presetFieldIds = [
   'TotalhBlank', 'TotalvBlank', 'bitsPerPixel' // Added fields
 ];
 
+const blankTotalIds = ['TotalhBlank','TotalvBlank'];
+function applyCustomBlankingStyle(){
+  blankTotalIds.forEach(id=>{
+    const el = document.getElementById(id);
+    if(el){
+      el.readOnly = true; // keep computed-only
+      el.style.background = '#f5f5f5';
+      el.style.color = '#888';
+      el.style.cursor = 'not-allowed';
+    }
+  });
+}
+// Ensure initial state (default preset may be Custom)
+applyCustomBlankingStyle();
+
 const presetSelect = document.getElementById('presetResolution');
 if (presetSelect) {
   presetSelect.addEventListener('change', function () {
@@ -333,12 +348,21 @@ if (presetSelect) {
       presetFieldIds.forEach(id => {
         const el = document.getElementById(id);
         if (el) {
-          el.readOnly = false;
-          el.style.background = '';
-          el.style.color = '';
-          el.style.cursor = '';
+          if(blankTotalIds.includes(id)){
+            el.readOnly = true;
+            el.style.background = '#f5f5f5';
+            el.style.color = '#888';
+            el.style.cursor = 'not-allowed';
+          } else {
+            // revert others to editable
+            el.readOnly = false;
+            el.style.background = '';
+            el.style.color = '';
+            el.style.cursor = '';
+          }
         }
       });
+      applyCustomBlankingStyle();
     }
   });
 }

@@ -235,12 +235,11 @@
             >
               <!-- Input & Output Container - Side by side layout -->
               <div style="display: flex; gap: 2rem; align-items: flex-start">
-                <!-- Left: Input Fields -->
                 <div class="form-block" style="flex: 1; min-width: 0">
                   <form id="customResoForm">
                     <!-- Two-column layout for input fields -->
                     <div class="fields-section" style="gap: 5rem">
-                      <!-- Left column (8 fields) -->
+                      <!-- Left column -->
                       <div class="fields-col">
                         <!-- Preset Resolution -->
                         <div class="form-group">
@@ -325,7 +324,7 @@
                             >Total Horizontal Blanking</label
                           >
                           <input
-                            type="text"
+                            type="number"
                             id="TotalhBlank"
                             name="TotalhBlank"
                           />
@@ -366,7 +365,7 @@
                             >Total Vertical Blanking</label
                           >
                           <input
-                            type="text"
+                            type="number"
                             id="TotalvBlank"
                             name="TotalvBlank"
                           />
@@ -460,7 +459,7 @@
                         <div class="form-group">
                           <label for="bitsPerPixel">Bits per Pixel</label>
                           <input
-                            type="text"
+                            type="number"
                             id="bitsPerPixel"
                             name="bitsPerPixel"
                             readonly

@@ -382,48 +382,28 @@ if (presetSelect) {
       try {
         const text = evt.target.result;
         const parsed = JSON.parse(text);
-        // New expected structure: { videoTiming: { presetResolution, inputs:{...}, outputs:{...}, meta:{...} } }
-        // Backward compatibility: allow root-level fields
-        const vt = parsed.videoTiming || parsed;
-        const preset = vt.presetResolution || vt.presetResolutionSelect || 'Custom';
+        const vt = parsed.videoTiming; // require nested object now
+        const valid = vt && typeof vt === 'object' && 'presetResolution' in vt && 'inputs' in vt && 'outputs' in vt && 'meta' in vt;
+        const inpValid = valid && vt.inputs && typeof vt.inputs === 'object' && 'hSync' in vt.inputs && 'hBackPorch' in vt.inputs && 'hFrontPorch' in vt.inputs && 'TotalhBlank' in vt.inputs && 'vSync' in vt.inputs && 'vBackPorch' in vt.inputs && 'vFrontPorch' in vt.inputs && 'TotalvBlank' in vt.inputs && 'hPixels' in vt.inputs && 'vLines' in vt.inputs && 'refreshRate' in vt.inputs && 'colorFormat' in vt.inputs && 'bitsPerPixel' in vt.inputs && 'pixelPerClock' in vt.inputs;
+        const outValid = valid && vt.outputs && typeof vt.outputs === 'object' && 'outHTotal' in vt.outputs && 'outVTotal' in vt.outputs && 'outTotalPixelPerSec' in vt.outputs && 'outPixelClock' in vt.outputs && 'outLinkBandwidthUsed' in vt.outputs;
+        if(!(inpValid && outValid)) throw new Error('Schema mismatch');
+        const preset = vt.presetResolution || 'Custom';
         const presetSelectEl = document.getElementById('presetResolution');
-        if(presetSelectEl){
-          presetSelectEl.value = preset;
-          presetSelectEl.dispatchEvent(new Event('change'));
-        }
-        const inp = vt.inputs || vt.inputs === undefined ? vt.inputs : vt; // prefer vt.inputs if exists
-        if(inp){
-          const map = {
-            hSync:'hSync', hBackPorch:'hBackPorch', hFrontPorch:'hFrontPorch', hPixels:'hPixels',
-            vSync:'vSync', vBackPorch:'vBackPorch', vFrontPorch:'vFrontPorch', vLines:'vLines', refreshRate:'refreshRate',
-            colorFormat:'colorFormat', pixelPerClock:'pixelPerClock'
-          };
-          Object.keys(map).forEach(k=>{
-            const el = document.getElementById(map[k]);
-            if(el && inp[k] !== undefined){ el.value = inp[k]; }
-          });
-        }
-        // Update bitsPerPixel if colorFormat changed
+        if(presetSelectEl){ presetSelectEl.value = preset; presetSelectEl.dispatchEvent(new Event('change')); }
+        const inp = vt.inputs;
+        const map = { hSync:'hSync', hBackPorch:'hBackPorch', hFrontPorch:'hFrontPorch', hPixels:'hPixels', vSync:'vSync', vBackPorch:'vBackPorch', vFrontPorch:'vFrontPorch', vLines:'vLines', refreshRate:'refreshRate', colorFormat:'colorFormat', bitsPerPixel:'bitsPerPixel', pixelPerClock:'pixelPerClock' };
+        Object.keys(map).forEach(k=>{ const el = document.getElementById(map[k]); if(el && inp[k] !== undefined){ el.value = inp[k]; }});
         if(typeof updateBitsPerPixel === 'function') updateBitsPerPixel();
         calculateOutputs();
-        // If outputs present, populate them directly (does not recalc integrity, assumes file trusted)
-        const outs = vt.outputs || parsed.outputs;
-        if(outs){
-          const outMap = {
-            outHTotal:'outHTotal', outVTotal:'outVTotal', outTotalPixelPerSec:'outTotalPixelPerSec', outPixelClock:'outPixelClock', outLinkBandwidthUsed:'outLinkBandwidthUsed'
-          };
-          Object.keys(outMap).forEach(k=>{
-            const el = document.getElementById(outMap[k]);
-            if(el && outs[k] !== undefined) el.textContent = outs[k];
-          });
-          // Ensure output section shown if we have outputs
-          const outputSection = document.getElementById('outputSection');
-          if(outputSection){ outputSection.style.display='block'; outputSection.classList.add('visible'); }
-        }
+        const outs = vt.outputs;
+        const outMap = { outHTotal:'outHTotal', outVTotal:'outVTotal', outTotalPixelPerSec:'outTotalPixelPerSec', outPixelClock:'outPixelClock', outLinkBandwidthUsed:'outLinkBandwidthUsed' };
+        Object.keys(outMap).forEach(k=>{ const el = document.getElementById(outMap[k]); if(el && outs[k] !== undefined) el.textContent = outs[k]; });
+        const outputSection = document.getElementById('outputSection');
+        if(outputSection){ outputSection.style.display='block'; outputSection.classList.add('visible'); }
         if(importStatus){ importStatus.textContent = 'Imported timing applied.'; importStatus.style.color = '#50affc'; }
         importInput.value='';
       } catch(err){
-        if(importStatus){ importStatus.textContent = 'Failed to parse JSON.'; importStatus.style.color = '#ff6666'; }
+        if(importStatus){ importStatus.textContent = 'Invalid JSON format. Please verify you selected a Video Timing export file.'; importStatus.style.color = '#ff6666'; }
       }
     };
     reader.onerror = ()=>{ if(importStatus){ importStatus.textContent = 'File read error.'; importStatus.style.color = '#ff6666'; } };

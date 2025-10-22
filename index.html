@@ -33,29 +33,42 @@
     <!-- Welcome Text and Description -->
     <main>
       <section class="welcome-section">
-        <h1>Welcome to the Video Timing Calculator</h1>
+        <h1>Lattice Video Timing & MIPI Configuration Calculator</h1>
         <p>
-          This tool is designed to help you calculate and configure various
-          parameters for video timing and MIPI configurations. Explore the
-          following pages to get started:
+          This comprehensive tool helps FPGA/SoC designers calculate video
+          timing parameters, MIPI D-PHY configurations, and bandwidth
+          requirements for Lattice Semiconductor devices. Streamline your design
+          process with accurate calculations and industry-standard presets.
         </p>
         <p>
-          <strong>Purpose:</strong> Provide quick, accurate calculations for
-          video timing (active area, blanking intervals, pixel clock) and MIPI
-          D-PHY parameters based on display presets or custom inputs.
+          <strong>Purpose:</strong> Provide comprehensive video timing
+          calculations (active area, blanking intervals, pixel clock, frame
+          rates) and MIPI D-PHY parameter optimization for Lattice FPGA/SoC
+          designs. Support both industry-standard presets (CTA/CEA, VESA) and
+          custom configurations with real-time validation and export
+          capabilities.
         </p>
         <p>
           <strong>Target audience:</strong> FPGA/SoC designers, display
           interface engineers, firmware developers, applications engineers, and
-          validation/test teams working with MIPI DSI/CSI and general video
-          pipelines.
+          validation/test teams working with MIPI DSI/CSI and video pipelines.
+          Specifically designed for Lattice CrossLink-NX, Avant,
+          CertusPro-NX/MachXO5, and Certus-NX device families.
         </p>
-        <p>
-          <strong>Typical use cases:</strong> sizing blanking for timing
-          closure, estimating lane rates and bandwidth, validating
-          sensor/display configurations, and sharing configurations across
-          teams.
-        </p>
+        <p><strong>Typical use cases:</strong></p>
+        <ul>
+          <li>Sizing horizontal/vertical blanking for timing closure</li>
+          <li>Estimating MIPI lane rates and bandwidth requirements</li>
+          <li>
+            Validating sensor/display configurations against device capabilities
+          </li>
+          <li>
+            Calculating D-PHY timing parameters for soft D-PHY implementations
+          </li>
+          <li>Sharing standardized configurations across design teams</li>
+          <li>Converting between pixel and byte clock domains</li>
+          <li>Optimizing video pipeline performance for Lattice devices</li>
+        </ul>
         <p>
           <strong>Who should use this:</strong> Teams building camera/display
           interfaces, prototyping embedded vision systems, or validating
@@ -64,50 +77,112 @@
         <p><strong>What it covers:</strong></p>
         <ul>
           <li>
-            Video timing fundamentals: total/active pixels, horizontal/vertical
-            blanking, frame rate, pixel clock.
+            <strong>Video Timing Calculator:</strong> Total/active pixels,
+            horizontal/vertical blanking, frame rates, pixel clock calculations
+            with CTA/CEA and VESA presets
           </li>
           <li>
-            MIPI D-PHY sizing: lane count, lane rate, payload efficiency,
-            byte/bit clocks.
+            <strong>MIPI Configuration:</strong> Lane count optimization, line
+            rate validation, D-PHY clock calculations, and device-specific
+            parameter ranges
           </li>
           <li>
-            Color formats and bit depths: RGB and YCbCr options with derived
-            bits-per-pixel.
+            <strong>Soft D-PHY Timing:</strong> TX/RX timing parameter
+            calculations with min/max ranges and IP default values
+          </li>
+          <li>
+            <strong>Color Format Support:</strong> RGB (6-16 BPC), YCbCr (4:4:4,
+            4:2:2, 4:2:0), and RAW formats with automatic bits-per-pixel
+            calculation
+          </li>
+          <li>
+            <strong>Device Support:</strong> CrossLink-NX, Avant,
+            CertusPro-NX/MachXO5, and Certus-NX with package and speed grade
+            validation
+          </li>
+          <li>
+            <strong>Export/Import:</strong> JSON configuration sharing and
+            documentation capabilities
+          </li>
+        </ul>
+        <p><strong>Key Features:</strong></p>
+        <ul>
+          <li>
+            <strong>Multi-Device Support:</strong> Optimized for Lattice
+            CrossLink-NX, Avant, CertusPro-NX/MachXO5, and Certus-NX families
+          </li>
+          <li>
+            <strong>Industry Standards:</strong> Built-in CTA/CEA and VESA
+            timing presets for common display resolutions
+          </li>
+          <li>
+            <strong>Real-Time Validation:</strong> Dynamic parameter validation
+            with device-specific constraints and error checking
+          </li>
+          <li>
+            <strong>Configuration Management:</strong> JSON export/import for
+            easy sharing and version control of design parameters
+          </li>
+          <li>
+            <strong>Comprehensive Coverage:</strong> From high-level video
+            timing to low-level D-PHY parameter optimization
+          </li>
+          <li>
+            <strong>User-Friendly Interface:</strong> Intuitive design with
+            tooltips, diagrams, and step-by-step guidance
           </li>
         </ul>
         <p><strong>How to use:</strong></p>
         <ol>
           <li>
-            Open <a href="video_timing.html">Video Timing</a> and select a
-            preset resolution or enter custom values.
+            <strong>Start with Video Timing:</strong> Open
+            <a href="video_timing.html">Video Timing Calculator</a> and select a
+            preset resolution (CTA/CEA or VESA) or enter custom values for your
+            display requirements.
           </li>
           <li>
-            Adjust horizontal/vertical blanking as needed; derived fields update
-            automatically.
+            <strong>Configure MIPI Parameters:</strong> Use
+            <a href="config.html">MIPI Configuration</a> to select your Lattice
+            device, package, and speed grade, then enter line rate and lane
+            configuration.
           </li>
           <li>
-            Review outputs (pixel clock, totals) and proceed to
-            <a href="dphy.html">Soft D-PHY</a> to size lane rate and lanes.
+            <strong>Optimize D-PHY Timing:</strong> Proceed to
+            <a href="dphy.html">Soft D-PHY Parameter Calculator</a> to calculate
+            precise timing parameters for your specific bit rate requirements.
           </li>
           <li>
-            Use <a href="config.html">MIPI Configuration</a> to finalize format
-            and interface details.
+            <strong>Validate and Export:</strong> Review all calculated
+            parameters, validate against device specifications, and export your
+            configuration as JSON for team sharing and documentation.
           </li>
           <li>
-            Optionally export inputs/outputs as JSON for documentation and
-            reviews.
+            <strong>Iterate as Needed:</strong> Use the import/export
+            functionality to quickly test different configurations and optimize
+            your design parameters.
           </li>
         </ol>
         <p><strong>Assumptions & limitations:</strong></p>
         <ul>
           <li>
             Calculations assume synchronous pixel domain and typical D-PHY
-            efficiency; verify exact requirements with panel/sensor datasheets.
+            efficiency; verify exact requirements with panel/sensor datasheets
+            and Lattice device specifications.
           </li>
           <li>
-            Results provide engineering estimates; hardware validation is
-            recommended.
+            Results provide engineering estimates based on standard MIPI D-PHY
+            specifications; hardware validation and Lattice Radiant verification
+            are recommended.
+          </li>
+          <li>
+            Device-specific line rate ranges are based on Lattice device
+            capabilities; consult the latest device documentation for production
+            requirements.
+          </li>
+          <li>
+            Soft D-PHY timing calculations are optimized for Lattice
+            implementations; verify compatibility with your specific design
+            requirements.
           </li>
         </ul>
         <ul>

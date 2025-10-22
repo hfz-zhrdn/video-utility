@@ -698,9 +698,15 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
           const text = evt.target.result;
           const data = JSON.parse(text);
-          // Expect structure { selection:{device,package,speed}, inputs:{...} }
+          // Validate expected top-level keys
+          const valid = data && typeof data === 'object' && 'selection' in data && 'inputs' in data && 'outputs' in data;
+          const selValid = valid && data.selection && typeof data.selection === 'object' && 'device' in data.selection && 'package' in data.selection && 'speed' in data.selection;
+          const inpValid = valid && data.inputs && typeof data.inputs === 'object' && 'lineRateMbps' in data.inputs && 'numberOfLanes' in data.inputs && 'numberOfGear' in data.inputs && 'dataType' in data.inputs && 'pixelPerClock' in data.inputs;
+          const outValid = valid && data.outputs && typeof data.outputs === 'object' && 'bitsPerClock' in data.outputs && 'dphyClockMHz' in data.outputs && 'pixelClockMHz' in data.outputs && 'byteClockFrequency' in data.outputs;
+          if(!(selValid && inpValid && outValid)) {
+            throw new Error('Schema mismatch');
+          }
           const sel = data.selection || {}; const inp = data.inputs || {};
-          // Populate dropdowns only in user-config mode
           const modeSel = document.getElementById('mode-select');
           if(modeSel && modeSel.value !== 'user-config'){
             modeSel.value = 'user-config';
@@ -709,46 +715,31 @@ document.addEventListener("DOMContentLoaded", function () {
           const devSel = document.getElementById('device-select');
           const pkgSel = document.getElementById('package-select');
           const spdSel = document.getElementById('speed-select');
-          if(devSel && sel.device !== undefined){ devSel.value = sel.device; }
-          if(pkgSel && sel.package !== undefined){ pkgSel.value = sel.package; }
-          if(spdSel && sel.speed !== undefined){ spdSel.value = sel.speed; }
-          // Trigger change events so dependency logic re-applies
+          if(devSel) devSel.value = sel.device;
+          if(pkgSel) pkgSel.value = sel.package;
+          if(spdSel) spdSel.value = sel.speed;
           if(devSel) devSel.dispatchEvent(new Event('change'));
           if(pkgSel) pkgSel.dispatchEvent(new Event('change'));
           if(spdSel) spdSel.dispatchEvent(new Event('change'));
-          // Populate input fields
           const lineRate = document.getElementById('input1');
           const lanes = document.getElementById('input2');
           const gear = document.getElementById('input3');
           const dtype = document.getElementById('input4');
           const ppc = document.getElementById('input5');
-          if(lineRate && inp.lineRateMbps !== undefined){ lineRate.value = inp.lineRateMbps; }
-          if(lanes && inp.numberOfLanes !== undefined){ lanes.value = inp.numberOfLanes; }
-          if(gear && inp.numberOfGear !== undefined){ gear.value = inp.numberOfGear; }
-          if(dtype && inp.dataType !== undefined){ dtype.value = inp.dataType; }
-          if(ppc && inp.pixelPerClock !== undefined){ ppc.value = inp.pixelPerClock; }
-          // Enforce bounds after population
+          if(lineRate) lineRate.value = inp.lineRateMbps;
+          if(lanes) lanes.value = inp.numberOfLanes;
+          if(gear) gear.value = inp.numberOfGear;
+          if(dtype) dtype.value = inp.dataType;
+          if(ppc) ppc.value = inp.pixelPerClock;
           if(typeof enforceLineRateBounds === 'function'){ enforceLineRateBounds(); }
           if(typeof updateVisibilityForDefaults === 'function'){ updateVisibilityForDefaults(); }
-          if(importStatus){
-            importStatus.textContent = 'Imported configuration applied.';
-            importStatus.style.color = '#50affc';
-          }
-          // Clear file input for potential re-import
+          if(importStatus){ importStatus.textContent = 'Imported configuration applied.'; importStatus.style.color = '#50affc'; }
           importInput.value = '';
         } catch(err){
-          if(importStatus){
-            importStatus.textContent = 'Failed to parse JSON file.';
-            importStatus.style.color = '#ff6666';
-          }
+          if(importStatus){ importStatus.textContent = 'Invalid JSON format. Please verify you selected a MIPI Configuration export file.'; importStatus.style.color = '#ff6666'; }
         }
       };
-      reader.onerror = ()=>{
-        if(importStatus){
-          importStatus.textContent = 'Error reading file.';
-          importStatus.style.color = '#ff6666';
-        }
-      };
+      reader.onerror = ()=>{ if(importStatus){ importStatus.textContent = 'Error reading file.'; importStatus.style.color = '#ff6666'; } };
       reader.readAsText(file);
     });
   }

@@ -120,7 +120,7 @@
                 class="diagram-tooltip"
                 tabindex="0"
                 aria-label="Open RX Timing Diagram"
-                style="display:inline-block; position:relative; color:#fcdf50; font-weight:bold; cursor:pointer;"
+                style="display:inline-block; color:#fcdf50; font-weight:bold; cursor:pointer; position:relative;"
               >
                 ⓘ
                 <div
@@ -133,7 +133,7 @@
                     alt="RX Timing Diagram preview"
                     style="width:100%; height:auto; display:block; cursor:zoom-in; border-radius:4px;"
                   />
-
+                </div>
               </span>
             </h2>
             <p style="font-weight: normal">
@@ -293,11 +293,61 @@
                     <strong>Byte Clock Frequency (MHz):</strong>
                     <span id="out-byte-freq-min"></span>
                   </div>
-                </div>
-              </form>
-            </div>
-            <div
-              class="description-box"
+                  <div style="margin-top: 0.5rem; text-align: center;">
+                    <span style="color: #666666; font-size: 0.9em; font-weight: normal; font-style: italic; display: none;" id="radiant-params-text">
+                      Where should I put these parameters in Radiant?
+                    </span>
+                    <div style="margin-top: 0.3rem; display: none; text-align: center;" id="radiant-params-links">
+                      <div style="display: inline-flex; align-items: center; gap: 0.3rem; margin-right: 1rem;">
+                        <span style="color: #000; font-size: 0.9em; font-weight: normal;">1. TX D-PHY</span>
+                        <span
+                          class="tx-dphy-main-tooltip"
+                          tabindex="0"
+                          aria-label="Preview TX D-PHY main diagram"
+                          style="color: #fcdf50 !important; font-weight: bold; cursor: pointer; position: relative;"
+                        >
+                          ⓘ
+                          <div
+                            class="tx-dphy-main-tooltip-content"
+                            style="display: none; position: absolute; left: 0; z-index: 1200; background: #fefbe8; color: #000; padding: 0.6rem; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08); width: 320px;"
+                          >
+                            <div style="font-weight: bold; margin-bottom: 0.4rem;">Configure TX D-PHY in Radiant</div>
+                            <img
+                              src="imgs/tx_dphy_main.png"
+                              alt="TX D-PHY in Radiant"
+                              style="width: 100%; height: auto; display: block; cursor: zoom-in; border-radius: 4px;"
+                            />
+                          </div>
+                        </span>
+                      </div>
+                      <div style="display: inline-flex; align-items: center; gap: 0.3rem;">
+                        <span style="color: #000; font-size: 0.9em; font-weight: normal;">2. RX D-PHY</span>
+                        <span
+                          class="rx-dphy-main-tooltip"
+                          tabindex="0"
+                          aria-label="Preview RX D-PHY main diagram"
+                          style="color: #fcdf50 !important; font-weight: bold; cursor: pointer; position: relative;"
+                        >
+                          ⓘ
+                          <div
+                            class="rx-dphy-main-tooltip-content"
+                            style="display: none; position: absolute; left: 0; z-index: 1200; background: #fefbe8; color: #000; padding: 0.6rem; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08); width: 320px;"
+                          >
+                            <div style="font-weight: bold; margin-bottom: 0.4rem;">Configure RX D-PHY in Radiant</div>
+                            <img
+                              src="imgs/rx_dphy_main.png"
+                              alt="RX D-PHY in Radiant"
+                              style="width: 100%; height: auto; display: block; cursor: zoom-in; border-radius: 4px;"
+                            />
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div
+                class="description-box"
               style="max-width: 900px; margin: 0 auto; margin-top: 2rem"
             >
               <div class="desc-title" style="margin-top: 3rem">
@@ -330,7 +380,7 @@
                     <td id="out-hs-prepare-choice"></td>
                   </tr>
                   <tr>
-                    <td>TX_TCLK_HSZERO</td>
+                    <td>t_HS_ZERO</td>
                     <td id="out-tclk-hszero-min"></td>
                     <td id="out-tclk-hszero-max"></td>
                     <td id="out-tclk-hszero-choice"></td>
@@ -385,12 +435,38 @@
                   </tr>
                 </tbody>
               </table>
+              <!-- UG: Where to put the values of TX Timing Outputs in Radiant?-->
+              <div style="margin-top: 1rem; text-align: center;">
+                <span style="color: #666666; font-size: 0.9em; font-weight: normal; font-style: italic; display: none;" id="tx-radiant-params-text">
+                  Where should I put these parameters in Radiant?
+                </span>
+                <span
+                  class="tx-radiant-tooltip"
+                  tabindex="0"
+                  aria-label="Preview TX D-PHY Radiant parameters"
+                  style="color: #fcdf50; font-weight: bold; cursor: pointer; position: relative; margin-left: 0.3rem; display: none;"
+                  id="tx-radiant-tooltip-icon"
+                >
+                  ⓘ
+                  <div
+                    class="tx-radiant-tooltip-content"
+                    style="display: none; position: absolute; left: 0; z-index: 1200; background: #fefbe8; color: #000; padding: 0.6rem; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08); width: 320px;"
+                  >
+                    <div style="font-weight: bold; margin-bottom: 0.4rem;">Configure TX Timing Parameters in Radiant</div>
+                    <img
+                      src="imgs/tx_dphy2.png"
+                      alt="TX D-PHY Parameters in Radiant"
+                      style="width: 100%; height: auto; display: block; cursor: zoom-in; border-radius: 4px;"
+                    />
+                  </div>
+                </span>
+              </div>
               <!-- New Data_Settle Table -->
               <div
                 class="desc-title"
                 style="margin-top: 2.5rem; max-width: 900px"
               >
-                RX Timing Outputs
+                RX Timing Output
               </div>
               <table
                 class="table-border"
@@ -414,6 +490,32 @@
                   </tr>
                 </tbody>
               </table>
+              <!-- UG: Where to put the values of RX Timing Outputs in Radiant?-->
+              <div style="margin-top: 1rem; text-align: center;">
+                <span style="color: #666666; font-size: 0.9em; font-weight: normal; font-style: italic; display: none;" id="rx-radiant-params-text">
+                  Where should I put these parameters in Radiant?
+                </span>
+                <span
+                  class="rx-radiant-tooltip"
+                  tabindex="0"
+                  aria-label="Preview RX D-PHY Radiant parameters"
+                  style="color: #fcdf50; font-weight: bold; cursor: pointer; position: relative; margin-left: 0.3rem; display: none;"
+                  id="rx-radiant-tooltip-icon"
+                >
+                  ⓘ
+                  <div
+                    class="rx-radiant-tooltip-content"
+                    style="display: none; position: absolute; left: 0; z-index: 1200; background: #fefbe8; color: #000; padding: 0.6rem; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08); width: 320px;"
+                  >
+                    <div style="font-weight: bold; margin-bottom: 0.4rem;">Configure RX Timing Parameters in Radiant</div>
+                    <img
+                      src="imgs/rx_dphy2.png"
+                      alt="RX D-PHY Parameters in Radiant"
+                      style="width: 100%; height: auto; display: block; cursor: zoom-in; border-radius: 4px;"
+                    />
+                  </div>
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -453,61 +555,436 @@
           "
         />
       </div>
-      <script>
-        // Enlarge image on click
-        document.getElementById("rxTimingDiagram").onclick = function () {
-          var modal = document.getElementById("imgModal");
-          modal.classList.add("show");
-          document.getElementById("imgModalContent").src = this.src;
-        };
-        document.getElementById("imgModalClose").onclick = function () {
-          document.getElementById("imgModal").classList.remove("show");
-        };
-        // Close modal when clicking outside the image
-        document.getElementById("imgModal").onclick = function (e) {
-          if (e.target === this) this.classList.remove("show");
-        };
-        // Tooltip + modal behavior for RX Timing Diagram (mirrors video timing implementation)
+        <!-- Move all tooltip scripts to the end, after DOM is loaded -->
+        <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+          // Enhanced Modal close functionality
+          const modalClose = document.getElementById("imgModalClose");
+          const modal = document.getElementById("imgModal");
+          
+          // Function to completely close modal
+          function closeModal(e) {
+            if (e) {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+            }
+            
+            // Remove show class first
+            modal.classList.remove("show");
+            
+            // Use setTimeout to ensure CSS transition completes
+            setTimeout(() => {
+              modal.style.display = 'none';
+            }, 50);
+            
+            // Clear any floating tooltips
+            const existingFloating = document.querySelectorAll('[style*="position:absolute"][style*="z-index:4000"]');
+            existingFloating.forEach(el => {
+              try { document.body.removeChild(el); } catch(e) {}
+            });
+          }
+          
+          // Simplified close button handler
+          if (modalClose) {
+            modalClose.onclick = function(e) {
+              e.stopPropagation();
+              closeModal(e);
+              return false;
+            };
+          }
+          
+          // Close modal when clicking on background
+          if (modal) {
+            modal.onclick = function(e) {
+              if (e.target === modal) {
+                closeModal(e);
+              }
+            };
+          }
+        
+          // ESC key handler
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && (modal.style.display === 'flex' || modal.classList.contains('show'))) {
+              closeModal(e);
+            }
+          });
+        
+          // Single calcBtn event listener for both RX tooltip and Radiant link
+        const calcBtn = document.getElementById('calc-dphy-btn');
+        if (calcBtn) {
+          calcBtn.addEventListener('click', function() {
+            // Show the Radiant parameters text and links after calculation
+            const radiantText = document.getElementById('radiant-params-text');
+            const radiantLinks = document.getElementById('radiant-params-links');
+            if (radiantText) {
+              radiantText.style.display = 'inline';
+            }
+            if (radiantLinks) {
+              radiantLinks.style.display = 'block';
+            }
+
+            // Show the TX Radiant parameters text and tooltip after calculation
+            const txRadiantText = document.getElementById('tx-radiant-params-text');
+            const txRadiantTooltip = document.getElementById('tx-radiant-tooltip-icon');
+            if (txRadiantText) {
+              txRadiantText.style.display = 'inline';
+            }
+            if (txRadiantTooltip) {
+              txRadiantTooltip.style.display = 'inline';
+            }
+
+            // Show the RX Radiant parameters text and tooltip after calculation
+            const rxRadiantText = document.getElementById('rx-radiant-params-text');
+            const rxRadiantTooltip = document.getElementById('rx-radiant-tooltip-icon');
+            if (rxRadiantText) {
+              rxRadiantText.style.display = 'inline';
+            }
+            if (rxRadiantTooltip) {
+              rxRadiantTooltip.style.display = 'inline';
+            }
+          });
+        }
+
+        // Add tooltip behavior for TX D-PHY main
         (function() {
-          const trigger = document.querySelector('.diagram-tooltip');
-          if(!trigger) return;
-          const originalContent = trigger.querySelector('.diagram-tooltip-content');
-          if(!originalContent) return;
-          originalContent.style.display = 'none';
+          const txDphyMainTrigger = document.querySelector('.tx-dphy-main-tooltip');
+          if(!txDphyMainTrigger) return;
+          const txDphyMainOriginalContent = txDphyMainTrigger.querySelector('.tx-dphy-main-tooltip-content');
+          if(!txDphyMainOriginalContent) return;
+          txDphyMainOriginalContent.style.display = 'none';
 
           const modal = document.getElementById('imgModal');
-          let modalImg = document.getElementById('imgModalContent');
-          const modalClose = document.getElementById('imgModalClose');
+          const modalImg = document.getElementById('imgModalContent');
 
-          if(!modal || !modalImg) {
-            // Create modal if missing
-            const m = document.createElement('div');
-            m.id = 'imgModal';
-            m.className = 'img-modal';
-            m.innerHTML = '<span id="imgModalClose" class="img-modal-close" style="position:absolute;top:20px;right:40px;font-size:40px;color:#fff;cursor:pointer;z-index:11">&times;</span><img id="imgModalContent" class="img-modal-content" />';
-            document.body.appendChild(m);
-            modal = m; modalImg = document.getElementById('imgModalContent');
+          let txDphyMainFloating = null;
+          function removeTxDphyMainFloating(){ if(txDphyMainFloating){ try{ document.body.removeChild(txDphyMainFloating); }catch(e){} txDphyMainFloating=null; } }
+          function positionTxDphyMainFloating(){ 
+            if(!txDphyMainFloating) return; 
+            const rect = txDphyMainTrigger.getBoundingClientRect(); 
+            let left = rect.left + window.scrollX; 
+            let top = rect.bottom + window.scrollY + 6; 
+            const fw = txDphyMainFloating.offsetWidth; 
+            const fh = txDphyMainFloating.offsetHeight; 
+            if(left+fw > window.scrollX + window.innerWidth - 8){ 
+              left = Math.max(window.scrollX + window.innerWidth - fw - 8,8);
+            } 
+            if(top+fh > window.scrollY + window.innerHeight - 8){ 
+              top = rect.top + window.scrollY - fh - 8; 
+            } 
+            txDphyMainFloating.style.left = left + 'px'; 
+            txDphyMainFloating.style.top = top + 'px'; 
+          }
+          function createTxDphyMainFloating(){ 
+            if(txDphyMainFloating) return; 
+            txDphyMainFloating = txDphyMainOriginalContent.cloneNode(true); 
+            txDphyMainFloating.style.display='block'; 
+            txDphyMainFloating.style.position='absolute'; 
+            txDphyMainFloating.style.zIndex='4000'; 
+            document.body.appendChild(txDphyMainFloating); 
+            positionTxDphyMainFloating(); 
+          }
+          function openTxDphyMainModal(){ 
+            // Ensure modal is completely reset before opening
+            modal.classList.remove("show");
+            modal.style.display = 'none';
+            modalImg.alt = 'TX D-PHY Main Diagram'; 
+            modalImg.src = 'imgs/tx_dphy_main.png';
+            // Use setTimeout to ensure the reset completes before showing
+            setTimeout(() => {
+              modal.classList.add('show'); 
+              modal.style.display = 'flex';
+            }, 10);
           }
 
-          let floating = null;
-          function removeFloating(){ if(floating){ try{ document.body.removeChild(floating); }catch(e){} floating=null; } }
-          function positionFloating(){ if(!floating) return; const rect = trigger.getBoundingClientRect(); let left = rect.left + window.scrollX; let top = rect.bottom + window.scrollY + 6; const fw = floating.offsetWidth; const fh = floating.offsetHeight; if(left+fw > window.scrollX + window.innerWidth - 8){ left = Math.max(window.scrollX + window.innerWidth - fw - 8,8);} if(top+fh > window.scrollY + window.innerHeight - 8){ top = rect.top + window.scrollY - fh - 8; } floating.style.left = left + 'px'; floating.style.top = top + 'px'; }
-          function createFloating(){ if(floating) return; floating = originalContent.cloneNode(true); floating.style.display='block'; floating.style.position='absolute'; floating.style.zIndex='4000'; document.body.appendChild(floating); positionFloating(); const img = floating.querySelector('img'); if(img){ img.addEventListener('click', () => openModal(img.src, img.alt)); }
-          }
-          function openModal(src, alt){ modalImg.alt = alt || ''; modal.classList.add('show'); modalImg.onload = null; modalImg.src = src; }
-          function closeModal(){ modal.classList.remove('show'); modalImg.src=''; }
+          // Add click event to open modal directly
+          txDphyMainTrigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            openTxDphyMainModal();
+            removeTxDphyMainFloating();
+          });
 
-          trigger.addEventListener('mouseenter', () => { createFloating(); });
-          trigger.addEventListener('focus', () => { createFloating(); });
-          trigger.addEventListener('mouseleave', () => { removeFloating(); });
-          trigger.addEventListener('blur', () => { removeFloating(); });
-          window.addEventListener('scroll', positionFloating, { passive:true });
-          window.addEventListener('resize', positionFloating);
-
-          if(modalClose){ modalClose.addEventListener('click', closeModal); }
-          if(modal){ modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); }); }
+          txDphyMainTrigger.addEventListener('mouseenter', () => { createTxDphyMainFloating(); });
+          txDphyMainTrigger.addEventListener('focus', () => { createTxDphyMainFloating(); });
+          txDphyMainTrigger.addEventListener('mouseleave', () => { removeTxDphyMainFloating(); });
+          txDphyMainTrigger.addEventListener('blur', () => { removeTxDphyMainFloating(); });
+          window.addEventListener('scroll', positionTxDphyMainFloating, { passive:true });
+          window.addEventListener('resize', positionTxDphyMainFloating);
         })();
-      </script>
+
+        // Add tooltip behavior for RX D-PHY main
+        (function() {
+          const rxDphyMainTrigger = document.querySelector('.rx-dphy-main-tooltip');
+          if(!rxDphyMainTrigger) return;
+          const rxDphyMainOriginalContent = rxDphyMainTrigger.querySelector('.rx-dphy-main-tooltip-content');
+          if(!rxDphyMainOriginalContent) return;
+          rxDphyMainOriginalContent.style.display = 'none';
+
+          const modal = document.getElementById('imgModal');
+          const modalImg = document.getElementById('imgModalContent');
+
+          let rxDphyMainFloating = null;
+          function removeRxDphyMainFloating(){ if(rxDphyMainFloating){ try{ document.body.removeChild(rxDphyMainFloating); }catch(e){} rxDphyMainFloating=null; } }
+          function positionRxDphyMainFloating(){ 
+            if(!rxDphyMainFloating) return; 
+            const rect = rxDphyMainTrigger.getBoundingClientRect(); 
+            let left = rect.left + window.scrollX; 
+            let top = rect.bottom + window.scrollY + 6; 
+            const fw = rxDphyMainFloating.offsetWidth; 
+            const fh = rxDphyMainFloating.offsetHeight; 
+            if(left+fw > window.scrollX + window.innerWidth - 8){ 
+              left = Math.max(window.scrollX + window.innerWidth - fw - 8,8);
+            } 
+            if(top+fh > window.scrollY + window.innerHeight - 8){ 
+              top = rect.top + window.scrollY - fh - 8; 
+            } 
+            rxDphyMainFloating.style.left = left + 'px'; 
+            rxDphyMainFloating.style.top = top + 'px'; 
+          }
+          function createRxDphyMainFloating(){ 
+            if(rxDphyMainFloating) return; 
+            rxDphyMainFloating = rxDphyMainOriginalContent.cloneNode(true); 
+            rxDphyMainFloating.style.display='block'; 
+            rxDphyMainFloating.style.position='absolute'; 
+            rxDphyMainFloating.style.zIndex='4000'; 
+            document.body.appendChild(rxDphyMainFloating); 
+            positionRxDphyMainFloating(); 
+          }
+          function openRxDphyMainModal(){ 
+            // Ensure modal is completely reset before opening
+            modal.classList.remove("show");
+            modal.style.display = 'none';
+            modalImg.alt = 'RX D-PHY Main Diagram'; 
+            modalImg.src = 'imgs/rx_dphy_main.png';
+            // Use setTimeout to ensure the reset completes before showing
+            setTimeout(() => {
+              modal.classList.add('show'); 
+              modal.style.display = 'flex';
+            }, 10);
+          }
+
+          // Add click event to open modal directly
+          rxDphyMainTrigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            openRxDphyMainModal();
+            removeRxDphyMainFloating();
+          });
+
+          rxDphyMainTrigger.addEventListener('mouseenter', () => { createRxDphyMainFloating(); });
+          rxDphyMainTrigger.addEventListener('focus', () => { createRxDphyMainFloating(); });
+          rxDphyMainTrigger.addEventListener('mouseleave', () => { removeRxDphyMainFloating(); });
+          rxDphyMainTrigger.addEventListener('blur', () => { removeRxDphyMainFloating(); });
+          window.addEventListener('scroll', positionRxDphyMainFloating, { passive:true });
+          window.addEventListener('resize', positionRxDphyMainFloating);
+        })();
+
+        // Add tooltip behavior for TX Radiant parameters
+        (function() {
+          const txRadiantTrigger = document.querySelector('.tx-radiant-tooltip');
+          if(!txRadiantTrigger) return;
+          const txRadiantOriginalContent = txRadiantTrigger.querySelector('.tx-radiant-tooltip-content');
+          if(!txRadiantOriginalContent) return;
+          txRadiantOriginalContent.style.display = 'none';
+
+          const modal = document.getElementById('imgModal');
+          const modalImg = document.getElementById('imgModalContent');
+
+          let txRadiantFloating = null;
+          function removeTxRadiantFloating(){ if(txRadiantFloating){ try{ document.body.removeChild(txRadiantFloating); }catch(e){} txRadiantFloating=null; } }
+          function positionTxRadiantFloating(){ 
+            if(!txRadiantFloating) return; 
+            const rect = txRadiantTrigger.getBoundingClientRect(); 
+            let left = rect.left + window.scrollX; 
+            let top = rect.bottom + window.scrollY + 6; 
+            const fw = txRadiantFloating.offsetWidth; 
+            const fh = txRadiantFloating.offsetHeight; 
+            if(left+fw > window.scrollX + window.innerWidth - 8){ 
+              left = Math.max(window.scrollX + window.innerWidth - fw - 8,8);
+            } 
+            if(top+fh > window.scrollY + window.innerHeight - 8){ 
+              top = rect.top + window.scrollY - fh - 8; 
+            } 
+            txRadiantFloating.style.left = left + 'px'; 
+            txRadiantFloating.style.top = top + 'px'; 
+          }
+          function createTxRadiantFloating(){ 
+            if(txRadiantFloating) return; 
+            txRadiantFloating = txRadiantOriginalContent.cloneNode(true); 
+            txRadiantFloating.style.display='block'; 
+            txRadiantFloating.style.position='absolute'; 
+            txRadiantFloating.style.zIndex='4000'; 
+            document.body.appendChild(txRadiantFloating); 
+            positionTxRadiantFloating(); 
+          }
+          function openTxRadiantModal(){ 
+            // Ensure modal is completely reset before opening
+            modal.classList.remove("show");
+            modal.style.display = 'none';
+            modalImg.alt = 'TX D-PHY Parameters in Radiant'; 
+            modalImg.src = 'imgs/tx_dphy2.png';
+            // Use setTimeout to ensure the reset completes before showing
+            setTimeout(() => {
+              modal.classList.add('show'); 
+              modal.style.display = 'flex';
+            }, 10);
+          }
+
+          // Add click event to open modal directly
+          txRadiantTrigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            openTxRadiantModal();
+            removeTxRadiantFloating();
+          });
+
+          txRadiantTrigger.addEventListener('mouseenter', () => { createTxRadiantFloating(); });
+          txRadiantTrigger.addEventListener('focus', () => { createTxRadiantFloating(); });
+          txRadiantTrigger.addEventListener('mouseleave', () => { removeTxRadiantFloating(); });
+          txRadiantTrigger.addEventListener('blur', () => { removeTxRadiantFloating(); });
+          window.addEventListener('scroll', positionTxRadiantFloating, { passive:true });
+          window.addEventListener('resize', positionTxRadiantFloating);
+        })();
+
+        // Add tooltip behavior for RX Radiant parameters
+        (function() {
+          const rxRadiantTrigger = document.querySelector('.rx-radiant-tooltip');
+          if(!rxRadiantTrigger) return;
+          const rxRadiantOriginalContent = rxRadiantTrigger.querySelector('.rx-radiant-tooltip-content');
+          if(!rxRadiantOriginalContent) return;
+          rxRadiantOriginalContent.style.display = 'none';
+
+          const modal = document.getElementById('imgModal');
+          const modalImg = document.getElementById('imgModalContent');
+
+          let rxRadiantFloating = null;
+          function removeRxRadiantFloating(){ if(rxRadiantFloating){ try{ document.body.removeChild(rxRadiantFloating); }catch(e){} rxRadiantFloating=null; } }
+          function positionRxRadiantFloating(){ 
+            if(!rxRadiantFloating) return; 
+            const rect = rxRadiantTrigger.getBoundingClientRect(); 
+            let left = rect.left + window.scrollX; 
+            let top = rect.bottom + window.scrollY + 6; 
+            const fw = rxRadiantFloating.offsetWidth; 
+            const fh = rxRadiantFloating.offsetHeight; 
+            if(left+fw > window.scrollX + window.innerWidth - 8){ 
+              left = Math.max(window.scrollX + window.innerWidth - fw - 8,8);
+            } 
+            if(top+fh > window.scrollY + window.innerHeight - 8){ 
+              top = rect.top + window.scrollY - fh - 8; 
+            } 
+            rxRadiantFloating.style.left = left + 'px'; 
+            rxRadiantFloating.style.top = top + 'px'; 
+          }
+          function createRxRadiantFloating(){ 
+            if(rxRadiantFloating) return; 
+            rxRadiantFloating = rxRadiantOriginalContent.cloneNode(true); 
+            rxRadiantFloating.style.display='block'; 
+            rxRadiantFloating.style.position='absolute'; 
+            rxRadiantFloating.style.zIndex='4000'; 
+            document.body.appendChild(rxRadiantFloating); 
+            positionRxRadiantFloating(); 
+          }
+          function openRxRadiantModal(){ 
+            // Ensure modal is completely reset before opening
+            modal.classList.remove("show");
+            modal.style.display = 'none';
+            modalImg.alt = 'RX D-PHY Parameters in Radiant'; 
+            modalImg.src = 'imgs/rx_dphy2.png';
+            // Use setTimeout to ensure the reset completes before showing
+            setTimeout(() => {
+              modal.classList.add('show'); 
+              modal.style.display = 'flex';
+            }, 10);
+          }
+
+          // Add click event to open modal directly
+          rxRadiantTrigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            openRxRadiantModal();
+            removeRxRadiantFloating();
+          });
+
+          rxRadiantTrigger.addEventListener('mouseenter', () => { createRxRadiantFloating(); });
+          rxRadiantTrigger.addEventListener('focus', () => { createRxRadiantFloating(); });
+          rxRadiantTrigger.addEventListener('mouseleave', () => { removeRxRadiantFloating(); });
+          rxRadiantTrigger.addEventListener('blur', () => { removeRxRadiantFloating(); });
+          window.addEventListener('scroll', positionRxRadiantFloating, { passive:true });
+          window.addEventListener('resize', positionRxRadiantFloating);
+        })();
+
+        
+        
+          // Tooltip + modal behavior for main diagram tooltip
+          (function() {
+            const diagramTrigger = document.querySelector('.diagram-tooltip');
+            if(!diagramTrigger) return;
+            const diagramOriginalContent = diagramTrigger.querySelector('.diagram-tooltip-content');
+            if(!diagramOriginalContent) return;
+            diagramOriginalContent.style.display = 'none';
+        
+            const modal = document.getElementById('imgModal');
+            const modalImg = document.getElementById('imgModalContent');
+        
+            let diagramFloating = null;
+            function removeDiagramFloating(){ if(diagramFloating){ try{ document.body.removeChild(diagramFloating); }catch(e){} diagramFloating=null; } }
+            function positionDiagramFloating(){ 
+              if(!diagramFloating) return; 
+              const rect = diagramTrigger.getBoundingClientRect(); 
+              let left = rect.left + window.scrollX; 
+              let top = rect.bottom + window.scrollY + 6; 
+              const fw = diagramFloating.offsetWidth; 
+              const fh = diagramFloating.offsetHeight; 
+              if(left+fw > window.scrollX + window.innerWidth - 8){ 
+                left = Math.max(window.scrollX + window.innerWidth - fw - 8,8);
+              } 
+              if(top+fh > window.scrollY + window.innerHeight - 8){ 
+                top = rect.top + window.scrollY - fh - 8; 
+              } 
+              diagramFloating.style.left = left + 'px'; 
+              diagramFloating.style.top = top + 'px'; 
+            }
+            function createDiagramFloating(){ 
+              if(diagramFloating) return; 
+              diagramFloating = diagramOriginalContent.cloneNode(true); 
+              diagramFloating.style.display='block'; 
+              diagramFloating.style.position='absolute'; 
+              diagramFloating.style.zIndex='4000'; 
+              document.body.appendChild(diagramFloating); 
+              positionDiagramFloating(); 
+            }
+            function openDiagramModal(){ 
+              // Use consistent modal opening logic
+              modal.style.display = 'flex';
+              modal.classList.add('show');
+              modalImg.alt = 'RX Timing Diagram'; 
+              modalImg.src = 'imgs/rxtiming_lightmode.svg';
+            }
+        
+            // Add click event to the main diagram tooltip icon to open modal directly
+            diagramTrigger.addEventListener('click', function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              openDiagramModal();
+              removeDiagramFloating();
+            });
+        
+            diagramTrigger.addEventListener('mouseenter', () => { createDiagramFloating(); });
+            diagramTrigger.addEventListener('focus', () => { createDiagramFloating(); });
+            diagramTrigger.addEventListener('mouseleave', () => { removeDiagramFloating(); });
+            diagramTrigger.addEventListener('blur', () => { removeDiagramFloating(); });
+            window.addEventListener('scroll', positionDiagramFloating, { passive:true });
+            window.addEventListener('resize', positionDiagramFloating);
+          })();
+        });
+        </script>
     </div>
   </body>
 </html>

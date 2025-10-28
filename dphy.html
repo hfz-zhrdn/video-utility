@@ -921,68 +921,7 @@
 
         
         
-          // Tooltip + modal behavior for main diagram tooltip
-          (function() {
-            const diagramTrigger = document.querySelector('.diagram-tooltip');
-            if(!diagramTrigger) return;
-            const diagramOriginalContent = diagramTrigger.querySelector('.diagram-tooltip-content');
-            if(!diagramOriginalContent) return;
-            diagramOriginalContent.style.display = 'none';
-        
-            const modal = document.getElementById('imgModal');
-            const modalImg = document.getElementById('imgModalContent');
-        
-            let diagramFloating = null;
-            function removeDiagramFloating(){ if(diagramFloating){ try{ document.body.removeChild(diagramFloating); }catch(e){} diagramFloating=null; } }
-            function positionDiagramFloating(){ 
-              if(!diagramFloating) return; 
-              const rect = diagramTrigger.getBoundingClientRect(); 
-              let left = rect.left + window.scrollX; 
-              let top = rect.bottom + window.scrollY + 6; 
-              const fw = diagramFloating.offsetWidth; 
-              const fh = diagramFloating.offsetHeight; 
-              if(left+fw > window.scrollX + window.innerWidth - 8){ 
-                left = Math.max(window.scrollX + window.innerWidth - fw - 8,8);
-              } 
-              if(top+fh > window.scrollY + window.innerHeight - 8){ 
-                top = rect.top + window.scrollY - fh - 8; 
-              } 
-              diagramFloating.style.left = left + 'px'; 
-              diagramFloating.style.top = top + 'px'; 
-            }
-            function createDiagramFloating(){ 
-              if(diagramFloating) return; 
-              diagramFloating = diagramOriginalContent.cloneNode(true); 
-              diagramFloating.style.display='block'; 
-              diagramFloating.style.position='absolute'; 
-              diagramFloating.style.zIndex='4000'; 
-              document.body.appendChild(diagramFloating); 
-              positionDiagramFloating(); 
-            }
-            function openDiagramModal(){ 
-              // Use consistent modal opening logic
-              modal.style.display = 'flex';
-              modal.classList.add('show');
-              modalImg.alt = 'RX Timing Diagram'; 
-              modalImg.src = 'imgs/rxtiming_lightmode.svg';
-            }
-        
-            // Add click event to the main diagram tooltip icon to open modal directly
-            diagramTrigger.addEventListener('click', function(e) {
-              e.preventDefault();
-              e.stopPropagation();
-              e.stopImmediatePropagation();
-              openDiagramModal();
-              removeDiagramFloating();
-            });
-        
-            diagramTrigger.addEventListener('mouseenter', () => { createDiagramFloating(); });
-            diagramTrigger.addEventListener('focus', () => { createDiagramFloating(); });
-            diagramTrigger.addEventListener('mouseleave', () => { removeDiagramFloating(); });
-            diagramTrigger.addEventListener('blur', () => { removeDiagramFloating(); });
-            window.addEventListener('scroll', positionDiagramFloating, { passive:true });
-            window.addEventListener('resize', positionDiagramFloating);
-          })();
+          // Diagram tooltip handler is in dphy.js to avoid duplication
         });
         </script>
     </div>

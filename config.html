@@ -161,6 +161,7 @@
       </div>
       <!-- Centered Import JSON button row -->
       <div
+        id="config-import-json-container"
         style="
           width: 100%;
           display: flex;
@@ -670,9 +671,10 @@
               </div>
             </div>
           </div>
-          <!-- Supported Data Type table moved into tooltip next to the Data Type label -->
         </div>
       </div>
+      </div>
+    </div>
       <!-- =====================
         PIXEL-BYTE FREQUENCY CALCULATOR SECTION
         To add new calculators or fields, edit the forms below.
@@ -741,7 +743,7 @@
               flex-wrap: wrap;
               margin-top: 0.1rem;
               position: relative;
-              padding: 0 10rem;
+              padding: 0 1rem;
             "
           >
             <!-- Input to P2B Calculator: add new fields or logic here -->
@@ -1074,194 +1076,205 @@
     </script>
 
     <!-- Tooltip functionality for P2B and B2P -->
-    <script>
-      // Tooltip behavior for P2B
-      (function() {
-        const p2bTrigger = document.querySelector('.p2b-tooltip');
-        if(!p2bTrigger) return;
-        const p2bOriginalContent = p2bTrigger.querySelector('.p2b-tooltip-content');
-        if(!p2bOriginalContent) return;
-        p2bOriginalContent.style.display = 'none';
-
-        const modal = document.getElementById('imgModal');
-        const modalImg = document.getElementById('imgModalContent');
-
-        let p2bFloating = null;
-        function removeP2bFloating(){ if(p2bFloating){ try{ document.body.removeChild(p2bFloating); }catch(e){} p2bFloating=null; } }
-        function positionP2bFloating(){ 
-          if(!p2bFloating) return; 
-          const rect = p2bTrigger.getBoundingClientRect(); 
-          let left = rect.left + window.scrollX; 
-          let top = rect.bottom + window.scrollY + 6; 
-          const fw = p2bFloating.offsetWidth; 
-          const fh = p2bFloating.offsetHeight; 
-          if(left+fw > window.scrollX + window.innerWidth - 8){ 
-            left = Math.max(window.scrollX + window.innerWidth - fw - 8,8);
-          } 
-          if(top+fh > window.scrollY + window.innerHeight - 8){ 
-            top = rect.top + window.scrollY - fh - 8; 
-          } 
-          p2bFloating.style.left = left + 'px'; 
-          p2bFloating.style.top = top + 'px'; 
-        }
-        function createP2bFloating(){ 
-          if(p2bFloating) return; 
-          p2bFloating = p2bOriginalContent.cloneNode(true); 
-          p2bFloating.style.display='block'; 
-          p2bFloating.style.position='absolute'; 
-          p2bFloating.style.zIndex='4000'; 
-          document.body.appendChild(p2bFloating); 
-          positionP2bFloating(); 
-        }
-        function openP2bModal(){ 
-          // Reset modal state
-          modalImg.style.width = "";
-          modalImg.style.height = "";
-          modalImg.style.objectFit = "contain";
-          modalImg.alt = 'Pixel-to-Byte Parameters';
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const userConfigSection = document.getElementById("user-config-section");
+          if (!userConfigSection) return;
           
-          // Show modal
-          modal.style.display = "flex";
-          
-          // Set up image load handler
-          modalImg.onload = function() {
-            try {
-              const padding = 40;
-              const maxW = Math.max(window.innerWidth * 0.9 - padding, 100);
-              const maxH = Math.max(window.innerHeight * 0.9 - padding, 100);
-              const natW = modalImg.naturalWidth || modalImg.width || maxW;
-              const natH = modalImg.naturalHeight || modalImg.height || maxH;
-              const scale = Math.min(maxW / natW, maxH / natH, 1);
-              modalImg.style.width = Math.round(natW * scale) + "px";
-              modalImg.style.height = Math.round(natH * scale) + "px";
-              modalImg.style.transformOrigin = "center center";
-              modalImg.style.transform = "translate(-6%, -60%)";
-            } catch (err) {
+          // Tooltip behavior for P2B
+          (function() {
+            const p2bTrigger = userConfigSection.querySelector('.p2b-tooltip');
+            if(!p2bTrigger) return;
+            const p2bOriginalContent = p2bTrigger.querySelector('.p2b-tooltip-content');
+            if(!p2bOriginalContent) return;
+            p2bOriginalContent.style.display = 'none';
+
+            const modal = document.getElementById('imgModal');
+            const modalImg = document.getElementById('imgModalContent');
+
+            let p2bFloating = null;
+            function removeP2bFloating(){ if(p2bFloating){ try{ document.body.removeChild(p2bFloating); }catch(e){} p2bFloating=null; } }
+            function positionP2bFloating(){ 
+              // Only position if user-config is visible
+              if(userConfigSection.style.display === 'none') return;
+              if(!p2bFloating) return; 
+              const rect = p2bTrigger.getBoundingClientRect(); 
+              let left = rect.left + window.scrollX; 
+              let top = rect.bottom + window.scrollY + 6; 
+              const fw = p2bFloating.offsetWidth; 
+              const fh = p2bFloating.offsetHeight; 
+              if(left+fw > window.scrollX + window.innerWidth - 8){ 
+                left = Math.max(window.scrollX + window.innerWidth - fw - 8,8);
+              } 
+              if(top+fh > window.scrollY + window.innerHeight - 8){ 
+                top = rect.top + window.scrollY - fh - 8; 
+              } 
+              p2bFloating.style.left = left + 'px'; 
+              p2bFloating.style.top = top + 'px'; 
+            }
+            function createP2bFloating(){ 
+              if(userConfigSection.style.display === 'none') return;
+              if(p2bFloating) return; 
+              p2bFloating = p2bOriginalContent.cloneNode(true); 
+              p2bFloating.style.display='block'; 
+              p2bFloating.style.position='absolute'; 
+              p2bFloating.style.zIndex='4000'; 
+              document.body.appendChild(p2bFloating); 
+              positionP2bFloating(); 
+            }
+            function openP2bModal(){ 
+              // Reset modal state
               modalImg.style.width = "";
               modalImg.style.height = "";
-              modalImg.style.transform = "";
+              modalImg.style.objectFit = "contain";
+              modalImg.alt = 'Pixel-to-Byte Parameters';
+              
+              // Show modal
+              modal.style.display = "flex";
+              
+              // Set up image load handler
+              modalImg.onload = function() {
+                try {
+                  const padding = 40;
+                  const maxW = Math.max(window.innerWidth * 0.9 - padding, 100);
+                  const maxH = Math.max(window.innerHeight * 0.9 - padding, 100);
+                  const natW = modalImg.naturalWidth || modalImg.width || maxW;
+                  const natH = modalImg.naturalHeight || modalImg.height || maxH;
+                  const scale = Math.min(maxW / natW, maxH / natH, 1);
+                  modalImg.style.width = Math.round(natW * scale) + "px";
+                  modalImg.style.height = Math.round(natH * scale) + "px";
+                  modalImg.style.transformOrigin = "center center";
+                  modalImg.style.transform = "translate(-6%, -60%)";
+                } catch (err) {
+                  modalImg.style.width = "";
+                  modalImg.style.height = "";
+                  modalImg.style.transform = "";
+                }
+              };
+              
+              // Set src last to trigger load
+              modalImg.src = 'imgs/p2b.png';
+              
+              // If image is cached, call fit immediately
+              if (modalImg.complete) {
+                modalImg.onload();
+              }
             }
-          };
-          
-          // Set src last to trigger load
-          modalImg.src = 'imgs/p2b.png';
-          
-          // If image is cached, call fit immediately
-          if (modalImg.complete) {
-            modalImg.onload();
-          }
-        }
 
-        // Add click event to open modal directly
-        p2bTrigger.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-          openP2bModal();
-          removeP2bFloating();
-        });
+            // Add click event to open modal directly
+            p2bTrigger.addEventListener('click', function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              openP2bModal();
+              removeP2bFloating();
+            });
 
-        p2bTrigger.addEventListener('mouseenter', () => { createP2bFloating(); });
-        p2bTrigger.addEventListener('focus', () => { createP2bFloating(); });
-        p2bTrigger.addEventListener('mouseleave', () => { removeP2bFloating(); });
-        p2bTrigger.addEventListener('blur', () => { removeP2bFloating(); });
-        window.addEventListener('scroll', positionP2bFloating, { passive:true });
-        window.addEventListener('resize', positionP2bFloating);
-      })();
+            p2bTrigger.addEventListener('mouseenter', () => { createP2bFloating(); });
+            p2bTrigger.addEventListener('focus', () => { createP2bFloating(); });
+            p2bTrigger.addEventListener('mouseleave', () => { removeP2bFloating(); });
+            p2bTrigger.addEventListener('blur', () => { removeP2bFloating(); });
+            window.addEventListener('scroll', positionP2bFloating, { passive:true });
+            window.addEventListener('resize', positionP2bFloating);
+          })();
 
-      // Tooltip behavior for B2P
-      (function() {
-        const b2pTrigger = document.querySelector('.b2p-tooltip');
-        if(!b2pTrigger) return;
-        const b2pOriginalContent = b2pTrigger.querySelector('.b2p-tooltip-content');
-        if(!b2pOriginalContent) return;
-        b2pOriginalContent.style.display = 'none';
+          // Tooltip behavior for B2P
+          (function() {
+            const b2pTrigger = userConfigSection.querySelector('.b2p-tooltip');
+            if(!b2pTrigger) return;
+            const b2pOriginalContent = b2pTrigger.querySelector('.b2p-tooltip-content');
+            if(!b2pOriginalContent) return;
+            b2pOriginalContent.style.display = 'none';
 
-        const modal = document.getElementById('imgModal');
-        const modalImg = document.getElementById('imgModalContent');
+            const modal = document.getElementById('imgModal');
+            const modalImg = document.getElementById('imgModalContent');
 
-        let b2pFloating = null;
-        function removeB2pFloating(){ if(b2pFloating){ try{ document.body.removeChild(b2pFloating); }catch(e){} b2pFloating=null; } }
-        function positionB2pFloating(){ 
-          if(!b2pFloating) return; 
-          const rect = b2pTrigger.getBoundingClientRect(); 
-          let left = rect.left + window.scrollX; 
-          let top = rect.bottom + window.scrollY + 6; 
-          const fw = b2pFloating.offsetWidth; 
-          const fh = b2pFloating.offsetHeight; 
-          if(left+fw > window.scrollX + window.innerWidth - 8){ 
-            left = Math.max(window.scrollX + window.innerWidth - fw - 8,8);
-          } 
-          if(top+fh > window.scrollY + window.innerHeight - 8){ 
-            top = rect.top + window.scrollY - fh - 8; 
-          } 
-          b2pFloating.style.left = left + 'px'; 
-          b2pFloating.style.top = top + 'px'; 
-        }
-        function createB2pFloating(){ 
-          if(b2pFloating) return; 
-          b2pFloating = b2pOriginalContent.cloneNode(true); 
-          b2pFloating.style.display='block'; 
-          b2pFloating.style.position='absolute'; 
-          b2pFloating.style.zIndex='4000'; 
-          document.body.appendChild(b2pFloating); 
-          positionB2pFloating(); 
-        }
-        function openB2pModal(){ 
-          // Reset modal state
-          modalImg.style.width = "";
-          modalImg.style.height = "";
-          modalImg.style.objectFit = "contain";
-          modalImg.alt = 'Byte-to-Pixel Parameters';
-          
-          // Show modal
-          modal.style.display = "flex";
-          
-          // Set up image load handler
-          modalImg.onload = function() {
-            try {
-              const padding = 40;
-              const maxW = Math.max(window.innerWidth * 0.9 - padding, 100);
-              const maxH = Math.max(window.innerHeight * 0.9 - padding, 100);
-              const natW = modalImg.naturalWidth || modalImg.width || maxW;
-              const natH = modalImg.naturalHeight || modalImg.height || maxH;
-              const scale = Math.min(maxW / natW, maxH / natH, 1);
-              modalImg.style.width = Math.round(natW * scale) + "px";
-              modalImg.style.height = Math.round(natH * scale) + "px";
-              modalImg.style.transformOrigin = "center center";
-              modalImg.style.transform = "translate(-6%, -60%)";
-            } catch (err) {
+            let b2pFloating = null;
+            function removeB2pFloating(){ if(b2pFloating){ try{ document.body.removeChild(b2pFloating); }catch(e){} b2pFloating=null; } }
+            function positionB2pFloating(){ 
+              // Only position if user-config is visible
+              if(userConfigSection.style.display === 'none') return;
+              if(!b2pFloating) return; 
+              const rect = b2pTrigger.getBoundingClientRect(); 
+              let left = rect.left + window.scrollX; 
+              let top = rect.bottom + window.scrollY + 6; 
+              const fw = b2pFloating.offsetWidth; 
+              const fh = b2pFloating.offsetHeight; 
+              if(left+fw > window.scrollX + window.innerWidth - 8){ 
+                left = Math.max(window.scrollX + window.innerWidth - fw - 8,8);
+              } 
+              if(top+fh > window.scrollY + window.innerHeight - 8){ 
+                top = rect.top + window.scrollY - fh - 8; 
+              } 
+              b2pFloating.style.left = left + 'px'; 
+              b2pFloating.style.top = top + 'px'; 
+            }
+            function createB2pFloating(){ 
+              if(userConfigSection.style.display === 'none') return;
+              if(b2pFloating) return; 
+              b2pFloating = b2pOriginalContent.cloneNode(true); 
+              b2pFloating.style.display='block'; 
+              b2pFloating.style.position='absolute'; 
+              b2pFloating.style.zIndex='4000'; 
+              document.body.appendChild(b2pFloating); 
+              positionB2pFloating(); 
+            }
+            function openB2pModal(){ 
+              // Reset modal state
               modalImg.style.width = "";
               modalImg.style.height = "";
-              modalImg.style.transform = "";
+              modalImg.style.objectFit = "contain";
+              modalImg.alt = 'Byte-to-Pixel Parameters';
+              
+              // Show modal
+              modal.style.display = "flex";
+              
+              // Set up image load handler
+              modalImg.onload = function() {
+                try {
+                  const padding = 40;
+                  const maxW = Math.max(window.innerWidth * 0.9 - padding, 100);
+                  const maxH = Math.max(window.innerHeight * 0.9 - padding, 100);
+                  const natW = modalImg.naturalWidth || modalImg.width || maxW;
+                  const natH = modalImg.naturalHeight || modalImg.height || maxH;
+                  const scale = Math.min(maxW / natW, maxH / natH, 1);
+                  modalImg.style.width = Math.round(natW * scale) + "px";
+                  modalImg.style.height = Math.round(natH * scale) + "px";
+                  modalImg.style.transformOrigin = "center center";
+                  modalImg.style.transform = "translate(-6%, -60%)";
+                } catch (err) {
+                  modalImg.style.width = "";
+                  modalImg.style.height = "";
+                  modalImg.style.transform = "";
+                }
+              };
+              
+              // Set src last to trigger load
+              modalImg.src = 'imgs/b2p.png';
+              
+              // If image is cached, call fit immediately
+              if (modalImg.complete) {
+                modalImg.onload();
+              }
             }
-          };
-          
-          // Set src last to trigger load
-          modalImg.src = 'imgs/b2p.png';
-          
-          // If image is cached, call fit immediately
-          if (modalImg.complete) {
-            modalImg.onload();
-          }
-        }
 
-        // Add click event to open modal directly
-        b2pTrigger.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-          openB2pModal();
-          removeB2pFloating();
+            // Add click event to open modal directly
+            b2pTrigger.addEventListener('click', function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              openB2pModal();
+              removeB2pFloating();
+            });
+
+            b2pTrigger.addEventListener('mouseenter', () => { createB2pFloating(); });
+            b2pTrigger.addEventListener('focus', () => { createB2pFloating(); });
+            b2pTrigger.addEventListener('mouseleave', () => { removeB2pFloating(); });
+            b2pTrigger.addEventListener('blur', () => { removeB2pFloating(); });
+            window.addEventListener('scroll', positionB2pFloating, { passive:true });
+            window.addEventListener('resize', positionB2pFloating);
+          })();
         });
-
-        b2pTrigger.addEventListener('mouseenter', () => { createB2pFloating(); });
-        b2pTrigger.addEventListener('focus', () => { createB2pFloating(); });
-        b2pTrigger.addEventListener('mouseleave', () => { removeB2pFloating(); });
-        b2pTrigger.addEventListener('blur', () => { removeB2pFloating(); });
-        window.addEventListener('scroll', positionB2pFloating, { passive:true });
-        window.addEventListener('resize', positionB2pFloating);
-      })();
-    </script>
+      </script>
   </body>
 </html>

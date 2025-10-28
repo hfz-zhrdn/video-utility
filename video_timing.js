@@ -42,7 +42,12 @@ const colorFormatToBpp = {
   YCbCr420_8: 12,
   YCbCr420_10: 15,
   YCbCr420_12: 18,
-  YCbCr420_16: 24
+  YCbCr420_16: 24,
+  RAW8: 8,
+  RAW10: 10,
+  RAW12: 12,
+  RAW14: 14,
+  RAW16: 16
 };
 
 const colorFormatSelect = document.getElementById('colorFormat');
@@ -178,7 +183,7 @@ function calculateOutputs() {
   // Total Link Bandwidth Used calculation
   let linkBandwidthUsed = '';
   if (hTotal && vTotal && refreshRate && bitsPerPixel) {
-    linkBandwidthUsed = (hTotal * vTotal * refreshRate * bitsPerPixel * numStreams * 100 / 96.71) / 1e9;
+    linkBandwidthUsed = (hTotal * vTotal * refreshRate * bitsPerPixel * numStreams) / 1e9;
     linkBandwidthUsed = linkBandwidthUsed.toFixed(4);
   }
 

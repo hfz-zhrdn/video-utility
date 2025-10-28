@@ -254,6 +254,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const lineRateRange = document.getElementById("line-rate-range");
   // Hide/show the user config description/instructions row as well
   const indexDescRow = document.querySelector('.index-description-row');
+  const importJsonContainer = document.getElementById('config-import-json-container');
+
+   // Hide import JSON button if starting in pxb mode
+   if (modeSelect && modeSelect.value === 'pxb' && importJsonContainer) {
+    importJsonContainer.style.display = 'none';
+  }
 
   // Set default line rate range on page load
   function getDefaultLineRateRange() {
@@ -287,6 +293,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (newMode === "user-config") {
         userConfigSection.style.display = "";
         pxbSection.style.display = "none";
+        if (importJsonContainer) importJsonContainer.style.display = ''; 
         if (indexDescRow) {
           // Restore original styles
             indexDescRow.style.display = originalStyles.display;
@@ -336,6 +343,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         userConfigSection.style.display = "none";
         pxbSection.style.display = "";
+        if (importJsonContainer) importJsonContainer.style.display = 'none'; 
         if (indexDescRow) indexDescRow.style.display = 'none';
         if (deviceRow) deviceRow.style.display = 'none';
         if (packageRow) packageRow.style.display = 'none';

@@ -618,63 +618,152 @@
                     Export JSON
                   </button>
                 </div>
-                 <!-- Added Radiant parameters section -->
-                <div style="margin-top: 1rem; text-align: center;">
-                  <div style="color: #666666; font-size: 0.9em; font-weight: normal; font-style: italic; margin-bottom: 0.5rem;">
+                <!-- Added Radiant parameters section -->
+                <div style="margin-top: 1rem; text-align: center">
+                  <div
+                    style="
+                      color: #666666;
+                      font-size: 0.9em;
+                      font-weight: normal;
+                      font-style: italic;
+                      margin-bottom: 0.5rem;
+                    "
+                  >
                     Where should I put these parameters in Radiant?
                   </div>
-                  <div style="display: flex; justify-content: center; gap: 2rem; align-items: center;">
-                    <div style="display: inline-flex; align-items: center; gap: 0.3rem;">
-                      <span style="color: #000; font-size: 0.9em; font-weight: normal;">1. Pixel-to-Byte</span>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: center;
+                      gap: 2rem;
+                      align-items: center;
+                    "
+                  >
+                    <div
+                      style="
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.3rem;
+                      "
+                    >
+                      <span
+                        style="
+                          color: #000;
+                          font-size: 0.9em;
+                          font-weight: normal;
+                        "
+                        >1. Pixel-to-Byte</span
+                      >
                       <span
                         class="p2b-tooltip"
                         tabindex="0"
                         aria-label="Preview Pixel-to-Byte diagram"
-                        style="color: #fcdf50; font-weight: bold; cursor: pointer; position: relative;"
+                        style="
+                          color: #fcdf50;
+                          font-weight: bold;
+                          cursor: pointer;
+                          position: relative;
+                        "
                       >
                         ⓘ
                         <div
                           class="p2b-tooltip-content"
-                          style="display: none; position: absolute; left: 0; z-index: 1200; background: #fefbe8; color: #000; padding: 0.6rem; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08); width: 320px;"
+                          style="
+                            display: none;
+                            position: absolute;
+                            left: 0;
+                            z-index: 1200;
+                            background: #fefbe8;
+                            color: #000;
+                            padding: 0.6rem;
+                            border-radius: 6px;
+                            border: 1px solid rgba(0, 0, 0, 0.08);
+                            width: 320px;
+                          "
                         >
-                          <div style="font-weight: bold; margin-bottom: 0.4rem;">Pixel-to-Byte Parameters</div>
+                          <div style="font-weight: bold; margin-bottom: 0.4rem">
+                            Pixel-to-Byte Parameters
+                          </div>
                           <img
                             src="imgs/p2b.png"
                             alt="Pixel-to-Byte Parameters"
-                            style="width: 100%; height: auto; display: block; cursor: zoom-in; border-radius: 4px;"
+                            style="
+                              width: 100%;
+                              height: auto;
+                              display: block;
+                              cursor: zoom-in;
+                              border-radius: 4px;
+                            "
                           />
                         </div>
                       </span>
                     </div>
-                    <div style="display: inline-flex; align-items: center; gap: 0.3rem;">
-                      <span style="color: #000; font-size: 0.9em; font-weight: normal;">2. Byte-to-Pixel</span>
+                    <div
+                      style="
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.3rem;
+                      "
+                    >
+                      <span
+                        style="
+                          color: #000;
+                          font-size: 0.9em;
+                          font-weight: normal;
+                        "
+                        >2. Byte-to-Pixel</span
+                      >
                       <span
                         class="b2p-tooltip"
                         tabindex="0"
                         aria-label="Preview Byte-to-Pixel diagram"
-                        style="color: #fcdf50; font-weight: bold; cursor: pointer; position: relative;"
+                        style="
+                          color: #fcdf50;
+                          font-weight: bold;
+                          cursor: pointer;
+                          position: relative;
+                        "
                       >
                         ⓘ
                         <div
                           class="b2p-tooltip-content"
-                          style="display: none; position: absolute; left: 0; z-index: 1200; background: #fefbe8; color: #000; padding: 0.6rem; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08); width: 320px;"
+                          style="
+                            display: none;
+                            position: absolute;
+                            left: 0;
+                            z-index: 1200;
+                            background: #fefbe8;
+                            color: #000;
+                            padding: 0.6rem;
+                            border-radius: 6px;
+                            border: 1px solid rgba(0, 0, 0, 0.08);
+                            width: 320px;
+                          "
                         >
-                          <div style="font-weight: bold; margin-bottom: 0.4rem;">Byte-to-Pixel Parameters</div>
+                          <div style="font-weight: bold; margin-bottom: 0.4rem">
+                            Byte-to-Pixel Parameters
+                          </div>
                           <img
                             src="imgs/b2p.png"
                             alt="Byte-to-Pixel Parameters"
-                            style="width: 100%; height: auto; display: block; cursor: zoom-in; border-radius: 4px;"
+                            style="
+                              width: 100%;
+                              height: auto;
+                              display: block;
+                              cursor: zoom-in;
+                              border-radius: 4px;
+                            "
                           />
                         </div>
                       </span>
                     </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
-    </div>
       <!-- =====================
         PIXEL-BYTE FREQUENCY CALCULATOR SECTION
         To add new calculators or fields, edit the forms below.
@@ -759,7 +848,7 @@
                   margin-bottom: 1rem;
                 "
               >
-                Input to Pixel-to-Byte
+                Input to Byte-to-Pixel
               </div>
               <form id="bandwidth-form" autocomplete="off">
                 <div class="bandwidth-fields">
@@ -774,7 +863,7 @@
                     />
                   </div>
                   <div class="field-group">
-                    <label for="ppc">Pixel Per Clock (PPC):</label>
+                    <label for="ppc">Number of Output Pixel Lanes:</label>
                     <input
                       type="number"
                       id="ppc"
@@ -784,7 +873,48 @@
                     />
                   </div>
                   <div class="field-group">
-                    <label for="bpc">Bits Per Clock (BPC):</label>
+                    <label for="bpc"
+                      >Bits Per Clock (BPC):
+                      <span
+                        class="tooltip"
+                        tabindex="0"
+                        aria-label="Info about BPC"
+                        style="
+                          position: relative;
+                          display: inline-block;
+                          margin-left: 0.5rem;
+                          color: #ecd24b;
+                          cursor: help;
+                          font-weight: bold;
+                          font-size: 1.1em;
+                        "
+                        >ⓘ
+                        <div
+                          class="tooltip-content"
+                          role="tooltip"
+                          style="
+                            visibility: hidden;
+                            position: absolute;
+                            left: 0;
+                            top: 1.6rem;
+                            z-index: 20;
+                            background: #fefbe8;
+                            color: #000;
+                            padding: 0.6rem;
+                            border-radius: 6px;
+                            border: 1px solid rgba(0, 0, 0, 0.08);
+                            width: 320px;
+                            font-weight: normal;
+                          "
+                        >
+                          <p>
+                            BPC depends on selected Data Type. Refer to
+                            Byte-to-Pixel Converter IP User Guide for more
+                            information.
+                          </p>
+                        </div>
+                      </span>
+                    </label>
                     <input
                       type="number"
                       id="bpc"
@@ -819,7 +949,7 @@
                   margin-bottom: 1rem;
                 "
               >
-                Output to Byte-to-Pixel
+                Output to Pixel-to-Byte
               </div>
               <form id="b2p-form" autocomplete="off">
                 <div class="bandwidth-fields">
@@ -834,7 +964,7 @@
                     />
                   </div>
                   <div class="field-group">
-                    <label for="num-lanes">Number of Lanes:</label>
+                    <label for="num-lanes">Number of TX Lanes:</label>
                     <input
                       type="number"
                       id="num-lanes"
@@ -1076,205 +1206,245 @@
     </script>
 
     <!-- Tooltip functionality for P2B and B2P -->
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          const userConfigSection = document.getElementById("user-config-section");
-          if (!userConfigSection) return;
-          
-          // Tooltip behavior for P2B
-          (function() {
-            const p2bTrigger = userConfigSection.querySelector('.p2b-tooltip');
-            if(!p2bTrigger) return;
-            const p2bOriginalContent = p2bTrigger.querySelector('.p2b-tooltip-content');
-            if(!p2bOriginalContent) return;
-            p2bOriginalContent.style.display = 'none';
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const userConfigSection = document.getElementById(
+          "user-config-section"
+        );
+        if (!userConfigSection) return;
 
-            const modal = document.getElementById('imgModal');
-            const modalImg = document.getElementById('imgModalContent');
+        // Tooltip behavior for P2B
+        (function () {
+          const p2bTrigger = userConfigSection.querySelector(".p2b-tooltip");
+          if (!p2bTrigger) return;
+          const p2bOriginalContent = p2bTrigger.querySelector(
+            ".p2b-tooltip-content"
+          );
+          if (!p2bOriginalContent) return;
+          p2bOriginalContent.style.display = "none";
 
-            let p2bFloating = null;
-            function removeP2bFloating(){ if(p2bFloating){ try{ document.body.removeChild(p2bFloating); }catch(e){} p2bFloating=null; } }
-            function positionP2bFloating(){ 
-              // Only position if user-config is visible
-              if(userConfigSection.style.display === 'none') return;
-              if(!p2bFloating) return; 
-              const rect = p2bTrigger.getBoundingClientRect(); 
-              let left = rect.left + window.scrollX; 
-              let top = rect.bottom + window.scrollY + 6; 
-              const fw = p2bFloating.offsetWidth; 
-              const fh = p2bFloating.offsetHeight; 
-              if(left+fw > window.scrollX + window.innerWidth - 8){ 
-                left = Math.max(window.scrollX + window.innerWidth - fw - 8,8);
-              } 
-              if(top+fh > window.scrollY + window.innerHeight - 8){ 
-                top = rect.top + window.scrollY - fh - 8; 
-              } 
-              p2bFloating.style.left = left + 'px'; 
-              p2bFloating.style.top = top + 'px'; 
+          const modal = document.getElementById("imgModal");
+          const modalImg = document.getElementById("imgModalContent");
+
+          let p2bFloating = null;
+          function removeP2bFloating() {
+            if (p2bFloating) {
+              try {
+                document.body.removeChild(p2bFloating);
+              } catch (e) {}
+              p2bFloating = null;
             }
-            function createP2bFloating(){ 
-              if(userConfigSection.style.display === 'none') return;
-              if(p2bFloating) return; 
-              p2bFloating = p2bOriginalContent.cloneNode(true); 
-              p2bFloating.style.display='block'; 
-              p2bFloating.style.position='absolute'; 
-              p2bFloating.style.zIndex='4000'; 
-              document.body.appendChild(p2bFloating); 
-              positionP2bFloating(); 
+          }
+          function positionP2bFloating() {
+            // Only position if user-config is visible
+            if (userConfigSection.style.display === "none") return;
+            if (!p2bFloating) return;
+            const rect = p2bTrigger.getBoundingClientRect();
+            let left = rect.left + window.scrollX;
+            let top = rect.bottom + window.scrollY + 6;
+            const fw = p2bFloating.offsetWidth;
+            const fh = p2bFloating.offsetHeight;
+            if (left + fw > window.scrollX + window.innerWidth - 8) {
+              left = Math.max(window.scrollX + window.innerWidth - fw - 8, 8);
             }
-            function openP2bModal(){ 
-              // Reset modal state
-              modalImg.style.width = "";
-              modalImg.style.height = "";
-              modalImg.style.objectFit = "contain";
-              modalImg.alt = 'Pixel-to-Byte Parameters';
-              
-              // Show modal
-              modal.style.display = "flex";
-              
-              // Set up image load handler
-              modalImg.onload = function() {
-                try {
-                  const padding = 40;
-                  const maxW = Math.max(window.innerWidth * 0.9 - padding, 100);
-                  const maxH = Math.max(window.innerHeight * 0.9 - padding, 100);
-                  const natW = modalImg.naturalWidth || modalImg.width || maxW;
-                  const natH = modalImg.naturalHeight || modalImg.height || maxH;
-                  const scale = Math.min(maxW / natW, maxH / natH, 1);
-                  modalImg.style.width = Math.round(natW * scale) + "px";
-                  modalImg.style.height = Math.round(natH * scale) + "px";
-                  modalImg.style.transformOrigin = "center center";
-                  modalImg.style.transform = "translate(-6%, -60%)";
-                } catch (err) {
-                  modalImg.style.width = "";
-                  modalImg.style.height = "";
-                  modalImg.style.transform = "";
-                }
-              };
-              
-              // Set src last to trigger load
-              modalImg.src = 'imgs/p2b.png';
-              
-              // If image is cached, call fit immediately
-              if (modalImg.complete) {
-                modalImg.onload();
+            if (top + fh > window.scrollY + window.innerHeight - 8) {
+              top = rect.top + window.scrollY - fh - 8;
+            }
+            p2bFloating.style.left = left + "px";
+            p2bFloating.style.top = top + "px";
+          }
+          function createP2bFloating() {
+            if (userConfigSection.style.display === "none") return;
+            if (p2bFloating) return;
+            p2bFloating = p2bOriginalContent.cloneNode(true);
+            p2bFloating.style.display = "block";
+            p2bFloating.style.position = "absolute";
+            p2bFloating.style.zIndex = "4000";
+            document.body.appendChild(p2bFloating);
+            positionP2bFloating();
+          }
+          function openP2bModal() {
+            // Reset modal state
+            modalImg.style.width = "";
+            modalImg.style.height = "";
+            modalImg.style.objectFit = "contain";
+            modalImg.alt = "Pixel-to-Byte Parameters";
+
+            // Show modal
+            modal.style.display = "flex";
+
+            // Set up image load handler
+            modalImg.onload = function () {
+              try {
+                const padding = 40;
+                const maxW = Math.max(window.innerWidth * 0.9 - padding, 100);
+                const maxH = Math.max(window.innerHeight * 0.9 - padding, 100);
+                const natW = modalImg.naturalWidth || modalImg.width || maxW;
+                const natH = modalImg.naturalHeight || modalImg.height || maxH;
+                const scale = Math.min(maxW / natW, maxH / natH, 1);
+                modalImg.style.width = Math.round(natW * scale) + "px";
+                modalImg.style.height = Math.round(natH * scale) + "px";
+                modalImg.style.transformOrigin = "center center";
+                modalImg.style.transform = "translate(-6%, -60%)";
+              } catch (err) {
+                modalImg.style.width = "";
+                modalImg.style.height = "";
+                modalImg.style.transform = "";
               }
+            };
+
+            // Set src last to trigger load
+            modalImg.src = "imgs/p2b.png";
+
+            // If image is cached, call fit immediately
+            if (modalImg.complete) {
+              modalImg.onload();
             }
+          }
 
-            // Add click event to open modal directly
-            p2bTrigger.addEventListener('click', function(e) {
-              e.preventDefault();
-              e.stopPropagation();
-              e.stopImmediatePropagation();
-              openP2bModal();
-              removeP2bFloating();
-            });
+          // Add click event to open modal directly
+          p2bTrigger.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            openP2bModal();
+            removeP2bFloating();
+          });
 
-            p2bTrigger.addEventListener('mouseenter', () => { createP2bFloating(); });
-            p2bTrigger.addEventListener('focus', () => { createP2bFloating(); });
-            p2bTrigger.addEventListener('mouseleave', () => { removeP2bFloating(); });
-            p2bTrigger.addEventListener('blur', () => { removeP2bFloating(); });
-            window.addEventListener('scroll', positionP2bFloating, { passive:true });
-            window.addEventListener('resize', positionP2bFloating);
-          })();
+          p2bTrigger.addEventListener("mouseenter", () => {
+            createP2bFloating();
+          });
+          p2bTrigger.addEventListener("focus", () => {
+            createP2bFloating();
+          });
+          p2bTrigger.addEventListener("mouseleave", () => {
+            removeP2bFloating();
+          });
+          p2bTrigger.addEventListener("blur", () => {
+            removeP2bFloating();
+          });
+          window.addEventListener("scroll", positionP2bFloating, {
+            passive: true,
+          });
+          window.addEventListener("resize", positionP2bFloating);
+        })();
 
-          // Tooltip behavior for B2P
-          (function() {
-            const b2pTrigger = userConfigSection.querySelector('.b2p-tooltip');
-            if(!b2pTrigger) return;
-            const b2pOriginalContent = b2pTrigger.querySelector('.b2p-tooltip-content');
-            if(!b2pOriginalContent) return;
-            b2pOriginalContent.style.display = 'none';
+        // Tooltip behavior for B2P
+        (function () {
+          const b2pTrigger = userConfigSection.querySelector(".b2p-tooltip");
+          if (!b2pTrigger) return;
+          const b2pOriginalContent = b2pTrigger.querySelector(
+            ".b2p-tooltip-content"
+          );
+          if (!b2pOriginalContent) return;
+          b2pOriginalContent.style.display = "none";
 
-            const modal = document.getElementById('imgModal');
-            const modalImg = document.getElementById('imgModalContent');
+          const modal = document.getElementById("imgModal");
+          const modalImg = document.getElementById("imgModalContent");
 
-            let b2pFloating = null;
-            function removeB2pFloating(){ if(b2pFloating){ try{ document.body.removeChild(b2pFloating); }catch(e){} b2pFloating=null; } }
-            function positionB2pFloating(){ 
-              // Only position if user-config is visible
-              if(userConfigSection.style.display === 'none') return;
-              if(!b2pFloating) return; 
-              const rect = b2pTrigger.getBoundingClientRect(); 
-              let left = rect.left + window.scrollX; 
-              let top = rect.bottom + window.scrollY + 6; 
-              const fw = b2pFloating.offsetWidth; 
-              const fh = b2pFloating.offsetHeight; 
-              if(left+fw > window.scrollX + window.innerWidth - 8){ 
-                left = Math.max(window.scrollX + window.innerWidth - fw - 8,8);
-              } 
-              if(top+fh > window.scrollY + window.innerHeight - 8){ 
-                top = rect.top + window.scrollY - fh - 8; 
-              } 
-              b2pFloating.style.left = left + 'px'; 
-              b2pFloating.style.top = top + 'px'; 
+          let b2pFloating = null;
+          function removeB2pFloating() {
+            if (b2pFloating) {
+              try {
+                document.body.removeChild(b2pFloating);
+              } catch (e) {}
+              b2pFloating = null;
             }
-            function createB2pFloating(){ 
-              if(userConfigSection.style.display === 'none') return;
-              if(b2pFloating) return; 
-              b2pFloating = b2pOriginalContent.cloneNode(true); 
-              b2pFloating.style.display='block'; 
-              b2pFloating.style.position='absolute'; 
-              b2pFloating.style.zIndex='4000'; 
-              document.body.appendChild(b2pFloating); 
-              positionB2pFloating(); 
+          }
+          function positionB2pFloating() {
+            // Only position if user-config is visible
+            if (userConfigSection.style.display === "none") return;
+            if (!b2pFloating) return;
+            const rect = b2pTrigger.getBoundingClientRect();
+            let left = rect.left + window.scrollX;
+            let top = rect.bottom + window.scrollY + 6;
+            const fw = b2pFloating.offsetWidth;
+            const fh = b2pFloating.offsetHeight;
+            if (left + fw > window.scrollX + window.innerWidth - 8) {
+              left = Math.max(window.scrollX + window.innerWidth - fw - 8, 8);
             }
-            function openB2pModal(){ 
-              // Reset modal state
-              modalImg.style.width = "";
-              modalImg.style.height = "";
-              modalImg.style.objectFit = "contain";
-              modalImg.alt = 'Byte-to-Pixel Parameters';
-              
-              // Show modal
-              modal.style.display = "flex";
-              
-              // Set up image load handler
-              modalImg.onload = function() {
-                try {
-                  const padding = 40;
-                  const maxW = Math.max(window.innerWidth * 0.9 - padding, 100);
-                  const maxH = Math.max(window.innerHeight * 0.9 - padding, 100);
-                  const natW = modalImg.naturalWidth || modalImg.width || maxW;
-                  const natH = modalImg.naturalHeight || modalImg.height || maxH;
-                  const scale = Math.min(maxW / natW, maxH / natH, 1);
-                  modalImg.style.width = Math.round(natW * scale) + "px";
-                  modalImg.style.height = Math.round(natH * scale) + "px";
-                  modalImg.style.transformOrigin = "center center";
-                  modalImg.style.transform = "translate(-6%, -60%)";
-                } catch (err) {
-                  modalImg.style.width = "";
-                  modalImg.style.height = "";
-                  modalImg.style.transform = "";
-                }
-              };
-              
-              // Set src last to trigger load
-              modalImg.src = 'imgs/b2p.png';
-              
-              // If image is cached, call fit immediately
-              if (modalImg.complete) {
-                modalImg.onload();
+            if (top + fh > window.scrollY + window.innerHeight - 8) {
+              top = rect.top + window.scrollY - fh - 8;
+            }
+            b2pFloating.style.left = left + "px";
+            b2pFloating.style.top = top + "px";
+          }
+          function createB2pFloating() {
+            if (userConfigSection.style.display === "none") return;
+            if (b2pFloating) return;
+            b2pFloating = b2pOriginalContent.cloneNode(true);
+            b2pFloating.style.display = "block";
+            b2pFloating.style.position = "absolute";
+            b2pFloating.style.zIndex = "4000";
+            document.body.appendChild(b2pFloating);
+            positionB2pFloating();
+          }
+          function openB2pModal() {
+            // Reset modal state
+            modalImg.style.width = "";
+            modalImg.style.height = "";
+            modalImg.style.objectFit = "contain";
+            modalImg.alt = "Byte-to-Pixel Parameters";
+
+            // Show modal
+            modal.style.display = "flex";
+
+            // Set up image load handler
+            modalImg.onload = function () {
+              try {
+                const padding = 40;
+                const maxW = Math.max(window.innerWidth * 0.9 - padding, 100);
+                const maxH = Math.max(window.innerHeight * 0.9 - padding, 100);
+                const natW = modalImg.naturalWidth || modalImg.width || maxW;
+                const natH = modalImg.naturalHeight || modalImg.height || maxH;
+                const scale = Math.min(maxW / natW, maxH / natH, 1);
+                modalImg.style.width = Math.round(natW * scale) + "px";
+                modalImg.style.height = Math.round(natH * scale) + "px";
+                modalImg.style.transformOrigin = "center center";
+                modalImg.style.transform = "translate(-6%, -60%)";
+              } catch (err) {
+                modalImg.style.width = "";
+                modalImg.style.height = "";
+                modalImg.style.transform = "";
               }
+            };
+
+            // Set src last to trigger load
+            modalImg.src = "imgs/b2p.png";
+
+            // If image is cached, call fit immediately
+            if (modalImg.complete) {
+              modalImg.onload();
             }
+          }
 
-            // Add click event to open modal directly
-            b2pTrigger.addEventListener('click', function(e) {
-              e.preventDefault();
-              e.stopPropagation();
-              e.stopImmediatePropagation();
-              openB2pModal();
-              removeB2pFloating();
-            });
+          // Add click event to open modal directly
+          b2pTrigger.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            openB2pModal();
+            removeB2pFloating();
+          });
 
-            b2pTrigger.addEventListener('mouseenter', () => { createB2pFloating(); });
-            b2pTrigger.addEventListener('focus', () => { createB2pFloating(); });
-            b2pTrigger.addEventListener('mouseleave', () => { removeB2pFloating(); });
-            b2pTrigger.addEventListener('blur', () => { removeB2pFloating(); });
-            window.addEventListener('scroll', positionB2pFloating, { passive:true });
-            window.addEventListener('resize', positionB2pFloating);
-          })();
-        });
-      </script>
+          b2pTrigger.addEventListener("mouseenter", () => {
+            createB2pFloating();
+          });
+          b2pTrigger.addEventListener("focus", () => {
+            createB2pFloating();
+          });
+          b2pTrigger.addEventListener("mouseleave", () => {
+            removeB2pFloating();
+          });
+          b2pTrigger.addEventListener("blur", () => {
+            removeB2pFloating();
+          });
+          window.addEventListener("scroll", positionB2pFloating, {
+            passive: true,
+          });
+          window.addEventListener("resize", positionB2pFloating);
+        })();
+      });
+    </script>
   </body>
 </html>

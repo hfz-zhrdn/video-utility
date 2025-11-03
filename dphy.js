@@ -102,7 +102,7 @@ function calcDPHY() {
   if (outClockPerMinTable) outClockPerMinTable.textContent = dphyClockPeriod.toFixed(2);
 
   // Byte Clock Frequency (MHz)
-  const byteClockFreq = dphyClock / 8;
+  const byteClockFreq = dphyClock / 4;
   if (outByteFreqMin) outByteFreqMin.textContent = byteClockFreq.toFixed(2);
   if (outByteFreqMinTable) outByteFreqMinTable.textContent = byteClockFreq.toFixed(2);
 

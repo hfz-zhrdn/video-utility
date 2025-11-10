@@ -222,11 +222,6 @@ if (calculateButton) {
       outputSection.style.display = 'block';
       outputSection.classList.add('visible');
     }
-    // Removed exportRow handling (button lives inside outputSection now)
-    const container = document.querySelector('.video-timing-bg-container .container.center-fields');
-    if (container) container.classList.add('expanded');
-    const bgContainer = document.querySelector('.video-timing-bg-container');
-    if (bgContainer) bgContainer.classList.add('expanded');
     calculateOutputs();
   });
 }
@@ -266,13 +261,7 @@ if (clearButton) {
         }
       }, 300);
     }
-    
-    // Shrink container when output is hidden
-    const container = document.querySelector('.video-timing-bg-container .container.center-fields');
-    if (container) container.classList.remove('expanded');
-    
-    const bgContainer = document.querySelector('.video-timing-bg-container');
-    if (bgContainer) bgContainer.classList.remove('expanded');
+    // No need to shrink containers - layout stays fixed
   });
 }
 

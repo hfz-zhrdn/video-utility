@@ -222,20 +222,28 @@
           <div
             style="
               display: flex;
-              flex-direction: column;
-              align-items: center;
+              justify-content: center;
               width: 100%;
               margin-left: 0;
               margin-top: 0;
+              position: relative;
             "
           >
-            <div
-              class="container center-fields"
-              style="min-width: 800px; position: relative; align-self: center"
-            >
+            <div class="container center-fields" style="position: relative">
               <!-- Input & Output Container - Side by side layout -->
-              <div style="display: flex; gap: 2rem; align-items: flex-start">
-                <div class="form-block" style="flex: 1; min-width: 0">
+              <div
+                style="
+                  display: flex;
+                  gap: 2rem;
+                  align-items: flex-start;
+                  width: 1100px;
+                  margin: 0 auto;
+                "
+              >
+                <div
+                  class="form-block"
+                  style="flex: 0 0 600px; width: 600px; margin-left: 150px"
+                >
                   <form id="customResoForm">
                     <!-- Two-column layout for input fields -->
                     <div class="fields-section" style="gap: 5rem">
@@ -492,7 +500,11 @@
                     <!-- Buttons outside the two-column layout -->
                     <div
                       class="button-row"
-                      style="margin-top: 1.5rem; justify-content: center"
+                      style="
+                        margin-top: 1.5rem;
+                        margin-left: 250px;
+                        justify-content: center;
+                      "
                     >
                       <button type="button" id="clearButton" class="action-btn">
                         Clear

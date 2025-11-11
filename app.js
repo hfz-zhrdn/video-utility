@@ -373,6 +373,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const calcP2BBtn = document.getElementById("calc-p2b-btn");
   const bandwidthOutput = document.getElementById("bandwidth-output");
   const bandwidthForm = document.getElementById("bandwidth-form");
+  const p2bReminder = document.getElementById("p2b-reminder");
   if (calcP2BBtn && bandwidthOutput && bandwidthForm) {
     calcP2BBtn.addEventListener("click", function () {
       const pixelClock = parseFloat(document.getElementById("pixel-clock").value);
@@ -380,13 +381,18 @@ document.addEventListener("DOMContentLoaded", function () {
       const bpc = parseFloat(document.getElementById("bpc").value);
       if (isNaN(pixelClock) || isNaN(ppc) || isNaN(bpc)) {
         bandwidthOutput.textContent = "Please enter valid numbers.";
+        if (p2bReminder) p2bReminder.style.display = "none";
         return;
       }
       const bandwidth = pixelClock * ppc * bpc;
       bandwidthOutput.textContent = bandwidth.toLocaleString() + " Mbps";
+      // Show the reminder after successful calculation
+      if (p2bReminder) p2bReminder.style.display = "block";
     });
     bandwidthForm.addEventListener("reset", function () {
       bandwidthOutput.textContent = "";
+      // Hide the reminder when form is reset
+      if (p2bReminder) p2bReminder.style.display = "none";
     });
   }
   const byteClockInput = document.getElementById("byte-clock");
@@ -395,6 +401,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const calcB2PBtn = document.getElementById("calc-b2p-btn");
   const b2pBandwidthOutput = document.getElementById("b2p-bandwidth-output");
   const b2pForm = document.getElementById("b2p-form");
+  const b2pReminder = document.getElementById("b2p-reminder");
   if (
     byteClockInput &&
     numLanesInput &&
@@ -416,13 +423,18 @@ document.addEventListener("DOMContentLoaded", function () {
         (gear !== 8 && gear !== 16)
       ) {
         b2pBandwidthOutput.textContent = "Please enter valid values for all fields.";
+        if (b2pReminder) b2pReminder.style.display = "none";
         return;
       }
       const bandwidth = byteClock * numLanes * gear;
       b2pBandwidthOutput.textContent = bandwidth + " Mbps";
+      // Show the reminder after successful calculation
+      if (b2pReminder) b2pReminder.style.display = "block";
     });
     b2pForm.addEventListener("reset", function () {
       b2pBandwidthOutput.textContent = "";
+      // Hide the reminder when form is reset
+      if (b2pReminder) b2pReminder.style.display = "none";
     });
   }
   // Enforce line rate bounds for CrossLink-NX, WLCSP84, speed 7

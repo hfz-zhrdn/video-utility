@@ -934,7 +934,7 @@
                   </div>
                   <div class="field-group">
                     <label for="bpc"
-                      >Bits Per Clock (BPC):
+                      >Bits Per Color (BPC):
                       <span
                         class="tooltip"
                         tabindex="0"
@@ -994,6 +994,24 @@
                   <label>Bandwidth (Mbps):</label>
                   <span id="bandwidth-output"></span>
                 </div>
+                <div
+                  id="p2b-reminder"
+                  style="
+                    display: none;
+                    margin-top: 1rem;
+                    padding: 0.8rem;
+                    background: #fffbea;
+                    border-left: 4px solid #fcdf50;
+                    border-radius: 4px;
+                    color: #333;
+                    font-size: 0.9em;
+                    line-height: 1.5;
+                    width: 430px;
+                  "
+                >
+                  <strong>💡 Tip:</strong> TX/RX Line Rate per Lane = Resulting
+                  Bandwidth / Number of Lanes
+                </div>
               </form>
             </div>
             <!-- Output to B2P Calculator: add new fields or logic here -->
@@ -1050,6 +1068,24 @@
                 <div class="bandwidth-output-group">
                   <label>Bandwidth (Mbps):</label>
                   <span id="b2p-bandwidth-output"></span>
+                </div>
+                <div
+                  id="b2p-reminder"
+                  style="
+                    display: none;
+                    margin-top: 1rem;
+                    padding: 0.8rem;
+                    background: #fffbea;
+                    border-left: 4px solid #fcdf50;
+                    border-radius: 4px;
+                    color: #333;
+                    font-size: 0.9em;
+                    line-height: 1.5;
+                    width: 430px;
+                  "
+                >
+                  <strong>💡 Tip:</strong> TX/RX Line Rate per Lane = Resulting
+                  Bandwidth / Number of Lanes
                 </div>
               </form>
             </div>

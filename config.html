@@ -908,7 +908,7 @@
                   margin-bottom: 1rem;
                 "
               >
-                Input to Byte-to-Pixel
+                Pixel Interface Bandwidth of P2B/B2P IP
               </div>
               <form id="bandwidth-form" autocomplete="off">
                 <div class="bandwidth-fields">
@@ -938,7 +938,7 @@
                       <span
                         class="tooltip"
                         tabindex="0"
-                        aria-label="Info about BPC"
+                        aria-label="Supported Data Types"
                         style="
                           position: relative;
                           display: inline-block;
@@ -964,14 +964,66 @@
                             border-radius: 6px;
                             border: 1px solid rgba(0, 0, 0, 0.08);
                             width: 320px;
-                            font-weight: normal;
                           "
                         >
-                          <p>
-                            BPC depends on selected Data Type. Refer to
-                            Byte-to-Pixel Converter IP User Guide for more
-                            information.
-                          </p>
+                          <div style="font-weight: bold; margin-bottom: 0.4rem">
+                            Supported Data Type Table
+                          </div>
+                          <table
+                            class="table-border"
+                            style="
+                              width: 100%;
+                              border-collapse: collapse;
+                              font-size: 0.9em;
+                            "
+                          >
+                            <tbody>
+                              <tr style="font-weight: bold">
+                                <td style="padding: 4px">CSI-2 Data Type</td>
+                                <td style="padding: 4px">Pixel Width</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 4px">RAW8</td>
+                                <td style="padding: 4px">8</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 4px">RAW10</td>
+                                <td style="padding: 4px">10</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 4px">RAW12</td>
+                                <td style="padding: 4px">12</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 4px">RAW14</td>
+                                <td style="padding: 4px">14</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 4px">RAW16</td>
+                                <td style="padding: 4px">16</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 4px">YUV_420_8</td>
+                                <td style="padding: 4px">8</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 4px">YUV_420_10</td>
+                                <td style="padding: 4px">10</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 4px">YUV_422_8</td>
+                                <td style="padding: 4px">8</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 4px">YUV_422_10</td>
+                                <td style="padding: 4px">10</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 4px">RGB888</td>
+                                <td style="padding: 4px">24</td>
+                              </tr>
+                            </tbody>
+                          </table>
                         </div>
                       </span>
                     </label>
@@ -1006,11 +1058,11 @@
                     color: #333;
                     font-size: 0.9em;
                     line-height: 1.5;
-                    width: 430px;
+                    width: fit-content;
                   "
                 >
-                  <strong>💡 Tip:</strong> TX/RX Line Rate per Lane = Resulting
-                  Bandwidth / Number of Lanes
+                  <strong>💡 Tip:</strong> Ensure both resulting bandwidth are
+                  equal
                 </div>
               </form>
             </div>
@@ -1027,7 +1079,7 @@
                   margin-bottom: 1rem;
                 "
               >
-                Output to Pixel-to-Byte
+                Byte Interface Bandwidth of P2B/B2P IP
               </div>
               <form id="b2p-form" autocomplete="off">
                 <div class="bandwidth-fields">
@@ -1042,7 +1094,7 @@
                     />
                   </div>
                   <div class="field-group">
-                    <label for="num-lanes">Number of TX Lanes:</label>
+                    <label for="num-lanes">Number of TX/RX Lanes:</label>
                     <input
                       type="number"
                       id="num-lanes"
@@ -1081,11 +1133,11 @@
                     color: #333;
                     font-size: 0.9em;
                     line-height: 1.5;
-                    width: 430px;
+                    width: fit-content;
                   "
                 >
-                  <strong>💡 Tip:</strong> TX/RX Line Rate per Lane = Resulting
-                  Bandwidth / Number of Lanes
+                  <strong>💡 Tip:</strong> Ensure both resulting bandwidth are
+                  equal
                 </div>
               </form>
             </div>

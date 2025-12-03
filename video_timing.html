@@ -546,9 +546,47 @@
                     <span class="output-value" id="outPixelClock">-</span>
                   </div>
                   <div class="output-group">
+                    <span
+                      class="tooltip"
+                      tabindex="0"
+                      aria-label="Info about Total Link Bandwidth"
+                      style="
+                        position: relative;
+                        display: inline-block;
+                        margin-left: 0.1rem;
+                        color: #ecd24b;
+                        cursor: help;
+                        font-weight: bold;
+                        font-size: 0.8em;
+                      "
+                      >ⓘ
+                      <div
+                        class="tooltip-content"
+                        role="tooltip"
+                        style="
+                          visibility: hidden;
+                          position: absolute;
+                          left: 0;
+                          top: 1.6rem;
+                          z-index: 20;
+                          background: #fefbe8;
+                          color: #000;
+                          padding: 0.6rem;
+                          border-radius: 6px;
+                          border: 2px solid rgba(0, 0, 0, 0.08);
+                          width: 320px;
+                          font-weight: normal;
+                        "
+                      >
+                        <p>
+                          To use this value in MIPI Configuration, divide this
+                          value by your number of lanes.
+                        </p>
+                      </div>
+                    </span>
                     <span class="output-label"
-                      >Total Link Bandwidth Used (Gbps):</span
-                    >
+                      >Total Link Bandwidth Used (Gbps):
+                    </span>
                     <span class="output-value" id="outLinkBandwidthUsed"
                       >-</span
                     >
@@ -860,6 +898,41 @@
         // Ensure image recenters on viewport resize while modal open
         window.addEventListener("resize", () => {
           if (modal.classList.contains("show")) fitImageToViewport();
+        });
+      })();
+    </script>
+    <!-- Add small JS to toggle tooltip visibility on focus/click for keyboard accessibility -->
+    <script>
+      (function () {
+        document.querySelectorAll(".tooltip").forEach(function (t) {
+          var content = t.querySelector(".tooltip-content");
+          if (!content) return;
+          t.addEventListener("mouseenter", function () {
+            content.style.visibility = "visible";
+          });
+          t.addEventListener("mouseleave", function () {
+            content.style.visibility = "hidden";
+          });
+          t.addEventListener("focus", function () {
+            content.style.visibility = "visible";
+          });
+          t.addEventListener("blur", function () {
+            content.style.visibility = "hidden";
+          });
+          t.addEventListener("click", function (e) {
+            // toggle on click
+            content.style.visibility =
+              content.style.visibility === "visible" ? "hidden" : "visible";
+            e.stopPropagation();
+          });
+        });
+        // hide tooltips when clicking elsewhere
+        document.addEventListener("click", function () {
+          document
+            .querySelectorAll(".tooltip .tooltip-content")
+            .forEach(function (c) {
+              c.style.visibility = "hidden";
+            });
         });
       })();
     </script>

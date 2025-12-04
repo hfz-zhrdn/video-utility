@@ -234,6 +234,131 @@ body {
   pointer-events: none;
 }
 
+/* Navigation responsive styles */
+.top-nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Responsive navigation bar */
+@media (max-width: 1200px) {
+  .banner-content {
+    padding: 0.5rem 1rem 0.5rem 0.8rem;
+  }
+
+  .banner-logo {
+    height: 28px;
+    margin-right: 1.5rem;
+  }
+
+  .top-nav .nav-link {
+    font-size: 1em;
+    padding: 0.3rem 1rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .banner-content {
+    padding: 0.5rem 0.8rem 0.5rem 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .banner-content > div {
+    width: 100%;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .banner-logo {
+    height: 26px;
+    margin-right: 1rem;
+  }
+
+  .top-nav {
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .top-nav .nav-link {
+    font-size: 0.95em;
+    padding: 0.25rem 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner-content {
+    padding: 0.4rem 0.6rem 0.4rem 0.5rem;
+  }
+
+  .banner-logo {
+    height: 24px;
+    margin-right: 0.8rem;
+  }
+
+  .top-nav {
+    gap: 0.3rem;
+  }
+
+  .top-nav .nav-link {
+    font-size: 0.9em;
+    padding: 0.25rem 0.6rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .banner-content {
+    padding: 0.4rem 0.5rem 0.4rem 0.4rem;
+  }
+
+  .banner-content > div {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem;
+  }
+
+  .banner-logo {
+    height: 22px;
+    margin-right: 0;
+    margin-bottom: 0.3rem;
+  }
+
+  .top-nav {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+  }
+
+  .top-nav .nav-link {
+    font-size: 0.85em;
+    padding: 0.2rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-content {
+    padding: 0.3rem 0.4rem 0.3rem 0.3rem;
+  }
+
+  .banner-logo {
+    height: 20px;
+  }
+
+  .top-nav {
+    gap: 0.2rem;
+  }
+
+  .top-nav .nav-link {
+    font-size: 0.8em;
+    padding: 0.2rem 0.4rem;
+  }
+}
+
 .description-box {
   position: static;
   max-width: 320px;
@@ -1601,6 +1726,10 @@ body.light .output-container {
     min-width: 100% !important;
     max-width: none !important;
     margin-left: 0 !important;
+    height: fit-content !important;
+    padding: 1rem !important;
+    flex: 0 0 auto !important;
+    align-self: flex-start !important;
   }
 }
 
